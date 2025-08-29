@@ -1,0 +1,56 @@
+project:
+  area: "Tri-County: Ventura + Santa Barbara + Los Angeles"
+  end_year: 2024
+  preferred_years: 8
+  min_years: 5
+  max_rows: 12000
+  seed: 42
+  label_method: "firms"     # "firms" | "fwi"
+
+data:
+  sites:
+    # Santa Barbara County
+    - {name: "Montecito"}
+    - {name: "Hope Ranch"}
+    - {name: "San Roque / La Cumbre (foothills)"}
+    - {name: "Santa Barbara - The Mesa"}
+    # Ventura County
+    - {name: "Thousand Oaks (WUI canyons)"}
+    - {name: "Newbury Park (WUI canyons)"}
+    - {name: "Moorpark (expanded VHFHSZ)"}
+    - {name: "Simi Valley (canyon edges)"}
+    - {name: "Ojai Valley"}
+    - {name: "Ventura Hillsides (Clearpoint/Ondulando/Skyline)"}
+    - {name: "Fillmore (north/inland)"}
+    - {name: "Santa Paula (north/inland)"}
+    # Los Angeles County
+    - {name: "Malibu (Santa Monica Mountains)"}
+    - {name: "Santa Monica Mountains Interior"}
+    - {name: "Glendale / Pasadena / Altadena / La Cañada Foothills"}
+    - {name: "Bel Air / Brentwood / Hollywood Hills / Pacific Palisades / Woodland Hills"}
+    - {name: "Chatsworth / Porter Ranch (Santa Susana)"}
+    - {name: "Eagle Rock / Highland Park / El Sereno (Eastside WUI)"}
+    - {name: "Palos Verdes Peninsula"}
+    - {name: "Antelope Valley fringe (Lancaster/Palmdale WUI)"}
+  raws_station_ids: []        # optional explicit RAWS IDs; else nearest lookup in code
+
+labeling:
+  buffer_km: 15               # try 10–20 if positives too rare/noisy
+  min_confidence: 0           # FIRMS confidence filter (0/nominal/high)
+  fwi_threshold_quantile: 0.85
+
+features:
+  lag_days: 7
+  roll_window: 7
+  use_neighbors: true
+  k_neighbors: 1
+  neighbor_radius_km: 60
+
+train:
+  model: "ann"                # "baseline" | "ann" | "lstm"
+  batch: 64
+  epochs: 200
+  lr: 0.001
+  patience_es: 10
+  patience_rlr: 5
+  class_weight: true
