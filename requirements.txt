@@ -4,7 +4,6 @@ matplotlib
 scikit-learn
 tensorflow==2.16.*
 pyyaml
-requests
 shapely
 geopandas
 fastapi

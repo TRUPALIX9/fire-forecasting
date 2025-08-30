@@ -41,6 +41,7 @@ def main():
     except Exception as e:
         print(f"Error loading real FIRMS data: {e}")
         print("Please ensure you have extracted the DL_FIRE_* zip files to data/firms/")
+        print("The pipeline now requires real FIRMS data and cannot fall back to WFS.")
 
 if __name__ == "__main__":
     main()

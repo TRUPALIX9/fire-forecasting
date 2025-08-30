@@ -94,14 +94,11 @@ def run_pipeline(config: dict, output_dir: Path, force_retrain: bool = False):
     
     # Fetch FIRMS data
     with timer("FIRMS data fetch"):
-        # Prefer real FIRMS data from DL_FIRE_* subdirectories
+        # Load real FIRMS data from DL_FIRE_* subdirectories
         firms_df = load_firms_data(
-            prefer_real=True,
             start_date=start_date.strftime('%Y-%m-%d'),
             end_date=end_date.strftime('%Y-%m-%d'),
-            min_confidence=config.get('labeling', {}).get('min_confidence', 0),
-            layer="fires_viirs",
-            sample_path="data/firms/firms_sample_data.csv"
+            min_confidence="n"  # Use nominal confidence for real data
         )
     
     # Fetch FRAP data

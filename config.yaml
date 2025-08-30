@@ -31,6 +31,12 @@ data:
     - {name: "Antelope Valley fringe (Lancaster/Palmdale WUI)"}
   raws_station_ids: []        # optional explicit RAWS IDs; else nearest lookup in code
 
+frap:
+  bbox: [-119.828, 33.422, -117.274, 34.931]   # [minLon, minLat, maxLon, maxLat]
+  year_min: 2019
+  year_max: 2024
+  simplify_tolerance: 0.0005   # ~50–100 m; raise to 0.001 if frontend feels heavy
+
 labeling:
   buffer_km: 22
   min_confidence: 20
