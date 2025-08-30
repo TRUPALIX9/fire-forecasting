@@ -1,284 +1,193 @@
+import os
+import json
+from typing import Tuple, Optional
+from datetime import datetime
 import pandas as pd
-import numpy as np
 import requests
-from typing import Dict, List, Tuple, Optional
-from datetime import datetime, timedelta
-import time
-import warnings
-from pathlib import Path
-from .raws import get_site_coordinates
+import glob
 
-def create_tri_county_bbox() -> Tuple[float, float, float, float]:
-    """Create bounding box for Tri-County area (Ventura, Santa Barbara, Los Angeles)"""
-    # (min_lat, min_lon, max_lat, max_lon)
-    return (33.5, -121.0, 35.0, -117.5)
+# VIIRS WFS endpoint (NASA FIRMS). We request GeoJSON via WFS.
+# Note: Specific layer names can vary by region; "fires_viirs" is commonly used.
+FIRMS_WFS_URL = "https://firms.modaps.eosdis.nasa.gov/wfs/viirs"
 
-def fetch_firms_data(start_date: datetime, end_date: datetime, 
-                    cache_dir: str = "data", min_confidence: str = "0") -> pd.DataFrame:
+def load_real_firms_data(
+    start_date: str = "2019-01-01",
+    end_date: str = "2024-12-31",
+    min_confidence: str = "n",  # "n" for nominal, "l" for low, "h" for high
+    firms_data_dir: str = "data/firms"
+) -> pd.DataFrame:
     """
-    Fetch FIRMS data for the specified date range
-    This is a mock implementation - in practice you'd fetch from NASA FIRMS API
+    Load and consolidate real NASA FIRMS data from DL_FIRE_* subdirectories.
+    Returns a standardized DataFrame with required columns for the pipeline.
     """
-    # Create cache directory
-    cache_path = Path(cache_dir) / "firms"
-    cache_path.mkdir(parents=True, exist_ok=True)
+    # Find all FIRMS CSV files in subdirectories
+    pattern = os.path.join(firms_data_dir, "DL_FIRE_*", "*.csv")
+    csv_files = glob.glob(pattern)
     
-    # Cache file path
-    cache_file = cache_path / f"firms_{start_date.strftime('%Y%m%d')}_{end_date.strftime('%Y%m%d')}.csv"
+    if not csv_files:
+        raise FileNotFoundError(f"No FIRMS CSV files found in {firms_data_dir}/DL_FIRE_*")
     
-    # Check if data is cached
-    if cache_file.exists():
-        print(f"  Loading cached FIRMS data")
-        return pd.read_csv(cache_file, parse_dates=['acq_date'])
+    print(f"[FIRMS] Found {len(csv_files)} CSV files: {[os.path.basename(f) for f in csv_files]}")
     
-    print(f"  Fetching FIRMS data (mock data)")
-    
-    # Get site coordinates for realistic fire placement
-    site_coords = get_site_coordinates()
-    
-    # Generate mock fire data based on historical patterns
-    date_range = pd.date_range(start=start_date, end=end_date, freq='D')
-    
-    # Base fire probability (higher in summer/fall)
-    base_fire_prob = 0.02  # 2% chance per day per site
-    
-    fire_data = []
-    
-    for date in date_range:
-        # Seasonal fire probability
-        day_of_year = date.timetuple().tm_yday
-        
-        # Higher fire probability in summer/fall (June-October)
-        if 152 <= day_of_year <= 304:  # June 1 - October 31
-            seasonal_multiplier = 3.0
-        else:
-            seasonal_multiplier = 0.5
-        
-        # Check each site for potential fires
-        for site_name, (lat, lon) in site_coords.items():
-            # Calculate fire probability for this site and date
-            site_fire_prob = base_fire_prob * seasonal_multiplier
+    all_data = []
+    for csv_file in csv_files:
+        try:
+            # Read CSV with proper date parsing
+            df = pd.read_csv(csv_file, parse_dates=["acq_date"], low_memory=False)
             
-            # Add some randomness
-            if np.random.random() < site_fire_prob:
-                # Generate fire point near the site
-                # Add some offset to simulate fire spread
-                fire_lat = lat + np.random.normal(0, 0.01)  # ~1km offset
-                fire_lon = lon + np.random.normal(0, 0.01)
-                
-                # Fire properties
-                confidence = np.random.choice(['0', 'nominal', 'high'], p=[0.3, 0.5, 0.2])
-                
-                # Only include fires that meet confidence threshold
-                if min_confidence == "0" or confidence == min_confidence:
-                    fire_data.append({
-                        'acq_date': date,
-                        'acq_time': f"{np.random.randint(0, 24):02d}:{np.random.randint(0, 60):02d}",
-                        'latitude': round(fire_lat, 4),
-                        'longitude': round(fire_lon, 4),
-                        'confidence': confidence,
-                        'frp': np.random.exponential(50),  # Fire Radiative Power
-                        'satellite': np.random.choice(['MODIS', 'VIIRS']),
-                        'site_nearby': site_name
-                    })
-    
-    if not fire_data:
-        # Create a few fires to ensure we have some data
-        for i in range(5):
-            site_name = list(site_coords.keys())[i % len(site_coords)]
-            lat, lon = site_coords[site_name]
+            # Filter by confidence if specified
+            if min_confidence != "n":
+                confidence_map = {"l": "l", "n": "n", "h": "h"}
+                if min_confidence in confidence_map:
+                    df = df[df["confidence"] == min_confidence]
             
-            fire_data.append({
-                'acq_date': start_date + timedelta(days=i*30),
-                'acq_time': "12:00",
-                'latitude': round(lat + np.random.normal(0, 0.01), 4),
-                'longitude': round(lon + np.random.normal(0, 0.01), 4),
-                'confidence': 'nominal',
-                'frp': np.random.exponential(50),
-                'satellite': 'VIIRS',
-                'site_nearby': site_name
+            # Filter by date range
+            start_dt = pd.to_datetime(start_date)
+            end_dt = pd.to_datetime(end_date)
+            df = df[(df["acq_date"] >= start_dt) & (df["acq_date"] <= end_dt)]
+            
+            # Add source identifier
+            df["source"] = "VIIRS"
+            
+            # Standardize column names and add required columns
+            if "date" not in df.columns:
+                df["date"] = pd.to_datetime(df["acq_date"], errors="coerce").dt.normalize()
+            
+            # Ensure required columns exist
+            required_cols = ["latitude", "longitude", "acq_date", "acq_time", "confidence", "date", "source"]
+            for col in required_cols:
+                if col not in df.columns:
+                    if col == "acq_time" and "acq_time" not in df.columns:
+                        df["acq_time"] = "0000"  # Default time if missing
+                    elif col == "confidence" and "confidence" not in df.columns:
+                        df["confidence"] = 50  # Default confidence if missing
+            
+            all_data.append(df)
+            print(f"[FIRMS] Loaded {len(df):,} records from {os.path.basename(csv_file)}")
+            
+        except Exception as e:
+            print(f"[FIRMS] Error reading {csv_file}: {e}")
+            continue
+    
+    if not all_data:
+        raise RuntimeError("No valid FIRMS data could be loaded from any CSV files")
+    
+    # Concatenate all data
+    consolidated_df = pd.concat(all_data, ignore_index=True)
+    
+    # Remove duplicates and sort by date
+    consolidated_df = consolidated_df.drop_duplicates(subset=["latitude", "longitude", "acq_date", "acq_time"])
+    consolidated_df = consolidated_df.sort_values("date")
+    
+    # Drop rows with missing critical data
+    consolidated_df = consolidated_df.dropna(subset=["latitude", "longitude", "date"])
+    
+    print(f"[FIRMS] Consolidated {len(consolidated_df):,} total FIRMS records")
+    return consolidated_df
+
+def fetch_firms_wfs(
+    bbox: Tuple[float, float, float, float],
+    start_date: str,
+    end_date: str,
+    min_confidence: int = 0,
+    layer: str = "fires_viirs",
+    timeout: int = 60
+) -> pd.DataFrame:
+    """
+    Fetch FIRMS detections from WFS as GeoJSON for the given bbox and date range.
+    Returns a DataFrame with at least: latitude, longitude, acq_date, acq_time, confidence, date.
+    """
+    map_key = os.getenv("FIRMS_MAP_KEY")
+    if not map_key:
+        raise RuntimeError("FIRMS_MAP_KEY is not set; export it in your environment or .env file")
+    
+    params = {
+        "service": "WFS",
+        "request": "GetFeature",
+        "version": "1.1.0",
+        "typename": layer,
+        "outputFormat": "application/json",
+        # bbox order: minx, miny, maxx, maxy (lon/lat)
+        "bbox": f"{bbox[0]},{bbox[1]},{bbox[2]},{bbox[3]}",
+        # ISO date range
+        "time": f"{start_date}/{end_date}",
+        "map_key": map_key,
+    }
+    
+    r = requests.get(FIRMS_WFS_URL, params=params, timeout=timeout)
+    r.raise_for_status()
+    gj = r.json()
+    feats = gj.get("features", [])
+    
+    rows = []
+    for f in feats:
+        props = f.get("properties", {}) or {}
+        geom = f.get("geometry", {}) or {}
+        coords = geom.get("coordinates", [None, None])
+        lon = props.get("longitude", coords[0] if len(coords) > 0 else None)
+        lat = props.get("latitude", coords[1] if len(coords) > 1 else None)
+        acq_date = props.get("acq_date")
+        acq_time = props.get("acq_time")
+        conf = props.get("confidence", 0) or 0
+        if conf is None:
+            conf = 0
+        
+        if lat is None or lon is None:
+            continue
+        
+        if conf >= min_confidence:
+            rows.append({
+                "latitude": lat,
+                "longitude": lon,
+                "acq_date": acq_date,
+                "acq_time": acq_time,
+                "confidence": conf,
+                "source": "VIIRS"
             })
     
-    df = pd.DataFrame(fire_data)
-    
-    # Cache the data
-    df.to_csv(cache_file, index=False)
+    df = pd.DataFrame(rows)
+    if not df.empty:
+        df["date"] = pd.to_datetime(df["acq_date"], errors="coerce").dt.normalize()
+        df = df.dropna(subset=["date"])
     
     return df
 
-def filter_firms_by_bbox(df: pd.DataFrame, bbox: Tuple[float, float, float, float]) -> pd.DataFrame:
-    """Filter FIRMS data to only points within bounding box"""
-    min_lat, min_lon, max_lat, max_lon = bbox
-    
-    mask = (
-        (df['latitude'] >= min_lat) & (df['latitude'] <= max_lat) &
-        (df['longitude'] >= min_lon) & (df['longitude'] <= max_lon)
-    )
-    
-    return df[mask].copy()
-
-def has_next_day_fire(site_lat: float, site_lon: float, date: datetime, 
-                      firms_df: pd.DataFrame, buffer_km: float = 15) -> bool:
+def load_firms_data(
+    prefer_real: bool = True,
+    bbox: Optional[Tuple[float, float, float, float]] = None,
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None,
+    min_confidence: int = 0,
+    layer: str = "fires_viirs",
+    firms_data_dir: str = "data/firms"
+) -> pd.DataFrame:
     """
-    Check if there's a fire within buffer_km of a site on the next day
-    
-    Args:
-        site_lat: Site latitude
-        site_lon: Site longitude
-        date: Current date
-        firms_df: FIRMS DataFrame
-        buffer_km: Buffer radius in kilometers
-    
-    Returns:
-        True if fire detected within buffer on next day
+    Try real FIRMS data first (when prefer_real=True). If it fails or returns empty,
+    fall back to WFS fetch. Returns a standardized dataframe with a 'date' column.
     """
-    # Convert buffer from km to degrees (approximate)
-    buffer_deg = buffer_km / 111.0
+    if prefer_real:
+        try:
+            df = load_real_firms_data(
+                start_date=start_date or "2019-01-01",
+                end_date=end_date or "2024-12-31",
+                min_confidence="n",  # Use nominal confidence for real data
+                firms_data_dir=firms_data_dir
+            )
+            if not df.empty:
+                print(f"[FIRMS] Successfully loaded {len(df):,} real FIRMS records")
+                return df
+        except Exception as e:
+            print(f"[FIRMS] Real data load failed: {e}. Falling back to WFS.")
     
-    # Next day
-    next_date = date + timedelta(days=1)
+    # Fallback to WFS if real data failed or prefer_real=False
+    if bbox and start_date and end_date:
+        try:
+            df = fetch_firms_wfs(bbox, start_date, end_date, min_confidence=min_confidence, layer=layer)
+            if not df.empty:
+                print(f"[FIRMS] Successfully fetched {len(df):,} records via WFS")
+                return df
+        except Exception as e:
+            print(f"[FIRMS] WFS fetch failed: {e}")
     
-    # Filter FIRMS data for next day
-    next_day_fires = firms_df[firms_df['acq_date'] == next_date]
-    
-    if next_day_fires.empty:
-        return False
-    
-    # Check if any fire is within buffer
-    for _, fire in next_day_fires.iterrows():
-        fire_lat = fire['latitude']
-        fire_lon = fire['longitude']
-        
-        # Calculate distance
-        lat_diff = abs(fire_lat - site_lat)
-        lon_diff = abs(fire_lon - site_lon)
-        
-        # Simple distance check (approximate)
-        if lat_diff <= buffer_deg and lon_diff <= buffer_deg:
-            # More precise distance calculation
-            distance_km = haversine_distance(site_lat, site_lon, fire_lat, fire_lon)
-            if distance_km <= buffer_km:
-                return True
-    
-    return False
-
-def haversine_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
-    """Calculate haversine distance between two points"""
-    # Convert to radians
-    lat1, lon1, lat2, lon2 = map(np.radians, [lat1, lon1, lat2, lon2])
-    
-    # Haversine formula
-    dlat = lat2 - lat1
-    dlon = lon2 - lon1
-    a = np.sin(dlat/2)**2 + np.cos(lat1) * np.cos(lat2) * np.sin(dlon/2)**2
-    c = 2 * np.arcsin(np.sqrt(a))
-    
-    # Radius of earth in kilometers
-    r = 6371
-    return c * r
-
-def create_fire_labels_for_sites(sites: List[str], start_date: datetime, end_date: datetime,
-                                firms_df: pd.DataFrame, buffer_km: float = 15) -> pd.DataFrame:
-    """
-    Create fire labels for all sites based on FIRMS data
-    
-    Args:
-        sites: List of site names
-        start_date: Start date for labeling
-        end_date: End date for labeling
-        firms_df: FIRMS DataFrame
-        buffer_km: Buffer radius for fire detection
-    
-    Returns:
-        DataFrame with site, date, and fire_tomorrow columns
-    """
-    print(f"Creating fire labels for {len(sites)} sites...")
-    
-    # Get site coordinates
-    site_coords = get_site_coordinates()
-    
-    # Create date range
-    date_range = pd.date_range(start=start_date, end=end_date, freq='D')
-    
-    label_data = []
-    
-    for site in sites:
-        if site not in site_coords:
-            print(f"  Warning: No coordinates found for {site}, skipping")
-            continue
-        
-        site_lat, site_lon = site_coords[site]
-        print(f"  Processing {site}...")
-        
-        for date in date_range:
-            # Check if there's a fire tomorrow within buffer
-            fire_tomorrow = has_next_day_fire(site_lat, site_lon, date, firms_df, buffer_km)
-            
-            label_data.append({
-                'site': site,
-                'date': date,
-                'site_lat': site_lat,
-                'site_lon': site_lon,
-                'fire_tomorrow': int(fire_tomorrow)
-            })
-    
-    labels_df = pd.DataFrame(label_data)
-    
-    # Calculate summary statistics
-    total_days = len(date_range)
-    total_sites = len(sites)
-    total_positives = labels_df['fire_tomorrow'].sum()
-    positive_rate = total_positives / (total_days * total_sites)
-    
-    print(f"  Label creation complete:")
-    print(f"    Total records: {len(labels_df)}")
-    print(f"    Positive rate: {positive_rate:.3f} ({total_positives} fires)")
-    
-    return labels_df
-
-def get_firms_summary_stats(firms_df: pd.DataFrame) -> Dict:
-    """Get summary statistics for FIRMS data"""
-    if firms_df.empty:
-        return {}
-    
-    summary = {
-        'total_fires': len(firms_df),
-        'date_range': {
-            'start': firms_df['acq_date'].min().strftime('%Y-%m-%d'),
-            'end': firms_df['acq_date'].max().strftime('%Y-%m-%d')
-        },
-        'confidence_distribution': firms_df['confidence'].value_counts().to_dict(),
-        'satellite_distribution': firms_df['satellite'].value_counts().to_dict(),
-        'avg_frp': firms_df['frp'].mean(),
-        'max_frp': firms_df['frp'].max(),
-        'sites_with_fires': firms_df['site_nearby'].nunique()
-    }
-    
-    return summary
-
-def validate_firms_data(df: pd.DataFrame) -> bool:
-    """Validate FIRMS data quality"""
-    if df.empty:
-        return False
-    
-    # Check for required columns
-    required_cols = ['acq_date', 'latitude', 'longitude', 'confidence', 'frp']
-    if not all(col in df.columns for col in required_cols):
-        return False
-    
-    # Check for reasonable value ranges
-    if not df['latitude'].between(-90, 90).all():
-        return False
-    
-    if not df['longitude'].between(-180, 180).all():
-        return False
-    
-    if not df['frp'].between(0, 10000).all():
-        return False
-    
-    # Check confidence values
-    valid_confidence = ['0', 'nominal', 'high']
-    if not df['confidence'].isin(valid_confidence).all():
-        return False
-    
-    return True
+    # If all else fails, raise an error
+    raise RuntimeError("Could not load FIRMS data from any source (real files or WFS)")

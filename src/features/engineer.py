@@ -215,11 +215,14 @@ def add_neighbor_features(df: pd.DataFrame, site_coords: Dict[str, Tuple[float, 
                             neighbor_values = []
                             neighbor_weights = []
                             
+                            # Get the current date from the row index
+                            current_date = df.index[row.name] if isinstance(row.name, int) else row.name
+                            
                             for neighbor_site, weight in neighbor_features[site]:
                                 # Find neighbor's value for the previous day
                                 neighbor_row = df[
                                     (df['site'] == neighbor_site) & 
-                                    (df.index == row.name - pd.Timedelta(days=1))
+                                    (df.index == current_date - pd.Timedelta(days=1))
                                 ]
                                 
                                 if not neighbor_row.empty:
@@ -327,6 +330,11 @@ def engineer_all_features(df: pd.DataFrame, config: Dict,
     initial_rows = len(df)
     df = df.dropna()
     final_rows = len(df)
+    
+    # Preserve a materialized date column for downstream merges
+    if isinstance(df.index, pd.DatetimeIndex):
+        df = df.copy()
+        df['date'] = df.index.normalize()
     
     print(f"  Feature engineering complete: {initial_rows} -> {final_rows} rows")
     print(f"  Final feature count: {len(df.columns)}")

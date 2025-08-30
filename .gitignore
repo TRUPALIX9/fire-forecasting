@@ -1,0 +1,163 @@
+# Environment
+.env
+frontend/.env.local
+.env.*
+!.env.example
+
+# Virtual env
+.venv/
+venv/
+env/
+ENV/
+
+# Node
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/dist/
+
+# Python cache
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Artifacts and data (do not commit)
+artifacts/
+data/
+# Keep sample data examples if needed
+!data/*/README.md
+!data/*/sample_*.csv
+!data/*/example_*.csv
+
+# Logs
+*.log
+*.out
+*.err
+logs/
+log/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+*.bak
+*.backup
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Build and Distribution
+build/
+dist/
+*.tar.gz
+*.zip
+*.rar
+*.7z
+# Keep source zip files if they're part of the project
+!data/firms/*.zip
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Security and Keys
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.csr
+secrets/
+credentials/
+
+# Large files
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+
+# Model files (keep small ones, ignore large trained models)
+*.keras
+*.h5
+*.pkl
+*.joblib
+# Keep small model examples if needed
+!models/example_*.pkl
+!models/sample_*.h5
+
+# Documentation builds
+docs/_build/
+docs/build/
+site/
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+*.rej
+
+# Local configuration overrides
+config.local.yaml
+config.dev.yaml
+config.prod.yaml
+

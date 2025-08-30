@@ -94,7 +94,9 @@ def fetch_raws_data_daily(station_id: str, start_date: datetime,
     # Check if data is cached
     if cache_file.exists():
         print(f"  Loading cached RAWS data for {station_id}")
-        return pd.read_csv(cache_file, parse_dates=['date'])
+        df_cached = pd.read_csv(cache_file, parse_dates=['date'])
+        df_cached['date'] = pd.to_datetime(df_cached['date']).dt.normalize()
+        return df_cached
     
     print(f"  Fetching RAWS data for {station_id} (mock data)")
     
@@ -148,6 +150,8 @@ def fetch_raws_data_daily(station_id: str, start_date: datetime,
         })
     
     df = pd.DataFrame(data)
+    # Ensure proper datetime dtype normalized to day
+    df['date'] = pd.to_datetime(df['date']).dt.normalize()
     
     # Cache the data
     df.to_csv(cache_file, index=False)
@@ -283,6 +287,11 @@ def fetch_all_sites_raws_data(sites: List[str], start_date: datetime,
     # Impute missing values
     print("Imputing missing values...")
     combined_df = impute_missing_values(combined_df)
+    
+    # Materialize 'date' column from index for downstream merges
+    if isinstance(combined_df.index, pd.DatetimeIndex):
+        combined_df = combined_df.reset_index().rename(columns={'index': 'date'})
+        combined_df['date'] = pd.to_datetime(combined_df['date']).dt.normalize()
     
     print(f"RAWS data fetch complete: {len(combined_df)} total records")
     

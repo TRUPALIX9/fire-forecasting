@@ -4,9 +4,9 @@ from typing import Dict, List, Tuple, Optional
 from datetime import datetime, timedelta
 import warnings
 
-from ..features.fwi import calculate_light_fwi_proxy, get_fwi_threshold
-from ..data_sources.firms import create_fire_labels_for_sites
-from ..data_sources.raws import get_site_coordinates
+from src.features.fwi import calculate_light_fwi_proxy, get_fwi_threshold
+from src.data_sources.firms import create_fire_labels_for_sites
+from src.data_sources.raws import get_site_coordinates
 
 def create_firms_proximity_labels(weather_df: pd.DataFrame, firms_df: pd.DataFrame,
                                 buffer_km: float = 15) -> pd.DataFrame:
@@ -25,11 +25,19 @@ def create_firms_proximity_labels(weather_df: pd.DataFrame, firms_df: pd.DataFra
     
     # Get unique sites and date range
     sites = weather_df['site'].unique()
-    start_date = weather_df['date'].min()
-    end_date = weather_df['date'].max()
+    if 'date' in weather_df.columns:
+        start_date = pd.to_datetime(weather_df['date']).min()
+        end_date = pd.to_datetime(weather_df['date']).max()
+    else:
+        start_date = weather_df.index.min()
+        end_date = weather_df.index.max()
     
-    # Create labels using FIRMS data
+    # Create per-day labels using FIRMS proximity for each site/date
     labels_df = create_fire_labels_for_sites(sites, start_date, end_date, firms_df, buffer_km)
+    
+    # Ensure date column is datetime
+    if 'date' in labels_df.columns:
+        labels_df['date'] = pd.to_datetime(labels_df['date'])
     
     return labels_df
 
@@ -108,17 +116,42 @@ def merge_features_and_labels(weather_df: pd.DataFrame, labels_df: pd.DataFrame)
         Merged DataFrame
     """
     print("Merging features and labels...")
+    print(f"  Weather DataFrame columns: {weather_df.columns.tolist()}")
+    print(f"  Weather DataFrame index: {type(weather_df.index)}")
+    print(f"  Labels DataFrame columns: {labels_df.columns.tolist()}")
+    
+    # If date column is missing but datetime index exists, materialize it
+    if 'date' not in weather_df.columns and isinstance(weather_df.index, pd.DatetimeIndex):
+        print("  Materializing 'date' column from DatetimeIndex before reset")
+        weather_df = weather_df.copy()
+        weather_df['date'] = weather_df.index.normalize()
     
     # Ensure both DataFrames have the same structure
-    if 'date' in weather_df.columns:
-        weather_df = weather_df.set_index(['site', 'date'])
-    else:
-        weather_df = weather_df.set_index(['site', 'date'])
+    # weather_df already has date as index, so we need to reset it first
+    if 'date' not in weather_df.columns:
+        print("  Resetting weather DataFrame index...")
+        weather_df = weather_df.reset_index()
+        print(f"  After reset, columns: {weather_df.columns.tolist()}")
+        
+        # If we already have a real 'date' column (from feature engineering), drop the integer index
+        if 'date' in weather_df.columns and 'index' in weather_df.columns:
+            print("  Dropping integer 'index' column; preserving existing 'date'")
+            weather_df = weather_df.drop(columns=['index'])
+        elif 'index' in weather_df.columns and 'date' not in weather_df.columns:
+            print("  Renaming 'index' column to 'date'...")
+            weather_df = weather_df.rename(columns={'index': 'date'})
     
-    if 'date' in labels_df.columns:
-        labels_df = labels_df.set_index(['site', 'date'])
-    else:
-        labels_df = labels_df.set_index(['site', 'date'])
+    # Ensure both DataFrames have datetime date columns
+    print("  Converting date columns to datetime...")
+    weather_df['date'] = pd.to_datetime(weather_df['date'])
+    labels_df['date'] = pd.to_datetime(labels_df['date'])
+    
+    print(f"  Weather DataFrame date range: {weather_df['date'].min()} to {weather_df['date'].max()}")
+    print(f"  Labels DataFrame date range: {labels_df['date'].min()} to {labels_df['date'].max()}")
+    
+    # Set index on both DataFrames for merging
+    weather_df = weather_df.set_index(['site', 'date'])
+    labels_df = labels_df.set_index(['site', 'date'])
     
     # Merge on site and date
     merged_df = weather_df.merge(labels_df, left_index=True, right_index=True, how='inner')
@@ -128,6 +161,9 @@ def merge_features_and_labels(weather_df: pd.DataFrame, labels_df: pd.DataFrame)
     
     # Ensure chronological ordering
     merged_df = merged_df.sort_values(['site', 'date'])
+    
+    # Set the date column as the index for the chronological split
+    merged_df = merged_df.set_index('date')
     
     print(f"  Merge complete: {len(merged_df)} records")
     
@@ -185,15 +221,19 @@ def validate_labeled_data(df: pd.DataFrame) -> bool:
     """
     print("Validating labeled data...")
     
-    # Check required columns
-    required_cols = ['site', 'date', 'fire_tomorrow']
+    # Check required columns (date might be in index)
+    required_cols = ['site', 'fire_tomorrow']
     missing_cols = [col for col in required_cols if col not in df.columns]
     
     if missing_cols:
         raise ValueError(f"Missing required columns: {missing_cols}")
     
+    # Check if date is in index
+    if not isinstance(df.index, pd.DatetimeIndex):
+        raise ValueError("DataFrame must have datetime index")
+    
     # Check for NaN values in critical columns
-    critical_cols = ['site', 'date', 'fire_tomorrow']
+    critical_cols = ['site', 'fire_tomorrow']
     for col in critical_cols:
         if df[col].isna().any():
             raise ValueError(f"Found NaN values in {col}")
@@ -212,11 +252,11 @@ def validate_labeled_data(df: pd.DataFrame) -> bool:
     if positive_rate > 0.1:  # More than 10% would be unusual
         print(f"  Warning: High positive rate ({positive_rate:.3f}) - check data quality")
     
-    # Check chronological ordering
+    # Check chronological ordering (using index)
     sites = df['site'].unique()
     for site in sites:
-        site_data = df[df['site'] == site].sort_values('date')
-        if not site_data['date'].is_monotonic_increasing:
+        site_data = df[df['site'] == site].sort_index()
+        if not site_data.index.is_monotonic_increasing:
             raise ValueError(f"Dates not in chronological order for site: {site}")
     
     print("  Data validation passed")

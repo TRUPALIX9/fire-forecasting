@@ -18,3 +18,8 @@ learning-curve:
 
 threshold:
 	. $(VENV)/bin/activate; $(PY) -m src.experiments.threshold_sweep --config config.yaml
+
+.PHONY: fetch-firms run-train run-backend
+
+fetch-firms:
+	. $(VENV)/bin/activate; $(PY) -m scripts.fetch_firms_data

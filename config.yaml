@@ -1,11 +1,8 @@
 project:
-  area: "Tri-County: Ventura + Santa Barbara + Los Angeles"
+  preferred_years: [2019, 2020, 2021, 2022, 2023, 2024]
   end_year: 2024
-  preferred_years: 8
-  min_years: 5
-  max_rows: 12000
-  seed: 42
-  label_method: "firms"     # "firms" | "fwi"
+  max_rows: 5000000
+  label_method: "firms"
 
 data:
   sites:
@@ -35,22 +32,20 @@ data:
   raws_station_ids: []        # optional explicit RAWS IDs; else nearest lookup in code
 
 labeling:
-  buffer_km: 15               # try 10–20 if positives too rare/noisy
-  min_confidence: 0           # FIRMS confidence filter (0/nominal/high)
-  fwi_threshold_quantile: 0.85
+  buffer_km: 22
+  min_confidence: 20
+  fwi_threshold_quantile: 0.9
 
 features:
   lag_days: 7
   roll_window: 7
-  use_neighbors: true
-  k_neighbors: 1
-  neighbor_radius_km: 60
+  use_neighbors: false
+  k_neighbors: 5
+  neighbor_radius_km: 50
 
 train:
-  model: "ann"                # "baseline" | "ann" | "lstm"
-  batch: 64
-  epochs: 200
+  model: "ann"
+  epochs: 60
+  batch: 256
   lr: 0.001
-  patience_es: 10
-  patience_rlr: 5
   class_weight: true

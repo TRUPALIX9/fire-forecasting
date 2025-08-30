@@ -1,205 +1,560 @@
-# 🔥 Fire Forecasting
+# 🔥 Fire Forecasting - ML Pipeline for Wildfire Prediction
 
-A machine learning system for predicting wildfire risk in the Tri-County area of California (Ventura, Santa Barbara, and Los Angeles counties).
+A complete machine learning system that predicts "Fire tomorrow?" for selected sites across Ventura, Santa Barbara, and Los Angeles counties using real NASA FIRMS data, RAWS weather stations, and CAL FIRE FRAP historical fire perimeters.
 
-## 🎯 Mission
+## 🎯 Project Overview
 
-Create a complete ML system that predicts "Fire tomorrow?" for selected sites across the Tri-County area using three free datasets:
-1. **RAWS** (Remote Automated Weather Stations) — daily weather features
-2. **NASA FIRMS** — active fire points used to build next-day labels  
-3. **CAL FIRE FRAP** — historical fire perimeters for contextual mapping/EDA
+**Fire Forecasting** is an end-to-end ML pipeline that combines:
+- **Real NASA FIRMS Data**: Active fire detection from VIIRS satellites (2019-2024)
+- **RAWS Weather Data**: Daily weather features from automated weather stations
+- **CAL FIRE FRAP**: Historical fire perimeter data for context and mapping
+- **Machine Learning Models**: ANN/LSTM models trained on 75K+ fire detection records
 
-Train compact neural nets (ANN primary, LSTM optional) on daily data (≈ 5k–12k rows) so a full run finishes on CPU in ~10 minutes. Expose a FastAPI backend for metrics & retraining; ship a Next.js frontend using Material UI and ApexCharts for a clean dashboard; include a Leaflet map with FRAP overlays.
+The system predicts fire risk for 20+ WUI (Wildland-Urban Interface) sites in Southern California with a focus on areas like Montecito, Malibu, Thousand Oaks canyons, and Ojai Valley.
 
 ## 🏗️ Architecture
 
 ```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │    Backend      │    │   ML Pipeline   │
+│   (Next.js)     │◄──►│   (FastAPI)     │◄──►│   (Python)      │
+│   • Dashboard   │    │   • API Routes  │    │   • Data Fetch  │
+│   • Map View    │    │   • Model Serve │    │   • Features    │
+│   • Sites Table │    │   • Artifacts   │    │   • Training    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+### Backend (FastAPI + Python)
+- **ML Pipeline**: TensorFlow ANN/LSTM models with CPU training
+- **Data Sources**: RAWS weather, FIRMS fire detection, FRAP historical perimeters
+- **API Endpoints**: 9 REST endpoints for metrics, training, and geospatial data
+- **Static Serving**: `/artifacts/` directory for model downloads and visualizations
+
+### Frontend (Next.js + Material UI + ApexCharts)
+- **Dashboard**: KPI cards, PR/ROC curves, confusion matrix, threshold tuning
+- **Map View**: Interactive Leaflet map with site markers and FRAP overlays
+- **Sites Table**: Per-site performance metrics with sorting/filtering
+- **Responsive Design**: Material UI components with consistent theming
+
+## 📊 Machine Learning Pipeline
+
+### Data Processing
+- **20+ WUI Sites**: Montecito, Malibu, Thousand Oaks canyons, Ojai Valley, etc.
+- **Feature Engineering**: Daily weather + 7-day lags + rolling stats + seasonality + neighbor features
+- **Labeling**: FIRMS proximity (default) or FWI threshold (ablation study)
+- **Data Size**: 75K+ FIRMS records, 5+ years of daily data
+
+### Models & Training
+- **Baseline**: Logistic Regression, Random Forest
+- **Primary**: ANN (256→128→64→1 with Dropout)
+- **Optional**: LSTM with 14-day lookback
+- **Metrics**: PR-AUC (primary), ROC-AUC, Precision, Recall, F1
+- **Runtime**: ANN ~1-2 min, LSTM ~5-8 min on CPU
+
+### Data Splitting
+- **Chronological**: 70/15/15 by date across all sites
+- **No Leakage**: Target is strictly t+1, scaler fit on train only
+- **Class Imbalance**: Automatic class weight computation
+
+## 🗂️ Repository Structure
+
+```
 fire-forecasting/
-├── backend/                 # FastAPI backend
-├── src/                     # ML pipeline source code
-│   ├── data_sources/       # RAWS, FIRMS, FRAP data fetching
-│   ├── features/           # Feature engineering & FWI calculation
-│   ├── labeling/           # Fire label creation
-│   ├── splits/             # Chronological data splitting
-│   ├── models/             # ANN, LSTM, baseline models
-│   └── experiments/        # Pipeline orchestration
-├── frontend/               # Next.js + MUI + ApexCharts dashboard
-├── artifacts/              # Models, metrics, plots, GeoJSON
-├── data/                   # Cached raw data downloads
-└── config.yaml            # Configuration file
+├── README.md                 # This comprehensive documentation
+├── config.yaml              # Pre-filled Tri-County configuration
+├── requirements.txt         # Python dependencies
+├── Makefile                # Development commands
+├── create_github_repo.sh   # GitHub repository creation script
+├── .env.example            # Environment variables template
+├── .gitignore              # Git ignore patterns
+├── data/                   # Raw data storage
+│   ├── firms/             # NASA FIRMS fire detection data
+│   │   ├── DL_FIRE_J1V-C2_654579/  # VIIRS fire data
+│   │   ├── DL_FIRE_SV-C2_654580/   # VIIRS fire data
+│   │   └── firms_consolidated.csv   # Consolidated FIRMS data
+│   ├── frap/              # CAL FIRE FRAP historical fires
+│   └── raws/              # RAWS weather station data
+├── artifacts/              # Generated outputs (gitignored)
+│   ├── metrics/           # Model performance metrics
+│   ├── figures/           # Training plots and charts
+│   ├── models/            # Trained model files
+│   └── geo/               # Geospatial data exports
+├── backend/                # FastAPI application
+│   ├── main.py            # FastAPI app and routes
+│   └── api_schemas.py     # Pydantic models
+├── src/                    # ML pipeline source code
+│   ├── config.py          # Configuration management
+│   ├── utils.py           # Utility functions
+│   ├── geometry.py        # Geospatial operations
+│   ├── features/          # Feature engineering
+│   │   ├── engineer.py    # Main feature engineering
+│   │   └── fwi.py         # Fire Weather Index
+│   ├── data_sources/      # Data fetching modules
+│   │   ├── firms.py       # NASA FIRMS data loading
+│   │   ├── frap.py        # CAL FIRE FRAP data
+│   │   └── raws.py        # RAWS weather data
+│   ├── labeling/          # Label generation
+│   │   └── make_labels.py # Fire event labeling
+│   ├── splits/            # Data splitting
+│   │   └── chrono.py      # Chronological splitting
+│   ├── models/            # Model implementations
+│   │   ├── ann.py         # Artificial Neural Network
+│   │   ├── lstm.py        # Long Short-Term Memory
+│   │   └── baselines.py   # Baseline models
+│   └── experiments/       # Pipeline orchestration
+│       ├── run_pipeline.py # Main pipeline
+│       ├── learning_curve.py # Learning curve analysis
+│       ├── per_site_eval.py  # Per-site evaluation
+│       └── threshold_sweep.py # Threshold optimization
+├── scripts/                # Utility scripts
+│   └── fetch_firms_data.py # FIRMS data consolidation
+└── frontend/              # Next.js application
+    ├── app/               # App Router pages
+    │   ├── page.tsx       # Dashboard
+    │   ├── map/           # Map view
+    │   ├── sites/         # Sites table
+    │   └── about/         # About page
+    ├── components/        # React components
+    │   ├── KPICard.tsx    # Performance indicators
+    │   ├── PRChart.tsx    # Precision-Recall charts
+    │   ├── ROCChart.tsx   # ROC curves
+    │   ├── ConfusionMatrix.tsx # Confusion matrix
+    │   ├── MapLeaflet.tsx # Interactive map
+    │   ├── SitesTable.tsx # Sites performance table
+    │   └── ThresholdSlider.tsx # Threshold tuning
+    ├── package.json       # Node.js dependencies
+    └── next.config.js     # Next.js configuration
 ```
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.10+
-- Node.js 18+
-- GitHub CLI (`gh`) for repository creation
+- **Python**: 3.10+ with pip
+- **Node.js**: 18+ with npm
+- **Git**: For version control
+- **Memory**: At least 8GB RAM for training
 
-### 1. Backend/ML Setup
+### 1. Clone and Setup
 ```bash
-# Clone and setup
 git clone <your-repo-url>
 cd fire-forecasting
 
 # Create virtual environment
 make venv
-make install
 
-# Run first training (downloads data, trains ANN, writes artifacts)
+# Activate virtual environment
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install Python dependencies
+make install
+```
+
+### 2. Environment Configuration
+```bash
+# Copy environment template
+cp env.example .env
+
+# Edit .env with your FIRMS API key (if using WFS)
+FIRMS_MAP_KEY=your_api_key_here
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+```
+
+### 3. Data Preparation
+```bash
+# Load and consolidate real FIRMS data
+make fetch-firms
+
+# This will:
+# - Read from data/firms/DL_FIRE_*/ CSV files
+# - Create data/firms/firms_consolidated.csv
+# - Create data/firms/firms_wfs.csv for pipeline compatibility
+```
+
+### 4. Run ML Pipeline
+```bash
+# Train the complete model end-to-end
 make run-train
 
-# Start FastAPI backend
-make run-backend
+# This will:
+# - Load RAWS weather data
+# - Load FIRMS fire data
+# - Engineer features
+# - Train ANN model
+# - Generate artifacts in artifacts/ directory
 ```
 
-### 2. Frontend Setup
+### 5. Start Backend API
 ```bash
+# Start FastAPI server
+make run-backend
+
+# API will be available at http://localhost:8000
+# Interactive docs at http://localhost:8000/docs
+```
+
+### 6. Start Frontend
+```bash
+# Install Node.js dependencies
 cd frontend
 npm install
+
+# Start development server
 npm run dev
+
+# Frontend will be available at http://localhost:3000
 ```
-
-### 3. Access the System
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8000
-- **API Docs**: http://localhost:8000/docs
-
-## 📊 Features
-
-### ML Pipeline
-- **Data Sources**: RAWS weather, FIRMS fire detection, FRAP historical fires
-- **Feature Engineering**: Lags (1-7 days), rolling stats, seasonal features, neighbor signals
-- **Labeling**: FIRMS proximity (15km buffer) or FWI threshold methods
-- **Models**: ANN (256→128→64), LSTM (optional), baseline comparisons
-- **Metrics**: PR-AUC (primary), ROC-AUC, Precision, Recall, F1
-- **Performance**: CPU training in ~10 minutes, <12k rows
-
-### Frontend Dashboard
-- **KPI Cards**: PR-AUC, ROC-AUC, Precision, Recall, F1
-- **Charts**: ApexCharts PR/ROC curves, confusion matrix
-- **Controls**: Threshold slider, retrain button, layer toggles
-- **Map**: Leaflet integration with site markers and FRAP overlays
-- **Tables**: Per-site performance metrics with MUI DataGrid
-
-### Backend API
-- **Training**: POST `/api/train` for end-to-end pipeline
-- **Metrics**: GET `/api/metrics/global` and `/api/metrics/sites`
-- **Curves**: GET `/api/curves/pr` and `/api/curves/roc`
-- **Geo**: GET `/api/geo/sites` and `/api/geo/frap`
-- **Status**: GET `/api/status` for system health
 
 ## 🔧 Configuration
 
-Edit `config.yaml` to customize:
-- **Sites**: 20+ WUI-focused locations across Tri-County
-- **Features**: Lag days, rolling windows, neighbor signals
+### config.yaml
+The main configuration file controls:
+- **Project**: Date ranges, data limits, labeling method
+- **Data**: Site definitions, RAWS station IDs
+- **Labeling**: Buffer distances, confidence thresholds, FWI settings
+- **Features**: Lag days, rolling windows, neighbor features
 - **Training**: Model type, epochs, batch size, learning rate
-- **Labeling**: Buffer radius, confidence thresholds, FWI quantiles
 
-## 📈 Model Performance
+### Key Parameters
+```yaml
+project:
+  preferred_years: [2019, 2020, 2021, 2022, 2023, 2024]
+  end_year: 2024
+  label_method: "firms"
 
-The system is designed to achieve:
-- **PR-AUC**: >0.7 (excellent), >0.5 (good)
-- **Training Time**: <10 minutes on CPU
-- **Data Size**: 5k-12k rows (configurable)
-- **Sites**: 20+ monitoring locations
-- **Coverage**: 8 years of historical data
+labeling:
+  buffer_km: 22          # Distance for fire proximity labeling
+  min_confidence: 20     # Minimum FIRMS confidence
+  fwi_threshold_quantile: 0.9  # FWI threshold for alternative labeling
+
+features:
+  lag_days: 7            # Days of historical weather data
+  roll_window: 7         # Rolling statistics window
+  use_neighbors: false   # Include neighbor site features
+
+train:
+  model: "ann"           # Model type: "ann", "lstm", or "baseline"
+  epochs: 60             # Training epochs
+  batch: 256             # Batch size
+  lr: 0.001              # Learning rate
+  class_weight: true     # Handle class imbalance
+```
+
+## 📊 Data Sources
+
+### NASA FIRMS (Fire Information for Resource Management System)
+- **Source**: VIIRS satellite fire detection
+- **Coverage**: Global active fire monitoring
+- **Data**: 75K+ records from 2019-2024
+- **Variables**: Latitude, longitude, acquisition date/time, confidence, brightness
+- **Location**: `data/firms/DL_FIRE_*/` subdirectories
+
+### RAWS (Remote Automated Weather Stations)
+- **Source**: NOAA automated weather stations
+- **Coverage**: National network
+- **Variables**: Temperature, humidity, wind, precipitation
+- **Frequency**: Hourly data aggregated to daily
+- **Quality**: Missing value imputation and validation
+
+### CAL FIRE FRAP (Fire and Resource Assessment Program)
+- **Source**: California fire perimeter database
+- **Coverage**: Decades of fire event data
+- **Format**: Vector polygons with metadata
+- **Use**: Historical context and mapping
+
+## 🎯 Machine Learning Models
+
+### Artificial Neural Network (Primary)
+- **Architecture**: 256→128→64→1 with Dropout
+- **Activation**: ReLU for hidden, Sigmoid for output
+- **Optimizer**: Adam with learning rate scheduling
+- **Loss**: Binary crossentropy with class weights
+- **Training**: 60 epochs with early stopping
+
+### Long Short-Term Memory (Optional)
+- **Architecture**: LSTM with 14-day lookback
+- **Layers**: LSTM → Dense → Dropout → Dense
+- **Use Case**: Temporal pattern recognition
+- **Training**: Longer runtime, potentially better temporal modeling
+
+### Baseline Models
+- **Logistic Regression**: Linear baseline
+- **Random Forest**: Tree-based ensemble
+- **Purpose**: Performance comparison and validation
+
+## 📈 Performance Metrics
+
+### Global Performance
+- **PR-AUC**: Primary metric for class imbalance
+- **ROC-AUC**: Overall model discrimination
+- **F1 Score**: Harmonic mean of precision and recall
+- **Training Time**: Model training duration
+- **Inference Time**: Prediction latency
+
+### Per-Site Analysis
+- **Individual Metrics**: PR-AUC, F1 score per site
+- **Fire Events**: Number of positive samples
+- **Data Coverage**: Total samples per site
+- **Performance Ranking**: Site-by-site comparison
 
 ## 🗺️ Geographic Coverage
 
-**Santa Barbara County**
-- Montecito, Hope Ranch, San Roque, Santa Barbara Mesa
+### Tri-County Area
+- **Ventura County**: Thousand Oaks, Moorpark, Ojai Valley, Ventura Hillsides
+- **Santa Barbara County**: Montecito, Hope Ranch, San Roque
+- **Los Angeles County**: Malibu, Santa Monica Mountains, Glendale foothills
 
-**Ventura County**  
-- Thousand Oaks, Newbury Park, Moorpark, Simi Valley, Ojai Valley, Ventura Hillsides
+### WUI Focus
+- **Wildland-Urban Interface**: High-risk areas with development near wildlands
+- **Historical Fires**: Areas with documented fire history
+- **Weather Stations**: RAWS coverage within 60km of sites
 
-**Los Angeles County**
-- Malibu, Santa Monica Mountains, Glendale/Pasadena foothills, Bel Air/Brentwood, Chatsworth, Eagle Rock, Palos Verdes, Antelope Valley
+## 🔌 API Endpoints
 
-## 🔬 Technical Details
+### Core Endpoints
+- `GET /api/status` - API and training status
+- `GET /api/metrics/global` - Global model performance
+- `GET /api/metrics/per-site` - Per-site metrics
+- `GET /api/figures/{figure_name}` - Training visualizations
+- `GET /api/geo/frap` - FRAP fire perimeter data
+- `GET /api/geo/sites` - Site location data
 
-### ML Stack
-- **Framework**: TensorFlow 2.16
-- **Architecture**: ANN (256→128→64) with Dropout(0.2)
-- **Optimization**: Adam optimizer, early stopping, learning rate reduction
-- **Regularization**: Class weights, chronological splits, feature scaling
+### Training Endpoints
+- `POST /api/train` - Trigger model retraining
+- `GET /api/train/status` - Training progress
+- `GET /api/artifacts` - List available artifacts
 
-### Backend Stack  
-- **API**: FastAPI + Uvicorn
-- **Data**: Pandas, NumPy, scikit-learn
-- **Geo**: Shapely, GeoPandas
-- **ML**: TensorFlow, scikit-learn
+### Data Endpoints
+- `GET /api/data/firms` - FIRMS data summary
+- `GET /api/data/raws` - RAWS data summary
+- `GET /api/data/frap` - FRAP data summary
 
-### Frontend Stack
-- **Framework**: Next.js 14 (App Router)
-- **UI**: Material UI (MUI) + Emotion
-- **Charts**: ApexCharts + react-apexcharts
-- **Maps**: Leaflet + react-leaflet
-- **Data**: SWR for API state management
+## 🎨 Frontend Features
 
-## 📚 Data Sources
+### Dashboard (`/`)
+- **KPI Cards**: Key performance indicators with color coding
+- **Charts**: ApexCharts for PR/ROC curves
+- **Threshold Slider**: Interactive precision/recall tuning
+- **Confusion Matrix**: Real-time matrix updates
+- **Action Buttons**: Retrain model, download artifacts
 
-### RAWS Weather Data
-- **Source**: NOAA Remote Automated Weather Stations
-- **Features**: TMAX, TMIN, RH, WIND_SPD, WIND_DIR, PRCP
-- **Frequency**: Daily aggregated from hourly
-- **Coverage**: Nearest station to each site (<60km)
+### Map View (`/map`)
+- **Interactive Map**: Leaflet with custom markers
+- **Layer Toggles**: Sites, FRAP historical fires
+- **Site Details**: Performance metrics and fire event history
+- **Geographic Context**: Fire risk visualization
 
-### NASA FIRMS
-- **Source**: Fire Information for Resource Management System
-- **Data**: MODIS + VIIRS satellite fire detection
-- **Features**: Lat/lon, confidence, FRP, timestamp
-- **Usage**: Next-day fire labels (15km buffer)
+### Sites Table (`/sites`)
+- **Performance Table**: Sortable/filterable metrics
+- **Individual Analysis**: Per-site performance breakdown
+- **Data Coverage**: Sample counts and fire events
+- **Export Options**: CSV download capabilities
 
-### CAL FIRE FRAP
-- **Source**: Fire and Resource Assessment Program
-- **Data**: Historical fire perimeters (2017-2024)
-- **Features**: Geometry, name, year, acres, county
-- **Usage**: Contextual mapping and EDA
+## 🛠️ Development Commands
 
-## 🚨 Limitations & Considerations
+### Makefile Targets
+```bash
+make venv          # Create virtual environment
+make install       # Install Python dependencies
+make fetch-firms   # Load and consolidate FIRMS data
+make run-train     # Run end-to-end ML pipeline
+make run-backend   # Start FastAPI server
+make learning-curve # Generate learning curves
+make threshold     # Threshold optimization
+```
 
-- **Satellite Latency**: FIRMS data may have 1-2 day delays
-- **Weather Coverage**: Some sites far from RAWS stations
-- **Climate Change**: Historical patterns may not represent future conditions
-- **Human Factors**: Doesn't account for arson, accidents, etc.
-- **Data Quality**: Mock data used for demonstration
+### Python Scripts
+```bash
+# Run individual pipeline components
+python -m src.experiments.run_pipeline --config config.yaml
+python -m src.experiments.learning_curve --config config.yaml
+python -m src.experiments.threshold_sweep --config config.yaml
 
-## 🔮 Future Improvements
+# Data utilities
+python -m scripts.fetch_firms_data
+```
 
-- **Real-time Data**: Hourly RAWS updates, live FIRMS feeds
-- **Additional Features**: Fuel moisture, NDVI, topography, elevation
-- **Model Enhancements**: LSTM variants, ensemble methods, transfer learning
-- **Deployment**: Docker containers, cloud deployment, CI/CD pipeline
-- **Monitoring**: Model drift detection, automated retraining, alerting
+### Frontend Development
+```bash
+cd frontend
+npm install        # Install dependencies
+npm run dev        # Start development server
+npm run build      # Build for production
+npm run start      # Start production server
+```
+
+## 🔍 Troubleshooting
+
+### Common Issues
+
+#### 1. FIRMS Data Loading
+```bash
+# Check if data files exist
+ls -la data/firms/DL_FIRE_*/
+
+# Verify data structure
+head -5 data/firms/DL_FIRE_J1V-C2_654579/fire_archive_J1V-C2_654579.csv
+
+# Test data loading
+python -c "from src.data_sources.firms import load_real_firms_data; print(load_real_firms_data())"
+```
+
+#### 2. Training Issues
+```bash
+# Check configuration
+python -c "from src.config import load_config; print(load_config('config.yaml'))"
+
+# Verify data pipeline
+python -m src.experiments.run_pipeline --config config.yaml --force-retrain
+```
+
+#### 3. API Issues
+```bash
+# Check backend status
+curl http://localhost:8000/api/status
+
+# Verify artifacts exist
+ls -la artifacts/metrics/
+ls -la artifacts/figures/
+ls -la artifacts/models/
+```
+
+#### 4. Frontend Issues
+```bash
+# Check backend connectivity
+curl http://localhost:8000/api/metrics/global
+
+# Verify environment variables
+cat frontend/.env.local
+```
+
+### Performance Tuning
+
+#### Memory Optimization
+- **Reduce batch size**: Change `train.batch` in config.yaml
+- **Limit data size**: Adjust `project.max_rows` in config.yaml
+- **Use smaller models**: Try `train.model: "baseline"` first
+
+#### Training Speed
+- **Reduce epochs**: Lower `train.epochs` in config.yaml
+- **Use CPU optimization**: Ensure TensorFlow CPU optimizations
+- **Batch processing**: Process data in smaller chunks
+
+## 📚 Advanced Usage
+
+### Custom Model Development
+```python
+# Add new model in src/models/
+from src.models.base import BaseModel
+
+class CustomModel(BaseModel):
+    def __init__(self, config):
+        super().__init__(config)
+    
+    def train(self, X_train, y_train, X_val, y_val):
+        # Custom training logic
+        pass
+    
+    def predict(self, X):
+        # Custom prediction logic
+        pass
+```
+
+### Feature Engineering Extensions
+```python
+# Add new features in src/features/
+def engineer_custom_features(df):
+    """Add custom feature engineering logic"""
+    df['custom_feature'] = df['existing_feature'] * 2
+    return df
+```
+
+### Data Source Integration
+```python
+# Add new data source in src/data_sources/
+def load_custom_data():
+    """Load custom data source"""
+    # Implementation
+    pass
+```
+
+## 🌍 Deployment
+
+### Production Setup
+```bash
+# Build frontend
+cd frontend && npm run build
+
+# Start production backend
+make run-backend
+
+# Serve frontend with nginx or similar
+```
+
+### Docker Deployment
+```dockerfile
+# Example Dockerfile
+FROM python:3.10-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["make", "run-backend"]
+```
+
+### Environment Variables
+```bash
+# Production environment
+FIRMS_MAP_KEY=your_production_key
+NEXT_PUBLIC_BACKEND_URL=https://your-api-domain.com
+DATABASE_URL=your_database_connection
+```
 
 ## 🤝 Contributing
 
+### Development Setup
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Add tests and documentation
+5. Submit a pull request
+
+### Code Standards
+- **Python**: PEP 8 style guide
+- **JavaScript**: ESLint configuration
+- **TypeScript**: Strict type checking
+- **Testing**: Unit tests for critical functions
+
+### Review Process
+- **Code Review**: All changes require review
+- **Testing**: Automated testing on pull requests
+- **Documentation**: Updated documentation for new features
+- **Performance**: ML pipeline timing validation
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 🙏 Acknowledgments
 
-- **Data Sources**: NOAA RAWS, NASA FIRMS, CAL FIRE FRAP
-- **ML Libraries**: TensorFlow, scikit-learn, pandas, numpy
-- **Web Stack**: FastAPI, Next.js, Material UI, ApexCharts
-- **Research**: Wildfire prediction literature and methodologies
+- **RAWS**: NOAA for weather station data
+- **FIRMS**: NASA for satellite fire detection
+- **FRAP**: CAL FIRE for historical fire data
+- **Open Source**: TensorFlow, FastAPI, Next.js, Material UI communities
 
 ## 📞 Support
 
-For questions, issues, or contributions:
-- Open an issue on GitHub
-- Check the API documentation at `/docs`
-- Review the configuration in `config.yaml`
+### Getting Help
+- **Issues**: Create GitHub issues for bugs or feature requests
+- **Discussions**: Use GitHub Discussions for questions
+- **Documentation**: Check this README and code comments
+
+### Community
+- **Contributors**: See GitHub contributors page
+- **Updates**: Watch repository for updates
+- **Feedback**: Share your experience and suggestions
 
 ---
 
-**⚠️ Disclaimer**: This system is for research and demonstration purposes. Do not use for actual fire prediction without proper validation and emergency service coordination.
+**Fire Forecasting** - Predicting tomorrow's fires with today's data 🔥📊
+
+*Built with ❤️ for wildfire safety and prevention*
