@@ -35,6 +35,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+def get_project_root() -> Path:
+    """Get the project root directory (parent of backend/)"""
+    current_file = Path(__file__)
+    return current_file.parent.parent
+
+PROJECT_ROOT = get_project_root()
+
 # Global state for training status
 training_status = {"is_training": False, "last_completed": None, "error": None}
 
@@ -50,9 +57,9 @@ async def get_status():
         "api_status": "running",
         "training_status": training_status,
         "artifacts_exist": {
-            "global_metrics": Path("artifacts/metrics/global_metrics.json").exists(),
-            "per_site_metrics": Path("artifacts/metrics/per_site_metrics.csv").exists(),
-            "figures": len(list(Path("artifacts/figures").glob("*.png"))) if Path("artifacts/figures").exists() else 0
+            "global_metrics": (PROJECT_ROOT / "artifacts/metrics/global_metrics.json").exists(),
+            "per_site_metrics": (PROJECT_ROOT / "artifacts/metrics/per_site_metrics.csv").exists(),
+            "figures": len(list((PROJECT_ROOT / "artifacts/figures").glob("*.png"))) if (PROJECT_ROOT / "artifacts/figures").exists() else 0
         }
     }
 
@@ -60,10 +67,10 @@ async def get_status():
 async def get_firms_data():
     """Get FIRMS data status and count"""
     # Check for the consolidated FIRMS file first
-    firms_path = Path("data/firms/firms_consolidated.csv")
+    firms_path = PROJECT_ROOT / "data/firms/firms_consolidated.csv"
     if not firms_path.exists():
         # Fallback to the original file
-        firms_path = Path("data/firms/firms_20170101_20241231.csv")
+        firms_path = PROJECT_ROOT / "data/firms/firms_20170101_20241231.csv"
         if not firms_path.exists():
             raise HTTPException(status_code=404, detail="FIRMS data not found")
     
@@ -84,7 +91,7 @@ async def get_firms_data():
 @app.get("/api/data/raws")
 async def get_raws_data():
     """Get RAWS data status and count"""
-    raws_path = Path("data/raws/SANTA BARBARA_20170101_20241231.csv")
+    raws_path = PROJECT_ROOT / "data/raws/SANTA BARBARA_20170101_20241231.csv"
     if not raws_path.exists():
         raise HTTPException(status_code=404, detail="RAWS data not found")
     
@@ -105,8 +112,8 @@ async def get_raws_data():
 @app.get("/api/models/status")
 async def get_model_status():
     """Get model training status and artifacts"""
-    model_path = Path("artifacts/models/model.keras")
-    metrics_path = Path("artifacts/metrics/global_metrics.json")
+    model_path = PROJECT_ROOT / "artifacts/models/model.keras"
+    metrics_path = PROJECT_ROOT / "artifacts/metrics/global_metrics.json"
     
     if not model_path.exists():
         return {
@@ -155,7 +162,7 @@ def run_training_pipeline():
         result = subprocess.run([
             sys.executable, "-m", "src.experiments.run_pipeline",
             "--config", "config.yaml"
-        ], capture_output=True, text=True, cwd=Path.cwd())
+        ], capture_output=True, text=True, cwd=PROJECT_ROOT)
         
         if result.returncode == 0:
             training_status["last_completed"] = "success"
@@ -187,7 +194,7 @@ async def get_training_status():
 @app.get("/api/metrics/global")
 async def get_global_metrics():
     """Get global model metrics"""
-    metrics_path = Path("artifacts/metrics/global_metrics.json")
+    metrics_path = PROJECT_ROOT / "artifacts/metrics/global_metrics.json"
     if not metrics_path.exists():
         # Return a mock response if metrics don't exist
         return {
@@ -207,7 +214,7 @@ async def get_global_metrics():
 @app.get("/api/metrics/per-site")
 async def get_per_site_metrics():
     """Get per-site metrics"""
-    metrics_path = Path("artifacts/metrics/per_site_metrics.csv")
+    metrics_path = PROJECT_ROOT / "artifacts/metrics/per_site_metrics.csv"
     if not metrics_path.exists():
         # Return a mock response if metrics don't exist
         return {
@@ -269,7 +276,7 @@ async def get_roc_curve():
 @app.get("/api/figures/{figure_name}")
 async def get_figure(figure_name: str):
     """Get a specific figure by name"""
-    figure_path = Path(f"artifacts/figures/{figure_name}")
+    figure_path = PROJECT_ROOT / f"artifacts/figures/{figure_name}"
     if not figure_path.exists():
         raise HTTPException(status_code=404, detail=f"Figure {figure_name} not found")
     
@@ -278,7 +285,7 @@ async def get_figure(figure_name: str):
 @app.get("/api/figures")
 async def list_figures():
     """List all available figures"""
-    figures_dir = Path("artifacts/figures")
+    figures_dir = PROJECT_ROOT / "artifacts/figures"
     if not figures_dir.exists():
         return {"figures": []}
     
@@ -288,7 +295,7 @@ async def list_figures():
 @app.get("/api/geo/frap")
 async def get_frap_geojson():
     """Get FRAP fire perimeter data"""
-    geo_path = Path("artifacts/geo/frap_fire_perimeters.geojson")
+    geo_path = PROJECT_ROOT / "artifacts/geo/frap_fire_perimeters.geojson"
     if not geo_path.exists():
         raise HTTPException(status_code=404, detail="FRAP GeoJSON not found — run `make fetch-frap`")
     
@@ -299,9 +306,9 @@ async def get_sites_geojson():
     """Get sites geojson data"""
     # Check multiple possible locations for sites data
     possible_paths = [
-        Path("artifacts/geo/sites.geojson"),
-        Path("artifacts/geo/monitoring_sites.geojson"),
-        Path("data/sites.geojson")
+        PROJECT_ROOT / "artifacts/geo/sites.geojson",
+        PROJECT_ROOT / "artifacts/geo/monitoring_sites.geojson",
+        PROJECT_ROOT / "data/sites.geojson"
     ]
     
     for geo_path in possible_paths:
