@@ -1,1 +1,0 @@
-# Fire Forecasting ML Pipeline

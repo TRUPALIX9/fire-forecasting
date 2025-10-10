@@ -1,118 +1,124 @@
-# California Weather & Fire Dataset (2000-2025)
-## Consolidated Dataset Summary
+# Fire Forecasting Temporal Weather Datasets (2020-2023)
+## Multi-Resolution Weather & Fire Dataset Summary
 
 ### Overview
-This dataset contains daily weather and fire occurrence data for California from 2000 to 2025, consolidated from the original 1984-2025 dataset. This period focuses on the most recent and relevant fire patterns for modern machine learning applications.
+This dataset collection contains high-resolution weather and fire occurrence data from 2020-2023, sourced from the fire-prediction repository. The data is available at three different temporal resolutions (hourly, bihourly, trihourly) to support various machine learning applications and temporal analysis requirements.
 
 ### Dataset Information
-- **File**: `CA_Weather_Fire_Dataset_2000-2025.csv`
-- **Records**: 9,144 daily observations
-- **Years**: 26 years (2000-2025)
-- **Date Range**: January 1, 2000 to January 12, 2025
-- **File Size**: 924,107 bytes (902.4 KB)
+- **Files**: 3 CSV files with different temporal resolutions
+- **Total Records**: 82,775 observations across all datasets
+- **Years**: 4 years (2020-2023)
+- **Date Range**: January 1, 2020 to December 25, 2023
+- **Total Size**: 10.1 MB
 
-### Data Reduction Summary
-- **Records removed**: 5,844 (39.0% reduction from original)
-- **Years removed**: 16 years (1984-1999)
-- **Fire start days removed**: 1,512
-- **Size reduction**: 39.1%
+### Dataset Breakdown
 
-### Columns Description
-1. **DATE** - Date of observation (YYYY-MM-DD)
-2. **PRECIPITATION** - Daily precipitation in inches
-3. **MAX_TEMP** - Maximum temperature in Fahrenheit
-4. **MIN_TEMP** - Minimum temperature in Fahrenheit
-5. **AVG_WIND_SPEED** - Average wind speed in mph
-6. **FIRE_START_DAY** - Boolean indicating if a fire started on this day
-7. **YEAR** - Year of observation
-8. **TEMP_RANGE** - Temperature range (MAX_TEMP - MIN_TEMP)
-9. **WIND_TEMP_RATIO** - Ratio of wind speed to temperature range
-10. **MONTH** - Month number (1-12)
-11. **SEASON** - Season (Winter, Spring, Summer, Fall)
-12. **LAGGED_PRECIPITATION** - Previous day's precipitation
-13. **LAGGED_AVG_WIND_SPEED** - Previous day's average wind speed
-14. **DAY_OF_YEAR** - Day of the year (1-366)
+| Dataset | Temporal Resolution | Records | Size | Columns |
+|---------|-------------------|---------|------|---------|
+| **Hourly_Weather_Dataset.csv** | Every hour | 40,711 | 4.9 MB | 14 |
+| **Bihourly_Weather_Dataset.csv** | Every 2 hours | 23,954 | 2.8 MB | 14 |
+| **Trihourly_Weather_Dataset.csv** | Every 3 hours | 18,110 | 2.3 MB | 15 |
+
+### Features Description
+
+#### Temporal Features
+1. **date** - Date of observation (MM/DD/YY format)
+2. **time** - Time of observation (HH:MM:SS format)
+3. **datetime** - Combined date-time (Trihourly only)
+
+#### Target Variables
+4. **Severity** - Fire severity score (0-27.5+ range)
+5. **forest_fire** - Binary fire indicator (N/Y)
+
+#### Atmospheric Weather Features
+6. **temperature_2m** - Air temperature at 2m height (°C)
+7. **relative_humidity_2m** - Relative humidity at 2m (%)
+8. **precipitation** - Precipitation amount (mm)
+9. **surface_pressure** - Atmospheric pressure (hPa)
+10. **cloud_cover** - Cloud cover percentage (%)
+11. **wind_speed_10m** - Wind speed at 10m height (m/s)
+
+#### Soil/Subsurface Features
+12. **soil_temperature_0_to_7cm** - Soil temperature 0-7cm depth (°C)
+13. **soil_temperature_7_to_28cm** - Soil temperature 7-28cm depth (°C)
+14. **soil_moisture_0_to_7cm** - Soil moisture 0-7cm depth (fraction)
+15. **soil_moisture_7_to_28cm** - Soil moisture 7-28cm depth (fraction)
 
 ### Key Statistics
 
-#### Fire Occurrence
-- **Total fire start days**: 3,459 (37.8% of all days)
-- **Average fire start days per year**: 133.0
-- **Most fire-prone years**:
-  - 2017: 197 fire start days
-  - 2020: 188 fire start days
-  - 2018: 186 fire start days
-  - 2021: 173 fire start days
-  - 2012: 172 fire start days
+#### Fire Occurrence (Bihourly Dataset)
+- **Total fire events**: 6,422 instances (26.8% of observations)
+- **No fire events**: 17,529 instances (73.2% of observations)
+- **Class balance**: Reasonably balanced for fire prediction
+- **Severity range**: 0 to 27.5+ (continuous scale)
 
-#### Seasonal Analysis
-| Season | Fire Start Days | Avg Precipitation | Avg Max Temp | Avg Wind Speed |
-|--------|----------------|-------------------|--------------|----------------|
-| Summer | 1,760          | 0.00"            | 74.3°F       | 7.8 mph        |
-| Fall   | 888            | 0.01"            | 73.9°F       | 6.6 mph        |
-| Spring | 605            | 0.03"            | 67.7°F       | 8.1 mph        |
-| Winter | 206            | 0.08"            | 65.9°F       | 6.3 mph        |
-
-#### Temperature Statistics
-- **Average max temperature**: 70.4°F
-- **Average min temperature**: 56.7°F
-- **Average temperature range**: 13.8°F
-- **Maximum temperature recorded**: 105.0°F
-- **Minimum temperature recorded**: 35.0°F
+#### Temporal Resolution Comparison
+| Resolution | Records | Fire Events | Fire Rate | Use Case |
+|------------|---------|-------------|-----------|----------|
+| Hourly | 40,711 | ~10,000+ | ~25% | High-frequency analysis |
+| Bihourly | 23,954 | 6,422 | 26.8% | Standard ML training |
+| Trihourly | 18,110 | ~4,800+ | ~26% | Long-term patterns |
 
 #### Data Quality
-- **Missing wind speed values**: 9 records
-- **Missing wind-temperature ratio**: 9 records
-- **Data completeness**: 99.9%
+- **Format consistency**: All datasets use consistent column naming
+- **Missing values**: Minimal missing data across all features
+- **Temporal coverage**: Complete 4-year coverage (2020-2023)
+- **Data completeness**: High (>99% complete records)
 
-### Key Insights (2000-2025 Period)
+### Key Insights (2020-2023 Period)
 
-#### Modern Fire Patterns
-- **Higher fire frequency**: 37.8% of days had fires (vs 33.1% in 1984-2025)
-- **Recent peak years**: 2017-2021 saw the highest fire activity
-- **Climate change impact**: More extreme fire seasons in recent years
+#### Multi-Resolution Benefits
+- **Flexible analysis**: Choose appropriate temporal resolution for your use case
+- **Hourly data**: Perfect for short-term fire risk assessment and real-time monitoring
+- **Bihourly data**: Optimal balance between granularity and computational efficiency
+- **Trihourly data**: Suitable for long-term pattern analysis and trend identification
 
-#### Seasonal Trends
-- **Summer dominance**: 51% of all fires occur in summer
-- **Extended fire season**: Significant fall fire activity (26% of fires)
-- **Winter protection**: Only 6% of fires in winter months
+#### Fire Prediction Advantages
+- **High-resolution weather**: More precise weather conditions for fire prediction
+- **Soil moisture data**: Critical subsurface information often missing in other datasets
+- **Dual targets**: Both binary classification (fire/no-fire) and regression (severity)
+- **Recent data**: Captures current fire patterns and climate conditions
 
-#### Weather Patterns
-- **Drier conditions**: Lower average precipitation (0.03" vs 0.04" in full dataset)
-- **Higher temperatures**: Slightly elevated average temperatures
-- **Wind patterns**: Consistent wind speeds across seasons
+#### Machine Learning Opportunities
+- **Temporal modeling**: Time series analysis across multiple resolutions
+- **Feature engineering**: Rich weather and soil features for model development
+- **Balanced dataset**: Good fire/no-fire ratio for training robust models
+- **Multi-task learning**: Predict both fire occurrence and severity simultaneously
 
 ### Usage Notes
-- **Modern relevance**: Focuses on current fire patterns and climate conditions
-- **ML optimization**: Reduced dataset size improves training efficiency
-- **Recent trends**: Captures the impact of climate change on fire patterns
-- **Data quality**: High completeness with minimal missing values
-- **Temporal features**: All lagged and seasonal features preserved
+- **Multi-resolution flexibility**: Choose the temporal resolution that best fits your analysis needs
+- **High-quality data**: Clean, consistent formatting across all datasets
+- **Recent coverage**: 2020-2023 period captures current fire patterns and climate conditions
+- **Rich features**: Comprehensive weather and soil data for robust modeling
+- **Balanced targets**: Good class distribution for both classification and regression tasks
 
-### Comparison with Other Periods
+### Dataset Selection Guide
 
-| Metric | 1984-2025 | 1990-2025 | 2000-2025 |
-|--------|-----------|-----------|-----------|
-| Records | 14,988 | 12,796 | 9,144 |
-| Years | 42 | 36 | 26 |
-| Fire Days | 4,971 | 4,377 | 3,459 |
-| Fire Rate | 33.1% | 34.2% | 37.8% |
-| File Size | 1.48 MB | 1.25 MB | 0.90 MB |
+| Use Case | Recommended Dataset | Reason |
+|----------|-------------------|---------|
+| **Real-time monitoring** | Hourly_Weather_Dataset.csv | Highest temporal resolution |
+| **Standard ML training** | Bihourly_Weather_Dataset.csv | Balanced size and granularity |
+| **Long-term analysis** | Trihourly_Weather_Dataset.csv | Reduced noise, clear patterns |
+| **Time series modeling** | Any dataset | Choose based on prediction horizon |
+| **Feature engineering** | All datasets | Compare patterns across resolutions |
 
-### File Location
+### File Locations
 ```
-data/CA_Weather_Fire_Dataset_2000-2025.csv
+data/Hourly_Weather_Dataset.csv    (40,711 records, 4.9 MB)
+data/Bihourly_Weather_Dataset.csv  (23,954 records, 2.8 MB)
+data/Trihourly_Weather_Dataset.csv (18,110 records, 2.3 MB)
 ```
 
-### Related Files
-- Original dataset: `data/CA_Weather_Fire_Dataset_1984-2025.csv`
-- 1990-2025 dataset: `data/CA_Weather_Fire_Dataset_1990-2025.csv`
-- 1990 summary: `data/DATASET_SUMMARY_1990-2025.md`
-- This summary: `data/DATASET_SUMMARY_2000-2025.md`
+### Data Source
+- **Original repository**: [fire-prediction GitHub](https://github.com/gauravsurtani/fire-prediction)
+- **Final datasets folder**: Contains processed weather and fire data
+- **Processing**: Cleaned and formatted for machine learning applications
 
 ### Recommended Use Cases
-- **Modern fire prediction models**
-- **Climate change impact studies**
-- **Recent fire pattern analysis**
-- **Efficient ML training with reduced data size**
-- **Real-time fire risk assessment systems**
+- **Fire risk prediction models** (binary classification)
+- **Fire severity estimation** (regression)
+- **Temporal pattern analysis** (time series)
+- **Multi-resolution modeling** (ensemble methods)
+- **Real-time fire monitoring systems**
+- **Climate impact studies** on fire patterns
+- **Feature engineering** for advanced ML models
