@@ -1,249 +1,172 @@
 "use client";
 
-import React from "react";
+import React, { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
+import { Box, Card, Grid, Typography } from "@mui/material";
+import KPICard from "./components/KPICard";
+import ForecastControls from "./components/ForecastControls";
+import ForecastChart from "./components/ForecastChart";
+import SitesTable from "./components/SitesTable";
+import LayerToggles, { Layer } from "./components/LayerToggles";
+import MapLoading from "./components/MapLoading";
 import {
-  Box,
-  Card,
-  CardContent,
-  Typography,
-  Grid,
-  Button,
-  Alert,
-  Paper,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Divider,
-} from "@mui/material";
-import {
-  LocalFireDepartment,
-  Dataset,
-  Psychology,
-  Settings,
-  History,
-  Info,
-  Warning,
-  CheckCircle,
-} from "@mui/icons-material";
-import Link from "next/link";
+  computeView,
+  FIRST_DATE,
+  formatDay,
+  formatDayTime,
+  Horizon,
+} from "../lib/forecast";
 
-export default function HomePage() {
+// Leaflet needs the browser: load the map on the client only
+const MapLeaflet = dynamic(() => import("./components/MapLeaflet"), {
+  ssr: false,
+  loading: () => <MapLoading />,
+});
+
+export default function DashboardPage() {
+  const [start, setStart] = useState(FIRST_DATE);
+  const [horizon, setHorizon] = useState<Horizon>(72);
+  const [layers, setLayers] = useState<Layer[]>(["sites", "bbox"]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  const view = useMemo(() => computeView(start, horizon), [start, horizon]);
+  const selected =
+    view.sites.find((s) => s.id === selectedId) ?? view.peakSite;
+
   return (
     <Box>
-      {/* Hero Section */}
-      <Box sx={{ mb: 6, textAlign: "center" }}>
-        <LocalFireDepartment
-          sx={{
-            fontSize: 80,
-            color: "#ff9800",
-            mb: 2,
-          }}
-        />
-        <Typography variant="h3" component="h1" gutterBottom>
-          Fire Forecasting Dashboard
-        </Typography>
-        <Typography variant="h6" color="text.secondary" sx={{ mb: 3 }}>
-          ML-powered wildfire prediction system using temporal weather data
-        </Typography>
-        <Alert severity="info" sx={{ maxWidth: 600, mx: "auto" }}>
-          <Typography variant="body2">
-            <strong>Note:</strong> This is a frontend-only application. Backend
-            API has been removed. Navigate to Settings and ML History to explore
-            the interface.
+      {/* Header */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: 2,
+          mb: 2.5,
+        }}
+      >
+        <Box>
+          <Typography variant="h5" component="h1" sx={{ fontWeight: 600 }}>
+            Fire Forecasting Dashboard
           </Typography>
-        </Alert>
+          <Typography variant="body2" color="text.secondary">
+            Sample forecasts for the Tri-County area from the bundled trihourly
+            weather dataset
+          </Typography>
+        </Box>
+        <ForecastControls
+          start={start}
+          horizon={horizon}
+          onStartChange={setStart}
+          onHorizonChange={setHorizon}
+        />
       </Box>
 
-      {/* Quick Actions */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid item xs={12} md={4}>
-          <Card sx={{ height: "100%" }}>
-            <CardContent sx={{ textAlign: "center" }}>
-              <Settings sx={{ fontSize: 48, color: "primary.main", mb: 2 }} />
-              <Typography variant="h5" gutterBottom>
-                Settings
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-                Configure your dashboard preferences and data sources
-              </Typography>
-              <Button
-                variant="contained"
-                component={Link}
-                href="/settings"
-                fullWidth
-              >
-                Open Settings
-              </Button>
-            </CardContent>
-          </Card>
+      {/* KPI cards */}
+      <Grid container spacing={2} sx={{ mb: 2 }}>
+        <Grid item xs={12} sm={6} md={3}>
+          <KPICard
+            title="Peak fire risk"
+            value={view.peakSite.peak}
+            precision={2}
+            color="error"
+            subtitle={`${view.peakSite.name} · ${formatDayTime(view.peakSite.peakTime)}`}
+            showTrend={false}
+          />
         </Grid>
-
-        <Grid item xs={12} md={4}>
-          <Card sx={{ height: "100%" }}>
-            <CardContent sx={{ textAlign: "center" }}>
-              <History sx={{ fontSize: 48, color: "secondary.main", mb: 2 }} />
-              <Typography variant="h5" gutterBottom>
-                ML History
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-                View machine learning model training history and results
-              </Typography>
-              <Button
-                variant="contained"
-                color="secondary"
-                component={Link}
-                href="/ml-history"
-                fullWidth
-              >
-                View History
-              </Button>
-            </CardContent>
-          </Card>
+        <Grid item xs={12} sm={6} md={3}>
+          <KPICard
+            title="Sites above threshold"
+            value={view.aboveThreshold}
+            precision={0}
+            unit={`of ${view.sites.length} sites`}
+            color="warning"
+            subtitle={`Decision threshold τ = ${view.threshold.toFixed(2)}`}
+            showTrend={false}
+          />
         </Grid>
-
-        <Grid item xs={12} md={4}>
-          <Card sx={{ height: "100%" }}>
-            <CardContent sx={{ textAlign: "center" }}>
-              <Info sx={{ fontSize: 48, color: "info.main", mb: 2 }} />
-              <Typography variant="h5" gutterBottom>
-                About
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-                Learn more about the fire forecasting system
-              </Typography>
-              <Button variant="outlined" color="info" fullWidth disabled>
-                Coming Soon
-              </Button>
-            </CardContent>
-          </Card>
+        <Grid item xs={12} sm={6} md={3}>
+          <KPICard
+            title="Max temperature"
+            value={view.maxTemp.temperature_2m}
+            precision={1}
+            unit="°C"
+            color="primary"
+            subtitle={`temperature_2m · ${formatDayTime(view.maxTemp.time)}`}
+            showTrend={false}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <KPICard
+            title="Min humidity"
+            value={view.minHumidity.relative_humidity_2m}
+            precision={1}
+            unit="%"
+            color="info"
+            subtitle={`relative_humidity_2m · ${formatDay(view.minHumidity.time)}`}
+            showTrend={false}
+          />
         </Grid>
       </Grid>
 
-      {/* Dataset Information */}
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                <Dataset sx={{ mr: 1, verticalAlign: "middle" }} />
-                Available Datasets
-              </Typography>
-              <Divider sx={{ mb: 2 }} />
-              <List>
-                <ListItem>
-                  <ListItemIcon>
-                    <CheckCircle color="success" />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Hourly Weather Dataset"
-                    secondary="40,711 records - Every hour weather data (2020-2023)"
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <CheckCircle color="success" />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Bihourly Weather Dataset"
-                    secondary="23,954 records - Every 2 hours weather data (2020-2023)"
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <CheckCircle color="success" />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Trihourly Weather Dataset"
-                    secondary="18,110 records - Every 3 hours weather data (2020-2023)"
-                  />
-                </ListItem>
-              </List>
-            </CardContent>
+      <Grid container spacing={2}>
+        {/* Forecast map */}
+        <Grid item xs={12} md={7}>
+          <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+            <Box
+              sx={{
+                px: 2,
+                py: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: 1,
+                borderBottom: 1,
+                borderColor: "divider",
+              }}
+            >
+              <Box>
+                <Typography variant="subtitle1" component="h2" sx={{ fontWeight: 600 }}>
+                  Forecast Map
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Peak risk per site · {view.rangeLabel}
+                </Typography>
+              </Box>
+              <LayerToggles value={layers} onChange={setLayers} />
+            </Box>
+            <Box sx={{ flexGrow: 1, minHeight: { xs: 360, md: 420 } }}>
+              <MapLeaflet
+                sites={view.sites}
+                threshold={view.threshold}
+                showSites={layers.includes("sites")}
+                showFRAP={layers.includes("frap")}
+                showBoundingBox={layers.includes("bbox")}
+                onSelectSite={setSelectedId}
+                expandHref="/map"
+              />
+            </Box>
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={6}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                <Psychology sx={{ mr: 1, verticalAlign: "middle" }} />
-                Features
-              </Typography>
-              <Divider sx={{ mb: 2 }} />
-              <List>
-                <ListItem>
-                  <ListItemIcon>
-                    <CheckCircle color="success" />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Temporal Weather Data"
-                    secondary="Temperature, humidity, precipitation, wind speed, pressure"
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <CheckCircle color="success" />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Soil Conditions"
-                    secondary="Soil temperature and moisture at different depths"
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <CheckCircle color="success" />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Fire Labels"
-                    secondary="Binary fire indicators (N/Y) and severity scores"
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <CheckCircle color="success" />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Multi-Resolution"
-                    secondary="Data available at 1-hour, 2-hour, and 3-hour intervals"
-                  />
-                </ListItem>
-              </List>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-
-      {/* Status Information */}
-      <Card sx={{ mt: 3 }}>
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
-            <Warning
-              sx={{ mr: 1, verticalAlign: "middle", color: "warning.main" }}
+        {/* Risk chart + site table */}
+        <Grid item xs={12} md={5}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <ForecastChart
+              site={selected}
+              times={view.times}
+              threshold={view.threshold}
             />
-            System Status
-          </Typography>
-          <Divider sx={{ mb: 2 }} />
-          <Paper variant="outlined" sx={{ p: 2, bgcolor: "grey.50" }}>
-            <Typography variant="body2" color="text.secondary">
-              <strong>Current Status:</strong> Frontend-only mode
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <strong>Backend API:</strong> Removed (as requested)
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <strong>Data Sources:</strong> 3 temporal weather datasets
-              available
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <strong>ML Models:</strong> Simulated data in ML History page
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <strong>Last Updated:</strong> {new Date().toLocaleDateString()}
-            </Typography>
-          </Paper>
-        </CardContent>
-      </Card>
+            <SitesTable
+              sites={view.sites}
+              selectedId={selectedId}
+              onSelect={setSelectedId}
+            />
+          </Box>
+        </Grid>
+      </Grid>
     </Box>
   );
 }

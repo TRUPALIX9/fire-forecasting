@@ -1,0 +1,288 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" width="1280" height="640" viewBox="0 0 1280 640">
+<title id="t">Fire Forecasting</title>
+<desc id="d">Fire Forecasting: wildfire risk dashboard with sample forecasts, a Leaflet map and ApexCharts, built with Next.js and MUI.</desc>
+<defs><style>.b-s{font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif}.b-m{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace}.b-l{font-family:'Helvetica Neue', Arial, Helvetica, sans-serif}</style><linearGradient id="b-appbar" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#1976D2"/><stop offset="1" stop-color="#1565C0"/></linearGradient><linearGradient id="b-barsh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.18"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient><linearGradient id="b-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9800" stop-opacity="0.45"/><stop offset="1" stop-color="#FF9800" stop-opacity="0.04"/></linearGradient><filter id="b-cardsh" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="0" dy="1" stdDeviation="1.4" flood-color="#000" flood-opacity="0.14"/></filter><filter id="b-popsh" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.28"/></filter><filter id="b-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5"/></filter><filter id="b-winsh" x="-10%" y="-10%" width="120%" height="125%"><feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#5A3A12" flood-opacity="0.20"/></filter><linearGradient id="bm-tile" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1976D2"/><stop offset="1" stop-color="#0D47A1"/></linearGradient><linearGradient id="bm-flame" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB300"/><stop offset="0.55" stop-color="#FF9800"/><stop offset="1" stop-color="#F57C00"/></linearGradient>
+<linearGradient id="b-ground" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0B3D91"/><stop offset="0.6" stop-color="#1565C0"/><stop offset="1" stop-color="#1976D2"/></linearGradient>
+<radialGradient id="b-ember" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(180 230) scale(460 340)"><stop offset="0" stop-color="#FF9800" stop-opacity="0.22"/><stop offset="1" stop-color="#FF9800" stop-opacity="0"/></radialGradient>
+<clipPath id="b-bclip"><rect width="1280" height="640"/></clipPath>
+</defs>
+<rect width="1280" height="640" fill="url(#b-ground)"/>
+<rect width="1280" height="640" fill="url(#b-ember)"/>
+<g fill="none" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="1.5">
+<path d="M-20 520C120 470 220 500 330 450S520 330 640 360"/><path d="M-20 470C110 420 210 450 320 400S500 280 630 300"/>
+<path d="M-20 420C100 370 200 400 300 350S480 230 620 240"/><path d="M-20 580C140 530 250 560 360 510S540 400 660 420"/>
+</g>
+<text x="96" y="132" class="b-m" font-size="15" letter-spacing="3" fill="#FFFFFF" fill-opacity="0.72">DASHBOARD PROTOTYPE <tspan fill="#FF9800" fill-opacity="1">/</tspan> WEB</text>
+<g transform="translate(96 168) scale(0.2031)"><rect width="512" height="512" rx="112" fill="url(#bm-tile)"/><path d="M262 80C274 150 322 186 352 236C378 278 386 318 382 352C374 414 322 450 258 450C188 450 132 404 132 340C132 290 158 252 190 222C192 260 206 286 230 300C214 226 226 138 262 80Z" fill="url(#bm-flame)"/><path d="M268 246C302 288 336 318 336 364C336 410 302 434 262 434C220 434 192 408 192 370C192 342 208 322 226 306C232 332 246 346 264 350C254 314 256 278 268 246Z" fill="#FFC107" fill-opacity="0.9"/><path d="M92 404L188 322L270 360L402 214" fill="none" stroke="#0E4AA6" stroke-width="58" stroke-linecap="round" stroke-linejoin="round"/><path d="M92 404L188 322L270 360L402 214" fill="none" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/><circle cx="402" cy="214" r="36" fill="#FFFFFF"/><circle cx="402" cy="214" r="15" fill="#1976D2"/></g>
+<text x="96" y="340" class="b-s" font-size="60" font-weight="700" letter-spacing="-1.2" fill="#FFFFFF">Fire Forecasting</text>
+<text x="96" y="390" class="b-s" font-size="24" fill="#FFFFFF" fill-opacity="0.85">Wildfire risk dashboard with</text>
+<text x="96" y="422" class="b-s" font-size="24" fill="#FFFFFF" fill-opacity="0.85">sample forecasts and maps</text>
+<g class="b-m" font-size="14" fill="#FFFFFF" text-anchor="middle">
+<rect x="96.5" y="458.5" width="90" height="32" rx="16" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.35"/><text x="141.5" y="479">Next.js</text>
+<rect x="196.5" y="458.5" width="64" height="32" rx="16" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.35"/><text x="228.5" y="479">MUI</text>
+<rect x="270.5" y="458.5" width="90" height="32" rx="16" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.35"/><text x="315.5" y="479">Leaflet</text>
+<rect x="370.5" y="458.5" width="120" height="32" rx="16" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.35"/><text x="430.5" y="479">ApexCharts</text>
+</g>
+<g clip-path="url(#b-bclip)"><g transform="translate(612 104) scale(0.58) translate(-40 -40)"><clipPath id="b-win"><rect x="40" y="40" width="1200" height="720" rx="12"/></clipPath>
+<rect x="40" y="40" width="1200" height="720" rx="12" fill="#FFFFFF" filter="url(#b-winsh)"/>
+<g clip-path="url(#b-win)">
+<rect x="40" y="40" width="1200" height="44" fill="#F1F3F4"/><path d="M40 83.5H1240" stroke="#DADCE0"/>
+<circle cx="64" cy="62" r="6" fill="#D5D8DC"/>
+<circle cx="84" cy="62" r="6" fill="#D5D8DC"/>
+<circle cx="104" cy="62" r="6" fill="#D5D8DC"/>
+<g fill="none" stroke="#80868B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M142 62h-12m5-5-5 5 5 5"/><path d="M160 62h12m-5-5 5 5-5 5" stroke-opacity="0.45"/><path d="M197 57.5a6 6 0 1 0 1.6 4.5M197.5 54v4h-4"/></g>
+<rect x="224" y="50" width="832" height="24" rx="12" fill="#FFFFFF" stroke="#E2E4E7"/>
+<path transform="translate(236.0 55.0) scale(0.5833)" d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="#80868B"/>
+<text x="258.0" y="66.5" class="b-s" font-size="13" fill="#3C4043">localhost:3000</text>
+<rect x="40" y="84" width="1200" height="676" fill="#F5F6F8"/>
+<rect x="40" y="84" width="1200" height="70" fill="url(#b-appbar)"/>
+<rect x="40" y="154" width="1200" height="6" fill="url(#b-barsh)"/>
+<path transform="translate(68.0 109.0) scale(0.8333)" d="M19.48 12.35c-1.57-4.08-7.16-4.3-5.81-10.23.1-.44-.37-.78-.75-.55C9.29 3.71 6.68 8 8.87 13.62c.18.46-.36.89-.75.59-1.81-1.37-2-3.34-1.84-4.75.06-.52-.62-.77-.91-.34C4.69 10.16 4 11.84 4 14.37c.38 5.6 5.11 7.32 6.81 7.54 2.43.31 5.06-.14 6.95-1.87 2.08-1.93 2.84-5.01 1.72-7.69zm-9.28 5.03c1.44-.35 2.18-1.39 2.38-2.31.33-1.43-.96-2.83-.09-5.09.33 1.87 3.27 3.04 3.27 5.08.08 2.53-2.66 4.7-5.56 2.32z" fill="#FF9800"/>
+<text x="96.0" y="128.0" class="b-s" font-size="24" font-weight="700" fill="#FFFFFF" letter-spacing="-0.2">Fire Forecasting</text>
+<path transform="translate(904.0 109.0) scale(0.8333)" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="#FFFFFF"/>
+<text x="932.0" y="124.0" class="b-s" font-size="14" font-weight="500" fill="#FFFFFF">Home</text>
+<path transform="translate(996.0 109.0) scale(0.8333)" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" fill="#FFFFFF"/>
+<text x="1024.0" y="124.0" class="b-s" font-size="14" font-weight="500" fill="#FFFFFF">Settings</text>
+<path transform="translate(1098.0 109.0) scale(0.8333)" d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z" fill="#FFFFFF"/>
+<text x="1126.0" y="124.0" class="b-s" font-size="14" font-weight="500" fill="#FFFFFF">ML History</text>
+<text x="64.0" y="204.0" class="b-s" font-size="24" font-weight="600" fill="#212121" letter-spacing="-0.2">Fire Forecasting Dashboard</text>
+<text x="64.0" y="226.0" class="b-s" font-size="13.5" fill="#666666">Sample forecasts for the Tri-County area from the bundled trihourly weather dataset</text>
+<rect x="752.5" y="186.5" width="116" height="31" rx="15.5" fill="#FFFFFF" stroke="#ED6C02" stroke-opacity="0.7"/>
+<path transform="translate(762.0 193.0) scale(0.7500)" d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="#ED6C02"/>
+<text x="786.0" y="207.0" class="b-s" font-size="13" font-weight="500" fill="#B34F00">Sample data</text>
+<path d="M883.5 184.5h8M960 184.5h82.5a3.5 3.5 0 0 1 3.5 3.5v29a3.5 3.5 0 0 1-3.5 3.5h-155a3.5 3.5 0 0 1-3.5-3.5v-29a3.5 3.5 0 0 1 3.5-3.5" fill="#FFFFFF" stroke="#C4C4C4"/>
+<text x="894.0" y="188.5" class="b-s" font-size="10" fill="#666666">Forecast start</text>
+<text x="894.0" y="208.0" class="b-s" font-size="13.5" fill="#212121">08/15/2023</text>
+<path transform="translate(1018.0 193.0) scale(0.7500)" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" fill="#757575"/>
+<rect x="1062.5" y="184.5" width="153" height="36" rx="4" fill="#FFFFFF" stroke="#D9D9D9"/>
+<rect x="1165" y="185" width="50" height="35" fill="#1976D2" fill-opacity="0.09"/>
+<path d="M1113.5 185v35M1164.5 185v35" stroke="#D9D9D9"/>
+<text x="1088.0" y="207.0" class="b-s" font-size="13" font-weight="500" fill="#6B6B6B" text-anchor="middle">24H</text>
+<text x="1139.0" y="207.0" class="b-s" font-size="13" font-weight="500" fill="#6B6B6B" text-anchor="middle">48H</text>
+<text x="1190.0" y="207.0" class="b-s" font-size="13" font-weight="500" fill="#1976D2" text-anchor="middle">72H</text>
+<rect x="64" y="246" width="276" height="140" rx="4" fill="#FFFFFF" filter="url(#b-cardsh)"/>
+<rect x="65" y="247" width="274" height="138" rx="3" fill="none" stroke="#D32F2F" stroke-width="2"/>
+<text x="80.0" y="278.0" class="b-s" font-size="14" font-weight="500" fill="#666666" letter-spacing="0.5">PEAK FIRE RISK</text>
+<text x="80.0" y="319.0" class="b-s" font-size="34" font-weight="700" fill="#212121">0.82</text>
+<text x="80.0" y="349.0" class="b-s" font-size="14" fill="#666666">Matilija Canyon · 16 Aug, 21:00</text>
+<rect x="356" y="246" width="276" height="140" rx="4" fill="#FFFFFF" filter="url(#b-cardsh)"/>
+<rect x="357" y="247" width="274" height="138" rx="3" fill="none" stroke="#ED6C02" stroke-width="2"/>
+<text x="372.0" y="278.0" class="b-s" font-size="14" font-weight="500" fill="#666666" letter-spacing="0.5">SITES ABOVE THRESHOLD</text>
+<text x="372.0" y="319.0" class="b-s" font-size="34" font-weight="700" fill="#212121">3<tspan dx="8" font-size="14" font-weight="400" fill="#666666">of 8 sites</tspan></text>
+<text x="372.0" y="349.0" class="b-s" font-size="14" fill="#666666">Decision threshold τ = 0.50</text>
+<rect x="648" y="246" width="276" height="140" rx="4" fill="#FFFFFF" filter="url(#b-cardsh)"/>
+<rect x="649" y="247" width="274" height="138" rx="3" fill="none" stroke="#1976D2" stroke-width="2"/>
+<text x="664.0" y="278.0" class="b-s" font-size="14" font-weight="500" fill="#666666" letter-spacing="0.5">MAX TEMPERATURE</text>
+<text x="664.0" y="319.0" class="b-s" font-size="34" font-weight="700" fill="#212121">36.6<tspan dx="8" font-size="14" font-weight="400" fill="#666666">°C</tspan></text>
+<text x="664.0" y="349.0" class="b-s" font-size="14" fill="#666666">temperature_2m · 16 Aug, 21:00</text>
+<rect x="940" y="246" width="276" height="140" rx="4" fill="#FFFFFF" filter="url(#b-cardsh)"/>
+<rect x="941" y="247" width="274" height="138" rx="3" fill="none" stroke="#0288D1" stroke-width="2"/>
+<text x="956.0" y="278.0" class="b-s" font-size="14" font-weight="500" fill="#666666" letter-spacing="0.5">MIN HUMIDITY</text>
+<text x="956.0" y="319.0" class="b-s" font-size="34" font-weight="700" fill="#212121">15.2<tspan dx="8" font-size="14" font-weight="400" fill="#666666">%</tspan></text>
+<text x="956.0" y="349.0" class="b-s" font-size="14" fill="#666666">relative_humidity_2m · 16 Aug</text>
+<rect x="64" y="402" width="665" height="342" rx="4" fill="#FFFFFF" filter="url(#b-cardsh)"/>
+<text x="80.0" y="426.0" class="b-s" font-size="16" font-weight="600" fill="#212121">Forecast Map</text>
+<text x="80.0" y="446.0" class="b-s" font-size="14" fill="#666666">Peak risk per site · 15–17 Aug 2023</text>
+<text x="419.0" y="435.0" class="b-s" font-size="14" font-weight="500" fill="#212121">Layers:</text>
+<rect x="483.5" y="411.5" width="229" height="37" rx="4" fill="#FFFFFF" stroke="#D9D9D9"/>
+<rect x="484" y="412" width="77" height="36" fill="#000" fill-opacity="0.08"/>
+<path transform="translate(491.0 420.0) scale(0.8333)" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#212121"/>
+<text x="515.0" y="434.5" class="b-s" font-size="13" font-weight="500" fill="#212121" letter-spacing="0.4">SITES</text>
+<path d="M561.5 412v36" stroke="#D9D9D9"/>
+<path transform="translate(569.0 420.0) scale(0.7500)" d="M2 2v20h20V2H2zm18 18h-2v-2h-2.02c.63-.9 1.02-1.98 1.02-3.16 0-1.61-.66-3.12-1.84-4.19-.67-.61-1.25-1.08-1.44-1.52-.36-.83-.34-1.73-.21-2.61C11.07 7.73 9 10.73 9 14.07c0 1.5.37 2.56.91 3.93H8v2H4V4h16v16z" fill="#757575"/>
+<text x="593.0" y="434.5" class="b-s" font-size="13" font-weight="500" fill="#757575" letter-spacing="0.4">FRAP</text>
+<rect x="636" y="412" width="77" height="36" fill="#000" fill-opacity="0.08"/>
+<path d="M635.5 412v36" stroke="#D9D9D9"/>
+<path transform="translate(643.0 420.0) scale(0.8333)" d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z" fill="#212121"/>
+<text x="667.0" y="434.5" class="b-s" font-size="13" font-weight="500" fill="#212121" letter-spacing="0.4">BBOX</text>
+<path d="M64 457.5H729" stroke="#E0E0E0"/>
+<clipPath id="b-mapclip"><path d="M64 458H729V740a4 4 0 0 1-4 4H68a4 4 0 0 1-4-4Z"/></clipPath>
+<g clip-path="url(#b-mapclip)">
+<rect x="64" y="458" width="665" height="286" fill="#AAD3DF"/>
+<path d="M15.3 425.1 L57.5 504.4 L62.4 534.0 L64.0 571.5 L85.1 593.1 L112.7 589.2 L145.1 589.2 L177.5 597.1 L201.9 603.0 L211.6 601.0 L226.2 599.0 L239.2 604.9 L250.5 608.9 L261.9 618.7 L276.5 628.5 L283.0 638.3 L289.5 652.0 L300.8 659.9 L313.8 665.7 L331.6 673.6 L356.0 677.5 L375.4 674.6 L393.3 673.6 L401.4 675.5 L409.5 683.4 L416.0 695.1 L419.2 706.8 L420.8 720.5 L417.6 730.2 L428.9 736.1 L438.7 738.0 L445.2 734.1 L453.3 730.2 L464.6 728.3 L477.6 736.1 L489.0 749.7 L501.9 759.5 L513.3 767.3 L526.3 778.9 L537.6 786.7 L550.6 800.3 L566.8 812.0 L583.0 833.3 L599.2 856.6 L777.7 895.2 L777.7 425.1Z" fill="#F2EFE9" stroke="#9CC3D0" stroke-width="0.8"/>
+<path d="M174.3 667.7 C177.5 666.4 187.8 669.0 193.8 669.7 C199.7 670.3 204.6 671.0 210.0 671.6 C215.4 672.3 221.6 672.9 226.2 673.6 C230.8 674.2 236.2 673.6 237.5 675.5 C238.9 677.5 237.5 683.0 234.3 685.3 C231.1 687.6 223.5 688.6 218.1 689.2 C212.7 689.9 207.8 689.9 201.9 689.2 C195.9 688.6 187.0 687.3 182.4 685.3 C177.8 683.4 175.6 680.4 174.3 677.5 C172.9 674.6 171.0 669.0 174.3 667.7Z" fill="#F2EFE9" stroke="#9CC3D0" stroke-width="0.8"/>
+<path d="M122.4 677.5 C126.4 676.5 137.8 677.8 145.1 679.5 C152.4 681.1 163.5 683.7 166.2 687.3 C168.9 690.9 164.8 698.4 161.3 701.0 C157.8 703.6 150.5 703.9 145.1 702.9 C139.7 701.9 132.9 698.0 128.9 695.1 C124.8 692.2 121.8 688.3 120.8 685.3 C119.7 682.4 118.3 678.5 122.4 677.5Z" fill="#F2EFE9" stroke="#9CC3D0" stroke-width="0.8"/>
+<path d="M90.0 671.6 C92.4 670.3 104.5 670.6 107.8 671.6 C111.0 672.6 111.8 676.2 109.4 677.5 C107.0 678.8 96.4 680.4 93.2 679.5 C90.0 678.5 87.5 672.9 90.0 671.6Z" fill="#F2EFE9" stroke="#9CC3D0" stroke-width="0.8"/>
+<path d="M252.1 678.5 C254.3 678.2 263.0 678.6 265.1 679.1 C267.3 679.5 267.3 681.1 265.1 681.4 C263.0 681.7 254.3 681.1 252.1 680.6 C250.0 680.1 250.0 678.7 252.1 678.5Z" fill="#F2EFE9" stroke="#9CC3D0" stroke-width="0.8"/>
+<path d="M388.4 782.8 C391.4 783.5 399.7 788.7 404.6 790.6 C409.5 792.6 413.0 792.2 417.6 794.5 C422.2 796.8 428.9 801.3 432.2 804.2 C435.4 807.1 437.6 810.0 437.0 812.0 C436.5 813.9 433.0 816.5 428.9 815.9 C424.9 815.2 418.1 811.3 412.7 808.1 C407.3 804.9 400.8 800.0 396.5 796.4 C392.2 792.9 388.1 789.0 386.8 786.7 C385.4 784.5 385.4 782.2 388.4 782.8Z" fill="#F2EFE9" stroke="#9CC3D0" stroke-width="0.8"/>
+<path d="M145.1 573.5 C155.9 582.7 164.0 577.4 177.5 579.4 C191.1 581.3 212.7 583.6 226.2 585.3 C239.7 586.9 247.8 589.5 258.6 589.2 C269.4 588.9 278.9 586.2 291.1 583.3 C303.2 580.3 322.2 578.7 331.6 571.5 C341.1 564.3 347.8 553.8 347.8 539.9 C347.8 526.1 349.2 501.1 331.6 488.6 C314.1 476.0 276.2 468.7 242.4 464.8 C208.6 460.8 150.5 454.9 128.9 464.8 C107.3 474.7 110.0 506.0 112.7 524.1 C115.4 542.3 134.3 564.3 145.1 573.5Z" fill="#CDE6C0" fill-opacity="0.85"/>
+<path d="M323.5 661.8 C326.2 664.0 337.0 665.9 347.8 666.7 C358.7 667.5 378.9 667.1 388.4 666.7 C397.9 666.4 402.4 666.2 404.6 664.8 C406.8 663.3 406.8 659.4 401.4 657.9 C396.0 656.4 383.8 656.6 372.2 656.0 C360.5 655.3 339.7 653.0 331.6 654.0 C323.5 655.0 320.8 659.7 323.5 661.8Z" fill="#CDE6C0" fill-opacity="0.85"/>
+<path d="M396.5 583.3 C399.2 591.5 411.4 604.6 420.8 612.8 C430.3 621.0 439.8 627.5 453.3 632.4 C466.8 637.3 487.1 641.3 501.9 642.2 C516.8 643.2 533.0 641.6 542.5 638.3 C551.9 635.0 560.0 627.8 558.7 622.6 C557.3 617.4 546.5 610.8 534.4 606.9 C522.2 603.0 501.9 603.6 485.7 599.0 C469.5 594.4 450.6 585.3 437.0 579.4 C423.5 573.5 411.4 562.9 404.6 563.6 C397.9 564.3 393.8 575.1 396.5 583.3Z" fill="#CDE6C0" fill-opacity="0.85"/>
+<path d="M304.0 595.1 C306.8 592.8 328.9 594.1 339.7 593.1 C350.5 592.2 365.1 587.6 368.9 589.2 C372.7 590.8 370.0 600.0 362.4 603.0 C354.9 605.9 333.2 608.2 323.5 606.9 C313.8 605.6 301.3 597.4 304.0 595.1Z" fill="#CDE6C0" fill-opacity="0.85"/>
+<path d="M599.2 642.2 C611.4 646.5 642.5 652.0 664.1 652.0 C685.7 652.0 718.2 650.4 729.0 642.2 C739.8 634.1 742.5 606.2 729.0 603.0 C715.5 599.7 670.9 618.7 647.9 622.6 C624.9 626.5 599.2 623.3 591.1 626.5 C583.0 629.8 587.1 638.0 599.2 642.2Z" fill="#CDE6C0" fill-opacity="0.85"/>
+<path d="M401.4 675.5 C401.4 678.8 409.5 676.5 412.7 681.4 C416.0 686.3 418.9 698.4 420.8 704.9 C422.7 711.4 421.4 716.1 424.1 720.5 C426.8 724.9 429.5 730.2 437.0 731.2 C444.6 732.2 460.0 723.9 469.5 726.3 C478.9 728.8 485.7 740.0 493.8 745.8 C501.9 751.7 511.4 760.1 518.1 761.4 C524.9 762.7 530.3 760.5 534.4 753.6 C538.4 746.8 538.4 729.3 542.5 720.5 C546.5 711.7 549.2 705.8 558.7 701.0 C568.2 696.1 589.8 697.1 599.2 691.2 C608.7 685.3 616.8 671.6 615.5 665.7 C614.1 659.9 604.7 656.9 591.1 656.0 C577.6 655.0 551.9 660.9 534.4 659.9 C516.8 658.9 499.2 653.0 485.7 650.1 C472.2 647.1 461.4 641.3 453.3 642.2 C445.2 643.2 443.8 652.7 437.0 656.0 C430.3 659.2 418.7 658.6 412.7 661.8 C406.8 665.1 401.4 672.3 401.4 675.5Z" fill="#E0DFDF"/>
+<path d="M378.7 650.1 C376.0 645.2 381.4 627.2 388.4 622.6 C395.4 618.0 414.1 619.3 420.8 622.6 C427.6 625.9 428.1 637.3 428.9 642.2 C429.8 647.1 429.7 650.4 425.7 652.0 C421.6 653.7 412.4 652.4 404.6 652.0 C396.8 651.7 381.4 655.0 378.7 650.1Z" fill="#E0DFDF"/>
+<path d="M278.1 626.5 C278.6 623.9 283.0 622.6 287.8 622.6 C292.7 622.6 301.3 623.9 307.3 626.5 C313.2 629.2 322.2 634.1 323.5 638.3 C324.9 642.6 320.8 649.6 315.4 652.0 C310.0 654.5 296.2 655.3 291.1 653.0 C285.9 650.7 286.7 642.7 284.6 638.3 C282.4 633.9 277.6 629.2 278.1 626.5Z" fill="#E0DFDF"/>
+<path d="M331.6 642.2 C335.1 645.7 348.7 650.1 356.0 651.1 C363.2 652.0 371.4 652.2 375.4 648.1 C379.5 644.0 383.5 630.8 380.3 626.5 C377.0 622.3 363.5 622.0 356.0 622.6 C348.4 623.3 338.9 627.2 334.9 630.5 C330.8 633.7 328.1 638.8 331.6 642.2Z" fill="#E0DFDF"/>
+<path d="M180.8 595.1 C182.1 596.2 187.5 597.2 193.8 598.1 C200.0 598.9 212.7 600.2 218.1 600.0 C223.5 599.9 227.5 598.5 226.2 597.1 C224.8 595.6 216.7 592.2 210.0 591.2 C203.2 590.2 190.5 590.5 185.6 591.2 C180.8 591.8 179.4 594.0 180.8 595.1Z" fill="#E0DFDF"/>
+<path d="M385.1 606.9 C388.7 610.5 407.3 612.8 412.7 610.8 C418.1 608.9 421.1 598.7 417.6 595.1 C414.1 591.5 397.0 587.2 391.6 589.2 C386.2 591.2 381.6 603.3 385.1 606.9Z" fill="#E0DFDF"/>
+<path d="M445.2 573.5 C451.9 579.0 478.4 579.0 485.7 573.5 C493.0 567.9 495.7 545.5 489.0 539.9 C482.2 534.4 452.5 534.4 445.2 539.9 C437.9 545.5 438.4 567.9 445.2 573.5Z" fill="#E0DFDF"/>
+<path d="M247.3 607.9 L252.1 591.2 L252.1 504.4 L252.1 464.8" fill="none" stroke="#B08DB4" stroke-width="1.2" stroke-dasharray="6 3 1.5 3" stroke-opacity="0.75"/>
+<path d="M333.2 672.6 L357.6 648.1 L377.0 634.4 L381.9 603.0 L368.9 563.6 L343.0 520.2" fill="none" stroke="#B08DB4" stroke-width="1.2" stroke-dasharray="6 3 1.5 3" stroke-opacity="0.75"/>
+<path d="M469.5 730.2 L493.8 701.0 L521.4 691.2 L531.1 677.5 L537.6 603.0 L540.9 520.2" fill="none" stroke="#B08DB4" stroke-width="1.2" stroke-dasharray="6 3 1.5 3" stroke-opacity="0.75"/>
+<path d="M276.5 626.5 C277.0 622.6 280.0 610.2 279.7 603.0 C279.4 595.8 277.0 591.5 274.9 583.3 C272.7 575.1 269.4 565.3 266.7 553.7 C264.0 542.2 260.0 520.8 258.6 514.3" fill="none" stroke="#FCD6A4" stroke-width="2" stroke-linecap="round"/>
+<path d="M193.8 593.1 C189.7 589.9 177.5 579.4 169.4 573.5 C161.3 567.5 151.9 559.7 145.1 557.7 C138.3 555.7 131.6 561.0 128.9 561.6" fill="none" stroke="#FCD6A4" stroke-width="2" stroke-linecap="round"/>
+<path d="M331.6 626.5 C338.4 626.5 358.7 626.5 372.2 626.5 C385.7 626.5 406.0 626.5 412.7 626.5" fill="none" stroke="#FCD6A4" stroke-width="2" stroke-linecap="round"/>
+<path d="M453.3 642.2 C457.3 638.3 469.5 623.9 477.6 618.7 C485.7 613.4 497.9 612.1 501.9 610.8" fill="none" stroke="#FCD6A4" stroke-width="2" stroke-linecap="round"/>
+<path d="M287.8 630.5 C292.4 627.5 306.8 617.4 315.4 612.8 C324.1 608.2 330.3 604.9 339.7 603.0 C349.2 601.0 363.2 601.7 372.2 601.0 C381.1 600.3 389.7 599.4 393.3 599.0" fill="none" stroke="#F9B29C" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M412.7 608.9 C416.8 605.6 428.9 595.1 437.0 589.2 C445.2 583.3 456.8 581.0 461.4 573.5 C466.0 565.9 463.3 558.0 464.6 543.9 C466.0 529.7 468.7 497.8 469.5 488.6" fill="none" stroke="#F9B29C" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M313.8 665.7 C320.8 667.5 341.4 675.0 356.0 676.5 C370.5 678.0 393.8 674.9 401.4 674.6" fill="none" stroke="#F9B29C" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M93.2 494.5 C96.4 499.4 106.7 513.0 112.7 524.1 C118.6 535.3 126.7 550.8 128.9 561.6 C131.0 572.5 118.9 583.6 125.6 589.2 C132.4 594.8 158.9 594.1 169.4 595.1 C180.0 596.1 182.1 594.6 188.9 595.1 C195.6 595.6 202.4 596.9 210.0 598.1 C217.5 599.2 227.5 600.3 234.3 602.0 C241.1 603.6 243.8 604.0 250.5 607.9 C257.3 611.8 268.6 621.5 274.9 625.6 C281.1 629.6 284.6 630.3 287.8 632.4 C291.1 634.6 291.1 636.7 294.3 638.3 C297.6 639.9 302.4 641.6 307.3 642.2 C312.2 642.9 318.1 641.6 323.5 642.2 C328.9 642.9 334.3 645.0 339.7 646.2 C345.1 647.3 349.2 648.6 356.0 649.1 C362.7 649.6 372.2 648.9 380.3 649.1 C388.4 649.3 397.9 649.6 404.6 650.1 C411.4 650.6 415.4 650.1 420.8 652.0 C426.2 654.0 432.7 658.9 437.0 661.8 C441.4 664.8 445.2 668.4 446.8 669.7" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M93.2 494.5 C96.4 499.4 106.7 513.0 112.7 524.1 C118.6 535.3 126.7 550.8 128.9 561.6 C131.0 572.5 118.9 583.6 125.6 589.2 C132.4 594.8 158.9 594.1 169.4 595.1 C180.0 596.1 182.1 594.6 188.9 595.1 C195.6 595.6 202.4 596.9 210.0 598.1 C217.5 599.2 227.5 600.3 234.3 602.0 C241.1 603.6 243.8 604.0 250.5 607.9 C257.3 611.8 268.6 621.5 274.9 625.6 C281.1 629.6 284.6 630.3 287.8 632.4 C291.1 634.6 291.1 636.7 294.3 638.3 C297.6 639.9 302.4 641.6 307.3 642.2 C312.2 642.9 318.1 641.6 323.5 642.2 C328.9 642.9 334.3 645.0 339.7 646.2 C345.1 647.3 349.2 648.6 356.0 649.1 C362.7 649.6 372.2 648.9 380.3 649.1 C388.4 649.3 397.9 649.6 404.6 650.1 C411.4 650.6 415.4 650.1 420.8 652.0 C426.2 654.0 432.7 658.9 437.0 661.8 C441.4 664.8 445.2 668.4 446.8 669.7" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M334.9 464.8 C336.2 469.7 339.5 484.6 343.0 494.5 C346.5 504.4 351.6 513.9 356.0 524.1 C360.3 534.4 364.1 545.9 368.9 555.7 C373.8 565.6 380.6 575.4 385.1 583.3 C389.7 591.2 391.9 597.1 396.5 603.0 C401.1 608.9 406.0 611.5 412.7 618.7 C419.5 625.9 431.4 637.7 437.0 646.2 C442.7 654.7 441.4 662.2 446.8 669.7 C452.2 677.2 460.3 682.7 469.5 691.2 C478.7 699.7 492.5 710.7 501.9 720.5 C511.4 730.3 518.1 738.4 526.3 749.7 C534.4 761.1 541.1 775.7 550.6 788.7 C560.0 801.6 577.6 821.0 583.0 827.5" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M334.9 464.8 C336.2 469.7 339.5 484.6 343.0 494.5 C346.5 504.4 351.6 513.9 356.0 524.1 C360.3 534.4 364.1 545.9 368.9 555.7 C373.8 565.6 380.6 575.4 385.1 583.3 C389.7 591.2 391.9 597.1 396.5 603.0 C401.1 608.9 406.0 611.5 412.7 618.7 C419.5 625.9 431.4 637.7 437.0 646.2 C442.7 654.7 441.4 662.2 446.8 669.7 C452.2 677.2 460.3 682.7 469.5 691.2 C478.7 699.7 492.5 710.7 501.9 720.5 C511.4 730.3 518.1 738.4 526.3 749.7 C534.4 761.1 541.1 775.7 550.6 788.7 C560.0 801.6 577.6 821.0 583.0 827.5" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M404.6 677.5 C410.0 677.2 430.0 676.8 437.0 675.5 C444.1 674.2 438.7 671.0 446.8 669.7 C454.9 668.4 471.1 668.0 485.7 667.7 C500.3 667.4 518.1 667.4 534.4 667.7 C550.6 668.0 569.5 669.0 583.0 669.7 C596.5 670.3 601.9 668.0 615.5 671.6 C629.0 675.2 645.2 686.3 664.1 691.2 C683.0 696.1 718.2 699.3 729.0 701.0" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M404.6 677.5 C410.0 677.2 430.0 676.8 437.0 675.5 C444.1 674.2 438.7 671.0 446.8 669.7 C454.9 668.4 471.1 668.0 485.7 667.7 C500.3 667.4 518.1 667.4 534.4 667.7 C550.6 668.0 569.5 669.0 583.0 669.7 C596.5 670.3 601.9 668.0 615.5 671.6 C629.0 675.2 645.2 686.3 664.1 691.2 C683.0 696.1 718.2 699.3 729.0 701.0" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M409.5 622.6 C409.5 627.5 408.1 642.9 409.5 652.0 C410.8 661.2 415.2 669.3 417.6 677.5 C420.0 685.6 418.1 694.8 424.1 701.0 C430.0 707.2 443.0 708.8 453.3 714.6 C463.5 720.5 476.2 730.2 485.7 736.1 C495.2 741.9 506.0 747.5 510.0 749.7" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M409.5 622.6 C409.5 627.5 408.1 642.9 409.5 652.0 C410.8 661.2 415.2 669.3 417.6 677.5 C420.0 685.6 418.1 694.8 424.1 701.0 C430.0 707.2 443.0 708.8 453.3 714.6 C463.5 720.5 476.2 730.2 485.7 736.1 C495.2 741.9 506.0 747.5 510.0 749.7" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M420.8 624.6 C426.2 628.2 442.5 641.3 453.3 646.2 C464.1 651.1 472.2 652.0 485.7 654.0 C499.2 656.0 518.1 657.9 534.4 657.9 C550.6 657.9 574.9 654.6 583.0 654.0" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M420.8 624.6 C426.2 628.2 442.5 641.3 453.3 646.2 C464.1 651.1 472.2 652.0 485.7 654.0 C499.2 656.0 518.1 657.9 534.4 657.9 C550.6 657.9 574.9 654.6 583.0 654.0" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M583.0 701.0 C582.2 694.4 578.2 674.9 578.2 661.8 C578.2 648.8 579.5 635.7 583.0 622.6 C586.5 609.5 593.8 596.4 599.2 583.3 C604.7 570.2 610.1 560.3 615.5 543.9 C620.9 527.4 629.0 494.5 631.7 484.6" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M583.0 701.0 C582.2 694.4 578.2 674.9 578.2 661.8 C578.2 648.8 579.5 635.7 583.0 622.6 C586.5 609.5 593.8 596.4 599.2 583.3 C604.7 570.2 610.1 560.3 615.5 543.9 C620.9 527.4 629.0 494.5 631.7 484.6" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<text x="323.5" y="720.5" class="b-s" font-size="13" fill="#4D80B3" text-anchor="middle" font-style="italic">Pacific Ocean</text>
+<text x="164.6" y="642.2" class="b-s" font-size="10.5" fill="#4D80B3" text-anchor="middle" font-style="italic">Santa Barbara Channel</text>
+<text x="226.2" y="712.8" class="b-s" font-size="9.5" fill="#6B6B6B" text-anchor="middle">Santa Cruz Island</text>
+<text x="453.3" y="516.2" class="b-s" font-size="9.5" font-weight="600" fill="#9A7AA0" text-anchor="middle" letter-spacing="1.2">LOS ANGELES CO.</text>
+<circle cx="210.0" cy="599.0" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="204.0" y="616.0" class="b-s" font-size="11.5" font-weight="500" fill="#FFFFFF" text-anchor="end" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Santa Barbara</text>
+<text x="204.0" y="616.0" class="b-s" font-size="11.5" font-weight="500" fill="#333333" text-anchor="end">Santa Barbara</text>
+<circle cx="286.2" cy="626.5" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="293.2" y="638.5" class="b-s" font-size="11.5" font-weight="500" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Ventura</text>
+<text x="293.2" y="638.5" class="b-s" font-size="11.5" font-weight="500" fill="#333333">Ventura</text>
+<circle cx="349.5" cy="646.2" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="343.5" y="659.2" class="b-s" font-size="10.5" font-weight="500" fill="#FFFFFF" text-anchor="end" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Thousand Oaks</text>
+<text x="343.5" y="659.2" class="b-s" font-size="10.5" font-weight="500" fill="#333333" text-anchor="end">Thousand Oaks</text>
+<circle cx="398.1" cy="603.0" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="406.1" y="599.0" class="b-s" font-size="11" font-weight="500" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Santa Clarita</text>
+<text x="406.1" y="599.0" class="b-s" font-size="11" font-weight="500" fill="#333333">Santa Clarita</text>
+<circle cx="446.8" cy="671.6" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="454.8" y="675.6" class="b-s" font-size="13.5" font-weight="700" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Los Angeles</text>
+<text x="454.8" y="675.6" class="b-s" font-size="13.5" font-weight="700" fill="#333333">Los Angeles</text>
+<circle cx="454.9" cy="726.3" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="447.9" y="730.3" class="b-s" font-size="11" font-weight="500" fill="#FFFFFF" text-anchor="end" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Long Beach</text>
+<text x="447.9" y="730.3" class="b-s" font-size="11" font-weight="500" fill="#333333" text-anchor="end">Long Beach</text>
+<circle cx="463.0" cy="545.9" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="471.0" y="549.9" class="b-s" font-size="11" font-weight="500" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Lancaster</text>
+<text x="471.0" y="549.9" class="b-s" font-size="11" font-weight="500" fill="#333333">Lancaster</text>
+<circle cx="466.2" cy="567.5" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="474.2" y="571.5" class="b-s" font-size="11" font-weight="500" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Palmdale</text>
+<text x="474.2" y="571.5" class="b-s" font-size="11" font-weight="500" fill="#333333">Palmdale</text>
+<circle cx="312.2" cy="604.9" r="45.9" fill="#ED6C02" fill-opacity="0.16" stroke="#ED6C02" stroke-opacity="0.55" stroke-width="1.5"/>
+<circle cx="213.2" cy="589.2" r="49.0" fill="#ED6C02" fill-opacity="0.16" stroke="#ED6C02" stroke-opacity="0.55" stroke-width="1.5"/>
+<circle cx="274.9" cy="585.3" r="53.9" fill="#D32F2F" fill-opacity="0.16" stroke="#D32F2F" stroke-opacity="0.55" stroke-width="1.5"/>
+<rect x="189.2" y="498.3" width="414.2" height="295.9" fill="#1976D2" fill-opacity="0.08" stroke="#1976D2" stroke-opacity="0.7" stroke-width="3"/>
+<circle cx="274.9" cy="585.3" r="14" fill="#000" fill-opacity="0.22" filter="url(#b-blur)"/>
+<circle cx="274.9" cy="585.3" r="11.5" fill="#D32F2F" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="213.2" cy="589.2" r="14" fill="#000" fill-opacity="0.22" filter="url(#b-blur)"/>
+<circle cx="213.2" cy="589.2" r="11.5" fill="#ED6C02" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="312.2" cy="604.9" r="14" fill="#000" fill-opacity="0.22" filter="url(#b-blur)"/>
+<circle cx="312.2" cy="604.9" r="11.5" fill="#ED6C02" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="386.8" cy="577.4" r="14" fill="#000" fill-opacity="0.22" filter="url(#b-blur)"/>
+<circle cx="386.8" cy="577.4" r="11.5" fill="#FBC02D" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="388.4" cy="661.8" r="14" fill="#000" fill-opacity="0.22" filter="url(#b-blur)"/>
+<circle cx="388.4" cy="661.8" r="11.5" fill="#FBC02D" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="367.3" cy="632.4" r="14" fill="#000" fill-opacity="0.22" filter="url(#b-blur)"/>
+<circle cx="367.3" cy="632.4" r="11.5" fill="#FBC02D" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="453.3" cy="620.6" r="14" fill="#000" fill-opacity="0.22" filter="url(#b-blur)"/>
+<circle cx="453.3" cy="620.6" r="11.5" fill="#2E7D32" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="414.3" cy="547.8" r="14" fill="#000" fill-opacity="0.22" filter="url(#b-blur)"/>
+<circle cx="414.3" cy="547.8" r="11.5" fill="#2E7D32" stroke="#FFFFFF" stroke-width="3"/>
+<g filter="url(#b-popsh)"><rect x="182.9" y="467.3" width="184" height="94" rx="12" fill="#FFFFFF"/><path d="M264.9 561.3L274.9 571.3L284.9 561.3Z" fill="#FFFFFF"/></g>
+<text x="354.9" y="483.3" class="b-s" font-size="16" fill="#757575" text-anchor="middle">×</text>
+<text x="196.9" y="489.3" class="b-s" font-size="13" font-weight="700" fill="#212121">Matilija Canyon</text>
+<rect x="196.9" y="498.3" width="56" height="18" rx="9" fill="#D32F2F"/>
+<text x="224.9" y="511.3" class="b-s" font-size="10.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">Extreme</text>
+<text x="260.9" y="511.3" class="b-s" font-size="11.5" font-weight="600" fill="#212121">Peak risk 0.82</text>
+<text x="196.9" y="533.3" class="b-s" font-size="10.5" fill="#666666">Wed 16 Aug, 21:00</text>
+<text x="196.9" y="549.3" class="b-s" font-size="10.5" fill="#666666">36.6 °C · RH 16.5 %</text>
+<rect x="74" y="468" width="34" height="62" rx="4" fill="#FFFFFF" stroke="#000" stroke-opacity="0.22" stroke-width="2"/><path d="M75 499H107" stroke="#CCCCCC"/><path d="M85 484H97M91 478V490M85 515H97" stroke="#000" stroke-width="2.2"/>
+<rect x="547" y="468" width="172" height="104" rx="4" fill="#FFFFFF" fill-opacity="0.95" stroke="#000" stroke-opacity="0.15"/>
+<text x="557.0" y="486.0" class="b-s" font-size="11.5" font-weight="700" fill="#212121">Fire risk (peak)</text>
+<circle cx="563" cy="500" r="5" fill="#D32F2F" stroke="#FFFFFF" stroke-width="1.5"/>
+<text x="574.0" y="504.0" class="b-s" font-size="11" fill="#212121">Extreme</text>
+<text x="709.0" y="504.0" class="b-s" font-size="10.5" fill="#666666" text-anchor="end">≥ 0.75</text>
+<circle cx="563" cy="518" r="5" fill="#ED6C02" stroke="#FFFFFF" stroke-width="1.5"/>
+<text x="574.0" y="522.0" class="b-s" font-size="11" fill="#212121">High</text>
+<text x="709.0" y="522.0" class="b-s" font-size="10.5" fill="#666666" text-anchor="end">0.50 – 0.75</text>
+<circle cx="563" cy="536" r="5" fill="#FBC02D" stroke="#FFFFFF" stroke-width="1.5"/>
+<text x="574.0" y="540.0" class="b-s" font-size="11" fill="#212121">Moderate</text>
+<text x="709.0" y="540.0" class="b-s" font-size="10.5" fill="#666666" text-anchor="end">0.25 – 0.50</text>
+<circle cx="563" cy="554" r="5" fill="#2E7D32" stroke="#FFFFFF" stroke-width="1.5"/>
+<text x="574.0" y="558.0" class="b-s" font-size="11" fill="#212121">Low</text>
+<text x="709.0" y="558.0" class="b-s" font-size="10.5" fill="#666666" text-anchor="end">&lt; 0.25</text>
+<path d="M74 716V732H162V716" fill="#FFFFFF" fill-opacity="0.8" stroke="#777" stroke-width="2"/>
+<text x="79.0" y="728.0" class="b-l" font-size="11" fill="#333">50 km</text>
+<rect x="467" y="727" width="262" height="17" fill="#FFFFFF" fill-opacity="0.8"/>
+<path d="M472 731.5h12v4h-12z" fill="#4C7BE1"/><path d="M472 735.5h12v3h-12z" fill="#FFD500"/><path d="M472 738.5h12v1h-12z" fill="#E0BC00"/>
+<text x="488" y="739.5" class="b-l" font-size="12" fill="#333"><tspan fill="#0078A8">Leaflet</tspan> | © <tspan fill="#0078A8">OpenStreetMap</tspan> contributors</text>
+</g>
+<rect x="745" y="402" width="471" height="200" rx="4" fill="#FFFFFF" filter="url(#b-cardsh)"/>
+<text x="761.0" y="428.0" class="b-s" font-size="16" font-weight="600" fill="#212121">Fire Risk Forecast</text>
+<text x="761.0" y="447.0" class="b-s" font-size="14" fill="#666666">Matilija Canyon · P(forest_fire = Y)</text>
+<g fill="none" stroke="#6E8192" stroke-width="1.5" stroke-linecap="round"><circle cx="1104" cy="424" r="5"/><path d="M1108 428l3.5 3.5M1101.5 424h5M1104 421.5v5"/><circle cx="1128" cy="424" r="5"/><path d="M1132 428l3.5 3.5M1125.5 424h5"/><path d="M1150 424h12M1156 418v12M1153 420.5l3-2.5 3 2.5M1153 427.5l3 2.5 3-2.5M1152.5 421l-2.5 3 2.5 3M1159.5 421l2.5 3-2.5 3"/><path d="M1174 424.5l6-5.5 6 5.5M1176 423v7h8v-7"/><path d="M1196 419.5h12M1196 424h12M1196 428.5h12"/></g>
+<g stroke="#E0E0E0" stroke-dasharray="4 4">
+<path d="M797 464.0H1198"/>
+<path d="M797 491.0H1198"/>
+<path d="M797 518.0H1198"/>
+<path d="M797 545.0H1198"/>
+<path d="M797 572.0H1198"/>
+</g>
+<text x="787.0" y="468.0" class="b-s" font-size="11" fill="#373D3F" text-anchor="end">1.00</text>
+<text x="787.0" y="495.0" class="b-s" font-size="11" fill="#373D3F" text-anchor="end">0.75</text>
+<text x="787.0" y="522.0" class="b-s" font-size="11" fill="#373D3F" text-anchor="end">0.50</text>
+<text x="787.0" y="549.0" class="b-s" font-size="11" fill="#373D3F" text-anchor="end">0.25</text>
+<text x="787.0" y="576.0" class="b-s" font-size="11" fill="#373D3F" text-anchor="end">0.00</text>
+<path d="M797.0 527.7 C799.9 529.7 808.6 536.2 814.4 539.6 C820.2 543.0 826.1 546.4 831.9 548.2 C837.7 550.0 843.5 551.3 849.3 550.4 C855.1 549.5 860.9 547.0 866.7 542.8 C872.6 538.7 878.4 532.6 884.2 525.6 C890.0 518.5 895.8 506.3 901.6 500.7 C907.4 495.1 913.2 492.6 919.0 492.1 C924.9 491.5 930.7 492.8 936.5 497.5 C942.3 502.2 948.1 513.7 953.9 520.2 C959.7 526.6 965.5 533.3 971.3 536.4 C977.2 539.4 983.0 539.4 988.8 538.5 C994.6 537.6 1000.4 535.3 1006.2 531.0 C1012.0 526.6 1017.8 519.4 1023.7 512.6 C1029.5 505.8 1035.3 494.8 1041.1 489.9 C1046.9 485.1 1052.7 482.7 1058.5 483.4 C1064.3 484.2 1070.1 488.8 1076.0 494.2 C1081.8 499.6 1087.6 509.4 1093.4 515.8 C1099.2 522.3 1105.0 529.9 1110.8 533.1 C1116.6 536.4 1122.4 536.0 1128.3 535.3 C1134.1 534.6 1139.9 531.9 1145.7 528.8 C1151.5 525.7 1157.3 522.0 1163.1 516.9 C1168.9 511.9 1174.8 502.2 1180.6 498.6 C1186.4 495.0 1195.1 495.9 1198.0 495.3 L1198 572 L797 572Z" fill="url(#b-area)"/>
+<path d="M797.0 527.7 C799.9 529.7 808.6 536.2 814.4 539.6 C820.2 543.0 826.1 546.4 831.9 548.2 C837.7 550.0 843.5 551.3 849.3 550.4 C855.1 549.5 860.9 547.0 866.7 542.8 C872.6 538.7 878.4 532.6 884.2 525.6 C890.0 518.5 895.8 506.3 901.6 500.7 C907.4 495.1 913.2 492.6 919.0 492.1 C924.9 491.5 930.7 492.8 936.5 497.5 C942.3 502.2 948.1 513.7 953.9 520.2 C959.7 526.6 965.5 533.3 971.3 536.4 C977.2 539.4 983.0 539.4 988.8 538.5 C994.6 537.6 1000.4 535.3 1006.2 531.0 C1012.0 526.6 1017.8 519.4 1023.7 512.6 C1029.5 505.8 1035.3 494.8 1041.1 489.9 C1046.9 485.1 1052.7 482.7 1058.5 483.4 C1064.3 484.2 1070.1 488.8 1076.0 494.2 C1081.8 499.6 1087.6 509.4 1093.4 515.8 C1099.2 522.3 1105.0 529.9 1110.8 533.1 C1116.6 536.4 1122.4 536.0 1128.3 535.3 C1134.1 534.6 1139.9 531.9 1145.7 528.8 C1151.5 525.7 1157.3 522.0 1163.1 516.9 C1168.9 511.9 1174.8 502.2 1180.6 498.6 C1186.4 495.0 1195.1 495.9 1198.0 495.3" fill="none" stroke="#FF9800" stroke-width="2.5"/>
+<path d="M797 518.0H1198" stroke="#D32F2F" stroke-width="1.2" stroke-dasharray="5 4"/>
+<rect x="801" y="500.0" width="54" height="15" rx="2" fill="#D32F2F"/>
+<text x="828.0" y="511.0" class="b-s" font-size="10" font-weight="600" fill="#FFFFFF" text-anchor="middle">τ = 0.50</text>
+<rect x="1028.5" y="457.4" width="60" height="16" rx="2" fill="#FFFFFF" stroke="#D32F2F"/>
+<text x="1058.5" y="468.9" class="b-s" font-size="10" font-weight="600" fill="#D32F2F" text-anchor="middle">Peak 0.82</text>
+<circle cx="1058.5" cy="483.4" r="4.5" fill="#FFFFFF" stroke="#D32F2F" stroke-width="2"/>
+<text x="797.0" y="590.0" class="b-s" font-size="11" font-weight="600" fill="#373D3F" text-anchor="middle">15 Aug</text>
+<text x="866.7" y="590.0" class="b-s" font-size="11" fill="#373D3F" text-anchor="middle">12:00</text>
+<text x="936.5" y="590.0" class="b-s" font-size="11" font-weight="600" fill="#373D3F" text-anchor="middle">16 Aug</text>
+<text x="1006.2" y="590.0" class="b-s" font-size="11" fill="#373D3F" text-anchor="middle">12:00</text>
+<text x="1076.0" y="590.0" class="b-s" font-size="11" font-weight="600" fill="#373D3F" text-anchor="middle">17 Aug</text>
+<text x="1145.7" y="590.0" class="b-s" font-size="11" fill="#373D3F" text-anchor="middle">12:00</text>
+<path d="M797 572.5H1198" stroke="#BDBDBD"/>
+<rect x="745" y="618" width="471" height="240" rx="4" fill="#FFFFFF" filter="url(#b-cardsh)"/>
+<text x="761.0" y="646.0" class="b-s" font-size="16" font-weight="600" fill="#212121">Site Forecasts</text>
+<text x="1200.0" y="646.0" class="b-s" font-size="14" fill="#666666" text-anchor="end">8 sites</text>
+<path d="M745 662.5H1216M745 695.5H1216" stroke="#E0E0E0"/>
+<text x="761.0" y="683.5" class="b-s" font-size="14" font-weight="500" fill="#212121">Site</text>
+<text x="925.0" y="683.5" class="b-s" font-size="14" font-weight="500" fill="#212121">County</text>
+<text x="1100.0" y="683.5" class="b-s" font-size="14" font-weight="500" fill="#212121" text-anchor="end">Peak risk</text>
+<text x="1120.0" y="683.5" class="b-s" font-size="14" font-weight="500" fill="#212121">Level</text>
+<text x="761.0" y="716.5" class="b-s" font-size="14" fill="#212121">Matilija Canyon</text>
+<text x="925.0" y="716.5" class="b-s" font-size="14" fill="#666666">Ventura</text>
+<text x="1100.0" y="716.5" class="b-s" font-size="14" fill="#212121" text-anchor="end" font-variant-numeric="tabular-nums">0.82</text>
+<rect x="1120" y="699.5" width="66" height="24" rx="12" fill="#D32F2F"/>
+<text x="1153.0" y="716.0" class="b-s" font-size="13" fill="#FFFFFF" text-anchor="middle">Extreme</text>
+<path d="M745 728.5H1216" stroke="#E0E0E0"/>
+<text x="761.0" y="749.5" class="b-s" font-size="14" fill="#212121">Gibraltar Road</text>
+<text x="925.0" y="749.5" class="b-s" font-size="14" fill="#666666">Santa Barbara</text>
+<text x="1100.0" y="749.5" class="b-s" font-size="14" fill="#212121" text-anchor="end" font-variant-numeric="tabular-nums">0.71</text>
+<rect x="1120" y="732.5" width="46" height="24" rx="12" fill="#ED6C02"/>
+<text x="1143.0" y="749.0" class="b-s" font-size="13" fill="#FFFFFF" text-anchor="middle">High</text>
+<path d="M745 761.5H1216" stroke="#E0E0E0"/>
+<text x="761.0" y="782.5" class="b-s" font-size="14" fill="#212121">Santa Paula Ridge</text>
+<text x="925.0" y="782.5" class="b-s" font-size="14" fill="#666666">Ventura</text>
+<text x="1100.0" y="782.5" class="b-s" font-size="14" fill="#212121" text-anchor="end" font-variant-numeric="tabular-nums">0.64</text>
+<rect x="1120" y="765.5" width="46" height="24" rx="12" fill="#ED6C02"/>
+<text x="1143.0" y="782.0" class="b-s" font-size="13" fill="#FFFFFF" text-anchor="middle">High</text>
+<path d="M745 794.5H1216" stroke="#E0E0E0"/>
+<text x="761.0" y="815.5" class="b-s" font-size="14" fill="#212121">Castaic North</text>
+<text x="925.0" y="815.5" class="b-s" font-size="14" fill="#666666">Los Angeles</text>
+<text x="1100.0" y="815.5" class="b-s" font-size="14" fill="#212121" text-anchor="end" font-variant-numeric="tabular-nums">0.46</text>
+<rect x="1120.5" y="799" width="74" height="23" rx="11.5" fill="#FFF8E1" stroke="#F9A825"/>
+<text x="1157.5" y="815.0" class="b-s" font-size="13" fill="#7A5A00" text-anchor="middle">Moderate</text>
+<path d="M745 827.5H1216" stroke="#E0E0E0"/>
+</g>
+<rect x="40.5" y="40.5" width="1199" height="719" rx="11.5" fill="none" stroke="#000" stroke-opacity="0.10"/></g></g>
+<path d="M96 560.5H1184" stroke="#FFFFFF" stroke-opacity="0.22"/>
+<rect x="96" y="582" width="8" height="8" fill="#FF9800"/>
+<text x="116" y="591" class="b-m" font-size="15" letter-spacing="1" fill="#FFFFFF" fill-opacity="0.8">trupalpatel.com</text>
+<text x="1184" y="591" class="b-m" font-size="15" letter-spacing="1" text-anchor="end" fill="#FFFFFF" fill-opacity="0.6">TRUPALIX9/fire-forecasting</text>
+</svg>
