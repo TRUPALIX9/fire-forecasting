@@ -24,7 +24,8 @@ export default function AppHeader() {
         background: "linear-gradient(135deg, #1976d2 0%, #1565c0 100%)",
       }}
     >
-      <Toolbar sx={{ minHeight: 70 }}>
+      {/* Responsive value so it overrides the toolbar mixin's sm media query */}
+      <Toolbar sx={{ minHeight: { xs: 64, sm: 70 } }}>
         {/* Logo/Home Button */}
         <Button
           component={Link}
