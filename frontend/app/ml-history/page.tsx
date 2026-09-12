@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Box,
   Card,
@@ -15,22 +15,17 @@ import {
   TableRow,
   Paper,
   Chip,
-  Button,
   Alert,
   Divider,
-  LinearProgress,
-  IconButton,
-  Tooltip,
 } from "@mui/material";
 import {
   History as HistoryIcon,
-  Refresh,
-  Visibility,
-  Download,
   Info,
+  InfoOutlined,
   Warning,
   CheckCircle,
   Error,
+  Autorenew,
 } from "@mui/icons-material";
 
 interface ModelRun {
@@ -48,88 +43,83 @@ interface ModelRun {
   duration: string;
 }
 
-export default function MLHistoryPage() {
-  const [models, setModels] = useState<ModelRun[]>([]);
-  const [loading, setLoading] = useState(true);
+// Illustrative example runs. This prototype does not train or serve models,
+// so none of these values are real results.
+const EXAMPLE_RUNS: ModelRun[] = [
+  {
+    id: "1",
+    name: "Random Forest - Trihourly",
+    type: "Random Forest",
+    dataset: "trihourly_weather.csv",
+    status: "completed",
+    accuracy: 0.854,
+    precision: 0.823,
+    recall: 0.789,
+    f1Score: 0.806,
+    auc: 0.891,
+    timestamp: "2024-01-15 14:30:00",
+    duration: "2m 45s",
+  },
+  {
+    id: "2",
+    name: "XGBoost - Trihourly",
+    type: "XGBoost",
+    dataset: "trihourly_weather.csv",
+    status: "completed",
+    accuracy: 0.867,
+    precision: 0.841,
+    recall: 0.812,
+    f1Score: 0.826,
+    auc: 0.903,
+    timestamp: "2024-01-15 12:15:00",
+    duration: "3m 12s",
+  },
+  {
+    id: "3",
+    name: "Neural Network - Trihourly",
+    type: "Neural Network",
+    dataset: "trihourly_weather.csv",
+    status: "completed",
+    accuracy: 0.839,
+    precision: 0.815,
+    recall: 0.798,
+    f1Score: 0.806,
+    auc: 0.877,
+    timestamp: "2024-01-15 10:45:00",
+    duration: "5m 23s",
+  },
+  {
+    id: "4",
+    name: "SVM - Trihourly",
+    type: "Support Vector Machine",
+    dataset: "trihourly_weather.csv",
+    status: "failed",
+    accuracy: 0.0,
+    precision: 0.0,
+    recall: 0.0,
+    f1Score: 0.0,
+    auc: 0.0,
+    timestamp: "2024-01-15 09:20:00",
+    duration: "1m 34s",
+  },
+  {
+    id: "5",
+    name: "Logistic Regression - Trihourly",
+    type: "Logistic Regression",
+    dataset: "trihourly_weather.csv",
+    status: "completed",
+    accuracy: 0.782,
+    precision: 0.756,
+    recall: 0.734,
+    f1Score: 0.745,
+    auc: 0.834,
+    timestamp: "2024-01-15 08:10:00",
+    duration: "1m 56s",
+  },
+];
 
-  useEffect(() => {
-    // Simulate loading ML model history
-    setTimeout(() => {
-      setModels([
-        {
-          id: "1",
-          name: "Random Forest - Hourly",
-          type: "Random Forest",
-          dataset: "Hourly_Weather_Dataset.csv",
-          status: "completed",
-          accuracy: 0.854,
-          precision: 0.823,
-          recall: 0.789,
-          f1Score: 0.806,
-          auc: 0.891,
-          timestamp: "2024-01-15 14:30:00",
-          duration: "2m 45s",
-        },
-        {
-          id: "2",
-          name: "XGBoost - Bihourly",
-          type: "XGBoost",
-          dataset: "Bihourly_Weather_Dataset.csv",
-          status: "completed",
-          accuracy: 0.867,
-          precision: 0.841,
-          recall: 0.812,
-          f1Score: 0.826,
-          auc: 0.903,
-          timestamp: "2024-01-15 12:15:00",
-          duration: "3m 12s",
-        },
-        {
-          id: "3",
-          name: "Neural Network - Trihourly",
-          type: "Neural Network",
-          dataset: "Trihourly_Weather_Dataset.csv",
-          status: "completed",
-          accuracy: 0.839,
-          precision: 0.815,
-          recall: 0.798,
-          f1Score: 0.806,
-          auc: 0.877,
-          timestamp: "2024-01-15 10:45:00",
-          duration: "5m 23s",
-        },
-        {
-          id: "4",
-          name: "SVM - Hourly",
-          type: "Support Vector Machine",
-          dataset: "Hourly_Weather_Dataset.csv",
-          status: "failed",
-          accuracy: 0.0,
-          precision: 0.0,
-          recall: 0.0,
-          f1Score: 0.0,
-          auc: 0.0,
-          timestamp: "2024-01-15 09:20:00",
-          duration: "1m 34s",
-        },
-        {
-          id: "5",
-          name: "Logistic Regression - Bihourly",
-          type: "Logistic Regression",
-          dataset: "Bihourly_Weather_Dataset.csv",
-          status: "completed",
-          accuracy: 0.782,
-          precision: 0.756,
-          recall: 0.734,
-          f1Score: 0.745,
-          auc: 0.834,
-          timestamp: "2024-01-15 08:10:00",
-          duration: "1m 56s",
-        },
-      ]);
-      setLoading(false);
-    }, 1500);
-  }, []);
+export default function MLHistoryPage() {
+  const models = EXAMPLE_RUNS;
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -153,7 +143,7 @@ export default function MLHistoryPage() {
       case "failed":
         return <Error />;
       case "running":
-        return <LinearProgress sx={{ width: 20, height: 20 }} />;
+        return <Autorenew />;
       case "pending":
         return <Warning />;
       default:
@@ -165,24 +155,6 @@ export default function MLHistoryPage() {
     return value > 0 ? (value * 100).toFixed(1) + "%" : "N/A";
   };
 
-  const handleViewDetails = (modelId: string) => {
-    console.log("View details for model:", modelId);
-    // In a real app, this would navigate to model details
-  };
-
-  const handleDownloadModel = (modelId: string) => {
-    console.log("Download model:", modelId);
-    // In a real app, this would download the model file
-  };
-
-  const handleRefresh = () => {
-    setLoading(true);
-    // Simulate refresh
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  };
-
   return (
     <Box>
       {/* Header */}
@@ -192,6 +164,8 @@ export default function MLHistoryPage() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            flexWrap: "wrap",
+            gap: 2,
           }}
         >
           <Box>
@@ -203,23 +177,22 @@ export default function MLHistoryPage() {
               Track and manage your machine learning model training runs
             </Typography>
           </Box>
-          <Button
+          <Chip
+            icon={<InfoOutlined />}
+            label="Example data"
+            color="warning"
             variant="outlined"
-            startIcon={<Refresh />}
-            onClick={handleRefresh}
-            disabled={loading}
-          >
-            Refresh
-          </Button>
+            sx={{ color: "#b34f00", fontWeight: 500 }}
+          />
         </Box>
       </Box>
 
       {/* Alert */}
       <Alert severity="info" sx={{ mb: 3 }}>
         <Typography variant="body2">
-          <strong>Note:</strong> This is a frontend-only application. Model
-          history is simulated data. In a production environment, this would
-          connect to your ML training backend.
+          <strong>Example data:</strong> the runs and metrics below are
+          illustrative only. This prototype has no training backend, so no
+          models are trained, stored or served.
         </Typography>
       </Alert>
 
@@ -263,7 +236,7 @@ export default function MLHistoryPage() {
           <Card>
             <CardContent>
               <Typography color="text.secondary" gutterBottom>
-                Best Accuracy
+                Best Accuracy (example)
               </Typography>
               <Typography variant="h4" color="primary.main">
                 {formatMetric(
@@ -287,123 +260,85 @@ export default function MLHistoryPage() {
           </Typography>
           <Divider sx={{ mb: 2 }} />
 
-          {loading ? (
-            <Box sx={{ p: 3 }}>
-              <LinearProgress />
-              <Typography variant="body2" sx={{ mt: 1, textAlign: "center" }}>
-                Loading model history...
-              </Typography>
-            </Box>
-          ) : (
-            <TableContainer component={Paper} variant="outlined">
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Model Name</TableCell>
-                    <TableCell>Type</TableCell>
-                    <TableCell>Dataset</TableCell>
-                    <TableCell>Status</TableCell>
-                    <TableCell>Accuracy</TableCell>
-                    <TableCell>Precision</TableCell>
-                    <TableCell>Recall</TableCell>
-                    <TableCell>F1 Score</TableCell>
-                    <TableCell>AUC</TableCell>
-                    <TableCell>Duration</TableCell>
-                    <TableCell>Timestamp</TableCell>
-                    <TableCell>Actions</TableCell>
+          <TableContainer component={Paper} variant="outlined">
+            <Table sx={{ "& td, & th": { whiteSpace: "nowrap" } }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Model Name</TableCell>
+                  <TableCell>Type</TableCell>
+                  <TableCell>Dataset</TableCell>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Accuracy</TableCell>
+                  <TableCell>Precision</TableCell>
+                  <TableCell>Recall</TableCell>
+                  <TableCell>F1 Score</TableCell>
+                  <TableCell>AUC</TableCell>
+                  <TableCell>Duration</TableCell>
+                  <TableCell>Timestamp</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {models.map((model) => (
+                  <TableRow key={model.id} hover>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="medium">
+                        {model.name}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Chip label={model.type} size="small" variant="outlined" />
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" color="text.secondary">
+                        {model.dataset}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Chip
+                        label={model.status}
+                        color={getStatusColor(model.status) as any}
+                        size="small"
+                        icon={getStatusIcon(model.status)}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2">
+                        {formatMetric(model.accuracy)}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2">
+                        {formatMetric(model.precision)}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2">
+                        {formatMetric(model.recall)}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2">
+                        {formatMetric(model.f1Score)}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2">
+                        {formatMetric(model.auc)}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2">{model.duration}</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" color="text.secondary">
+                        {model.timestamp}
+                      </Typography>
+                    </TableCell>
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {models.map((model) => (
-                    <TableRow key={model.id} hover>
-                      <TableCell>
-                        <Typography variant="body2" fontWeight="medium">
-                          {model.name}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Chip
-                          label={model.type}
-                          size="small"
-                          variant="outlined"
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="body2" color="text.secondary">
-                          {model.dataset}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Chip
-                          label={model.status}
-                          color={getStatusColor(model.status) as any}
-                          size="small"
-                          icon={getStatusIcon(model.status)}
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="body2">
-                          {formatMetric(model.accuracy)}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="body2">
-                          {formatMetric(model.precision)}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="body2">
-                          {formatMetric(model.recall)}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="body2">
-                          {formatMetric(model.f1Score)}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="body2">
-                          {formatMetric(model.auc)}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="body2">
-                          {model.duration}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="body2" color="text.secondary">
-                          {model.timestamp}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Box sx={{ display: "flex", gap: 1 }}>
-                          <Tooltip title="View Details">
-                            <IconButton
-                              size="small"
-                              onClick={() => handleViewDetails(model.id)}
-                              disabled={model.status !== "completed"}
-                            >
-                              <Visibility />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip title="Download Model">
-                            <IconButton
-                              size="small"
-                              onClick={() => handleDownloadModel(model.id)}
-                              disabled={model.status !== "completed"}
-                            >
-                              <Download />
-                            </IconButton>
-                          </Tooltip>
-                        </Box>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          )}
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </CardContent>
       </Card>
     </Box>

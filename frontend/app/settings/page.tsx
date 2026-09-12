@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Card,
@@ -24,47 +24,74 @@ import {
   Save,
   Refresh,
   Info,
-  Warning,
 } from "@mui/icons-material";
+import { forecast, formatRange } from "../../lib/forecast";
+
+const STORAGE_KEY = "fire-forecasting:settings";
+
+const DEFAULT_SETTINGS = {
+  notifications: true,
+  autoRefresh: false,
+  refreshInterval: 30,
+  temperatureUnit: "celsius",
+  windSpeedUnit: "m/s",
+  pressureUnit: "hPa",
+  theme: "light",
+  dataRetention: 365,
+};
+
+type SettingsState = typeof DEFAULT_SETTINGS;
+
+const sampleRange = formatRange(
+  forecast.weather[0].time,
+  forecast.weather[forecast.weather.length - 1].time
+);
 
 export default function SettingsPage() {
-  const [settings, setSettings] = useState({
-    notifications: true,
-    autoRefresh: false,
-    refreshInterval: 30,
-    temperatureUnit: "celsius",
-    windSpeedUnit: "m/s",
-    pressureUnit: "hPa",
-    theme: "light",
-    dataRetention: 365,
-  });
+  const [settings, setSettings] = useState<SettingsState>(DEFAULT_SETTINGS);
+  const [alert, setAlert] = useState<"saved" | "error" | null>(null);
 
-  const [showAlert, setShowAlert] = useState(false);
+  // Load saved settings from this browser
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(STORAGE_KEY);
+      if (saved) setSettings({ ...DEFAULT_SETTINGS, ...JSON.parse(saved) });
+    } catch {
+      // Storage unavailable or malformed: keep defaults
+    }
+  }, []);
 
-  const handleSettingChange = (setting: string, value: any) => {
+  const handleSettingChange = <K extends keyof SettingsState>(
+    setting: K,
+    value: SettingsState[K]
+  ) => {
     setSettings((prev) => ({
       ...prev,
       [setting]: value,
     }));
   };
 
+  // Number fields: ignore empty/invalid input and keep values >= 1
+  const handleNumberChange = (
+    setting: "refreshInterval" | "dataRetention",
+    raw: string
+  ) => {
+    const value = parseInt(raw, 10);
+    if (!Number.isNaN(value)) handleSettingChange(setting, Math.max(1, value));
+  };
+
   const handleSaveSettings = () => {
-    // Simulate saving settings
-    setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 3000);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+      setAlert("saved");
+    } catch {
+      setAlert("error");
+    }
+    setTimeout(() => setAlert(null), 3000);
   };
 
   const handleResetSettings = () => {
-    setSettings({
-      notifications: true,
-      autoRefresh: false,
-      refreshInterval: 30,
-      temperatureUnit: "celsius",
-      windSpeedUnit: "m/s",
-      pressureUnit: "hPa",
-      theme: "light",
-      dataRetention: 365,
-    });
+    setSettings(DEFAULT_SETTINGS);
   };
 
   return (
@@ -80,20 +107,22 @@ export default function SettingsPage() {
         </Typography>
       </Box>
 
-      {showAlert && (
+      {alert && (
         <Alert
-          severity="success"
+          severity={alert === "saved" ? "success" : "error"}
           sx={{ mb: 3 }}
-          onClose={() => setShowAlert(false)}
+          onClose={() => setAlert(null)}
         >
-          Settings saved successfully!
+          {alert === "saved"
+            ? "Settings saved in this browser."
+            : "Settings could not be saved: browser storage is unavailable."}
         </Alert>
       )}
 
       <Grid container spacing={3}>
         {/* General Settings */}
         <Grid item xs={12} md={6}>
-          <Card>
+          <Card sx={{ height: "100%" }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 General Settings
@@ -130,11 +159,9 @@ export default function SettingsPage() {
                 type="number"
                 value={settings.refreshInterval}
                 onChange={(e) =>
-                  handleSettingChange(
-                    "refreshInterval",
-                    parseInt(e.target.value)
-                  )
+                  handleNumberChange("refreshInterval", e.target.value)
                 }
+                inputProps={{ min: 1 }}
                 disabled={!settings.autoRefresh}
                 fullWidth
                 sx={{ mt: 2 }}
@@ -150,8 +177,9 @@ export default function SettingsPage() {
                 type="number"
                 value={settings.dataRetention}
                 onChange={(e) =>
-                  handleSettingChange("dataRetention", parseInt(e.target.value))
+                  handleNumberChange("dataRetention", e.target.value)
                 }
+                inputProps={{ min: 1 }}
                 fullWidth
                 sx={{ mt: 2 }}
                 helperText="How long to keep historical data"
@@ -162,7 +190,7 @@ export default function SettingsPage() {
 
         {/* Display Settings */}
         <Grid item xs={12} md={6}>
-          <Card>
+          <Card sx={{ height: "100%" }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 Display Settings
@@ -253,26 +281,17 @@ export default function SettingsPage() {
                 <List>
                   <ListItem>
                     <ListItemText
-                      primary="Hourly Weather Dataset"
-                      secondary="40,711 records - Every hour weather data"
-                    />
-                    <ListItemSecondaryAction>
-                      <Info color="action" />
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText
-                      primary="Bihourly Weather Dataset"
-                      secondary="23,954 records - Every 2 hours weather data"
-                    />
-                    <ListItemSecondaryAction>
-                      <Info color="action" />
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText
                       primary="Trihourly Weather Dataset"
-                      secondary="18,110 records - Every 3 hours weather data"
+                      secondary="18,069 records - Every 3 hours weather data (2020-01-01 to 2024-01-01), data/trihourly_weather.csv"
+                    />
+                    <ListItemSecondaryAction>
+                      <Info color="action" />
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText
+                      primary="Sample Forecast (bundled)"
+                      secondary={`${forecast.sites.length} fictional sites - ${forecast.weather.length} steps of ${forecast.stepHours} hours (${sampleRange}), illustrative risk values`}
                     />
                     <ListItemSecondaryAction>
                       <Info color="action" />
@@ -312,9 +331,9 @@ export default function SettingsPage() {
       {/* Info Alert */}
       <Alert severity="info" sx={{ mt: 3 }}>
         <Typography variant="body2">
-          <strong>Note:</strong> This is a frontend-only application. Settings
-          are stored locally in your browser. No backend API is currently
-          available for persistent settings storage.
+          <strong>Note:</strong> Settings are saved in this browser
+          (localStorage). This prototype has no backend; the dashboard shows
+          metric units and the light theme.
         </Typography>
       </Alert>
     </Box>
