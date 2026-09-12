@@ -142,7 +142,7 @@ fire-forecasting/
 └── PROJECT_SUMMARY.md            # short project summary and history
 ```
 
-## Data
+### Data
 
 `data/trihourly_weather.csv` holds 18,069 rows of 3-hourly weather and fire labels from 2020-01-01 to 2024-01-01, processed by the [fire-prediction](https://github.com/gauravsurtani/fire-prediction) project. It has known quality issues (repeated timestamps with no location column, one empty row, some time mismatches). They are listed in [docs/DATASET.md](docs/DATASET.md).
 
