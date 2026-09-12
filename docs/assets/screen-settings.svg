@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-t t-d" width="1280" height="800" viewBox="0 0 1280 800">
+<title id="t-t">Fire Forecasting settings</title>
+<desc id="t-d">Browser window showing the Settings page at /settings: General Settings (notifications and auto refresh switches, refresh interval and data retention fields) and Display Settings (temperature, wind speed and pressure units, theme), with the Data Sources card below. Settings are saved in the browser.</desc>
+<defs><style>.t-s{font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif}.t-m{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace}.t-l{font-family:'Helvetica Neue', Arial, Helvetica, sans-serif}</style><linearGradient id="t-appbar" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#1976D2"/><stop offset="1" stop-color="#1565C0"/></linearGradient><linearGradient id="t-barsh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.18"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient><linearGradient id="t-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9800" stop-opacity="0.45"/><stop offset="1" stop-color="#FF9800" stop-opacity="0.04"/></linearGradient><filter id="t-cardsh" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="0" dy="1" stdDeviation="1.4" flood-color="#000" flood-opacity="0.14"/></filter><filter id="t-popsh" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.28"/></filter><filter id="t-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5"/></filter><filter id="t-winsh" x="-10%" y="-10%" width="120%" height="125%"><feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#5A3A12" flood-opacity="0.20"/></filter>
+<radialGradient id="t-canvasglow" cx="0.2" cy="0.1" r="0.9"><stop offset="0" stop-color="#FFE9CF"/><stop offset="1" stop-color="#F6F0EA"/></radialGradient></defs>
+<rect width="1280" height="800" fill="url(#t-canvasglow)"/>
+<clipPath id="t-win"><rect x="40" y="40" width="1200" height="720" rx="12"/></clipPath>
+<rect x="40" y="40" width="1200" height="720" rx="12" fill="#FFFFFF" filter="url(#t-winsh)"/>
+<g clip-path="url(#t-win)">
+<rect x="40" y="40" width="1200" height="44" fill="#F1F3F4"/><path d="M40 83.5H1240" stroke="#DADCE0"/>
+<circle cx="64" cy="62" r="6" fill="#D5D8DC"/>
+<circle cx="84" cy="62" r="6" fill="#D5D8DC"/>
+<circle cx="104" cy="62" r="6" fill="#D5D8DC"/>
+<g fill="none" stroke="#80868B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M142 62h-12m5-5-5 5 5 5"/><path d="M160 62h12m-5-5 5 5-5 5" stroke-opacity="0.45"/><path d="M197 57.5a6 6 0 1 0 1.6 4.5M197.5 54v4h-4"/></g>
+<rect x="224" y="50" width="832" height="24" rx="12" fill="#FFFFFF" stroke="#E2E4E7"/>
+<path transform="translate(236.0 55.0) scale(0.5833)" d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="#80868B"/>
+<text x="258.0" y="66.5" class="t-s" font-size="13" fill="#3C4043">localhost:3000/settings</text>
+<rect x="40" y="84" width="1200" height="676" fill="#F5F6F8"/>
+<rect x="40" y="84" width="1200" height="70" fill="url(#t-appbar)"/>
+<rect x="40" y="154" width="1200" height="6" fill="url(#t-barsh)"/>
+<path transform="translate(68.0 109.0) scale(0.8333)" d="M19.48 12.35c-1.57-4.08-7.16-4.3-5.81-10.23.1-.44-.37-.78-.75-.55C9.29 3.71 6.68 8 8.87 13.62c.18.46-.36.89-.75.59-1.81-1.37-2-3.34-1.84-4.75.06-.52-.62-.77-.91-.34C4.69 10.16 4 11.84 4 14.37c.38 5.6 5.11 7.32 6.81 7.54 2.43.31 5.06-.14 6.95-1.87 2.08-1.93 2.84-5.01 1.72-7.69zm-9.28 5.03c1.44-.35 2.18-1.39 2.38-2.31.33-1.43-.96-2.83-.09-5.09.33 1.87 3.27 3.04 3.27 5.08.08 2.53-2.66 4.7-5.56 2.32z" fill="#FF9800"/>
+<text x="96.0" y="128.0" class="t-s" font-size="24" font-weight="700" fill="#FFFFFF" letter-spacing="-0.2">Fire Forecasting</text>
+<path transform="translate(904.0 109.0) scale(0.8333)" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="#FFFFFF"/>
+<text x="932.0" y="124.0" class="t-s" font-size="14" font-weight="500" fill="#FFFFFF">Home</text>
+<path transform="translate(996.0 109.0) scale(0.8333)" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" fill="#FFFFFF"/>
+<text x="1024.0" y="124.0" class="t-s" font-size="14" font-weight="500" fill="#FFFFFF">Settings</text>
+<path transform="translate(1098.0 109.0) scale(0.8333)" d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z" fill="#FFFFFF"/>
+<text x="1126.0" y="124.0" class="t-s" font-size="14" font-weight="500" fill="#FFFFFF">ML History</text>
+<path transform="translate(64.0 190.0) scale(1.0000)" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" fill="#212121"/>
+<text x="104.0" y="211.0" class="t-s" font-size="34" fill="#212121" letter-spacing="0.1">Settings</text>
+<text x="64.0" y="252.0" class="t-s" font-size="16" fill="#666666" letter-spacing="0.1">Configure your fire forecasting dashboard preferences</text>
+<rect x="64" y="292" width="564" height="370" rx="4" fill="#FFFFFF" filter="url(#t-cardsh)"/>
+<text x="80.0" y="331.0" class="t-s" font-size="20" font-weight="500" fill="#212121" letter-spacing="0.15">General Settings</text>
+<path d="M80 347.5H612" stroke="#E0E0E0"/>
+<rect x="652" y="292" width="564" height="370" rx="4" fill="#FFFFFF" filter="url(#t-cardsh)"/>
+<text x="668.0" y="331.0" class="t-s" font-size="20" font-weight="500" fill="#212121" letter-spacing="0.15">Display Settings</text>
+<path d="M668 347.5H1200" stroke="#E0E0E0"/>
+<rect x="81" y="376" width="34" height="14" rx="7" fill="#1976D2" fill-opacity="0.5"/>
+<circle cx="108" cy="383" r="10" fill="#1976D2" filter="url(#t-cardsh)"/>
+<text x="127.0" y="388.5" class="t-s" font-size="16" fill="#212121">Enable Notifications</text>
+<rect x="81" y="422" width="34" height="14" rx="7" fill="#000" fill-opacity="0.38"/>
+<circle cx="88" cy="429" r="10" fill="#FFFFFF" filter="url(#t-cardsh)"/>
+<text x="127.0" y="434.5" class="t-s" font-size="16" fill="#212121">Auto Refresh Data</text>
+<rect x="80" y="464" width="532" height="56" rx="4" fill="#FFFFFF"/>
+<path d="M250.3 464.5H607.5a4 4 0 0 1 4 4V515.5a4 4 0 0 1-4 4H84.5a4 4 0 0 1-4-4V468.5a4 4 0 0 1 4-4H88.5" fill="none" stroke="#BDBDBD"/>
+<text x="94.0" y="468.5" class="t-s" font-size="12" fill="#9E9E9E">Refresh Interval (seconds)</text>
+<text x="94.0" y="497.5" class="t-s" font-size="16" fill="#9E9E9E">30</text>
+<text x="94.0" y="537.0" class="t-s" font-size="12" fill="#9E9E9E">Enable auto refresh to set interval</text>
+<rect x="80" y="559" width="532" height="56" rx="4" fill="#FFFFFF"/>
+<path d="M219.7 559.5H607.5a4 4 0 0 1 4 4V610.5a4 4 0 0 1-4 4H84.5a4 4 0 0 1-4-4V563.5a4 4 0 0 1 4-4H88.5" fill="none" stroke="#C4C4C4"/>
+<text x="94.0" y="563.5" class="t-s" font-size="12" fill="#666666">Data Retention (days)</text>
+<text x="94.0" y="592.5" class="t-s" font-size="16" fill="#212121">365</text>
+<text x="94.0" y="632.0" class="t-s" font-size="12" fill="#666666">How long to keep historical data</text>
+<rect x="668" y="364" width="532" height="56" rx="4" fill="#FFFFFF"/>
+<path d="M783.8 364.5H1195.5a4 4 0 0 1 4 4V415.5a4 4 0 0 1-4 4H672.5a4 4 0 0 1-4-4V368.5a4 4 0 0 1 4-4H676.5" fill="none" stroke="#C4C4C4"/>
+<text x="682.0" y="368.5" class="t-s" font-size="12" fill="#666666">Temperature Unit</text>
+<text x="682.0" y="397.5" class="t-s" font-size="16" fill="#212121">Celsius (°C)</text>
+<path transform="translate(1169.0 380.0) scale(1.0000)" d="M7 10l5 5 5-5z" fill="#757575"/>
+<rect x="668" y="436" width="532" height="56" rx="4" fill="#FFFFFF"/>
+<path d="M777.4 436.5H1195.5a4 4 0 0 1 4 4V487.5a4 4 0 0 1-4 4H672.5a4 4 0 0 1-4-4V440.5a4 4 0 0 1 4-4H676.5" fill="none" stroke="#C4C4C4"/>
+<text x="682.0" y="440.5" class="t-s" font-size="12" fill="#666666">Wind Speed Unit</text>
+<text x="682.0" y="469.5" class="t-s" font-size="16" fill="#212121">Meters per second (m/s)</text>
+<path transform="translate(1169.0 452.0) scale(1.0000)" d="M7 10l5 5 5-5z" fill="#757575"/>
+<rect x="668" y="508" width="532" height="56" rx="4" fill="#FFFFFF"/>
+<path d="M763.1 508.5H1195.5a4 4 0 0 1 4 4V559.5a4 4 0 0 1-4 4H672.5a4 4 0 0 1-4-4V512.5a4 4 0 0 1 4-4H676.5" fill="none" stroke="#C4C4C4"/>
+<text x="682.0" y="512.5" class="t-s" font-size="12" fill="#666666">Pressure Unit</text>
+<text x="682.0" y="541.5" class="t-s" font-size="16" fill="#212121">Hectopascal (hPa)</text>
+<path transform="translate(1169.0 524.0) scale(1.0000)" d="M7 10l5 5 5-5z" fill="#757575"/>
+<rect x="668" y="580" width="532" height="56" rx="4" fill="#FFFFFF"/>
+<path d="M726.1 580.5H1195.5a4 4 0 0 1 4 4V631.5a4 4 0 0 1-4 4H672.5a4 4 0 0 1-4-4V584.5a4 4 0 0 1 4-4H676.5" fill="none" stroke="#C4C4C4"/>
+<text x="682.0" y="584.5" class="t-s" font-size="12" fill="#666666">Theme</text>
+<text x="682.0" y="613.5" class="t-s" font-size="16" fill="#212121">Light</text>
+<path transform="translate(1169.0 596.0) scale(1.0000)" d="M7 10l5 5 5-5z" fill="#757575"/>
+<rect x="64" y="686" width="1152" height="290" rx="4" fill="#FFFFFF" filter="url(#t-cardsh)"/>
+<text x="80.0" y="725.0" class="t-s" font-size="20" font-weight="500" fill="#212121" letter-spacing="0.15">Data Sources</text>
+<path d="M80 741.5H1200" stroke="#E0E0E0"/>
+<rect x="80.5" y="757.5" width="1119" height="220" rx="4" fill="#FFFFFF" stroke="#E0E0E0"/>
+</g>
+<rect x="40.5" y="40.5" width="1199" height="719" rx="11.5" fill="none" stroke="#000" stroke-opacity="0.10"/>
+</svg>

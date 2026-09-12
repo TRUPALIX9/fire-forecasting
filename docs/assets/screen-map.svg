@@ -1,0 +1,225 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="m-t m-d" width="1280" height="800" viewBox="0 0 1280 800">
+<title id="m-t">Fire Forecasting forecast map</title>
+<desc id="m-d">Browser window showing the full-width Forecast Map at /map: a Leaflet map of Southern California with the Tri-County bounding box, eight sample monitoring sites coloured by peak fire risk, risk circles around the three sites above the 0.50 threshold, the risk legend and an open popup for Santa Paula Ridge. All values are sample data.</desc>
+<defs><style>.m-s{font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif}.m-m{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace}.m-l{font-family:'Helvetica Neue', Arial, Helvetica, sans-serif}</style><linearGradient id="m-appbar" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#1976D2"/><stop offset="1" stop-color="#1565C0"/></linearGradient><linearGradient id="m-barsh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.18"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient><linearGradient id="m-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9800" stop-opacity="0.45"/><stop offset="1" stop-color="#FF9800" stop-opacity="0.04"/></linearGradient><filter id="m-cardsh" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="0" dy="1" stdDeviation="1.4" flood-color="#000" flood-opacity="0.14"/></filter><filter id="m-popsh" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.28"/></filter><filter id="m-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5"/></filter><filter id="m-winsh" x="-10%" y="-10%" width="120%" height="125%"><feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#5A3A12" flood-opacity="0.20"/></filter>
+<radialGradient id="m-canvasglow" cx="0.2" cy="0.1" r="0.9"><stop offset="0" stop-color="#FFE9CF"/><stop offset="1" stop-color="#F6F0EA"/></radialGradient></defs>
+<rect width="1280" height="800" fill="url(#m-canvasglow)"/>
+<clipPath id="m-win"><rect x="40" y="40" width="1200" height="720" rx="12"/></clipPath>
+<rect x="40" y="40" width="1200" height="720" rx="12" fill="#FFFFFF" filter="url(#m-winsh)"/>
+<g clip-path="url(#m-win)">
+<rect x="40" y="40" width="1200" height="44" fill="#F1F3F4"/><path d="M40 83.5H1240" stroke="#DADCE0"/>
+<circle cx="64" cy="62" r="6" fill="#D5D8DC"/>
+<circle cx="84" cy="62" r="6" fill="#D5D8DC"/>
+<circle cx="104" cy="62" r="6" fill="#D5D8DC"/>
+<g fill="none" stroke="#80868B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M142 62h-12m5-5-5 5 5 5"/><path d="M160 62h12m-5-5 5 5-5 5" stroke-opacity="0.45"/><path d="M197 57.5a6 6 0 1 0 1.6 4.5M197.5 54v4h-4"/></g>
+<rect x="224" y="50" width="832" height="24" rx="12" fill="#FFFFFF" stroke="#E2E4E7"/>
+<path transform="translate(236.0 55.0) scale(0.5833)" d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="#80868B"/>
+<text x="258.0" y="66.5" class="m-s" font-size="13" fill="#3C4043">localhost:3000/map</text>
+<rect x="40" y="84" width="1200" height="676" fill="#F5F6F8"/>
+<rect x="40" y="84" width="1200" height="70" fill="url(#m-appbar)"/>
+<rect x="40" y="154" width="1200" height="6" fill="url(#m-barsh)"/>
+<path transform="translate(68.0 109.0) scale(0.8333)" d="M19.48 12.35c-1.57-4.08-7.16-4.3-5.81-10.23.1-.44-.37-.78-.75-.55C9.29 3.71 6.68 8 8.87 13.62c.18.46-.36.89-.75.59-1.81-1.37-2-3.34-1.84-4.75.06-.52-.62-.77-.91-.34C4.69 10.16 4 11.84 4 14.37c.38 5.6 5.11 7.32 6.81 7.54 2.43.31 5.06-.14 6.95-1.87 2.08-1.93 2.84-5.01 1.72-7.69zm-9.28 5.03c1.44-.35 2.18-1.39 2.38-2.31.33-1.43-.96-2.83-.09-5.09.33 1.87 3.27 3.04 3.27 5.08.08 2.53-2.66 4.7-5.56 2.32z" fill="#FF9800"/>
+<text x="96.0" y="128.0" class="m-s" font-size="24" font-weight="700" fill="#FFFFFF" letter-spacing="-0.2">Fire Forecasting</text>
+<path transform="translate(904.0 109.0) scale(0.8333)" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="#FFFFFF"/>
+<text x="932.0" y="124.0" class="m-s" font-size="14" font-weight="500" fill="#FFFFFF">Home</text>
+<path transform="translate(996.0 109.0) scale(0.8333)" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" fill="#FFFFFF"/>
+<text x="1024.0" y="124.0" class="m-s" font-size="14" font-weight="500" fill="#FFFFFF">Settings</text>
+<path transform="translate(1098.0 109.0) scale(0.8333)" d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z" fill="#FFFFFF"/>
+<text x="1126.0" y="124.0" class="m-s" font-size="14" font-weight="500" fill="#FFFFFF">ML History</text>
+<text x="64.0" y="204.0" class="m-s" font-size="24" font-weight="600" fill="#212121" letter-spacing="-0.2">Forecast Map</text>
+<text x="64.0" y="226.0" class="m-s" font-size="13.5" fill="#666666">Peak risk per site · 15–17 Aug 2023</text>
+<rect x="752.5" y="186.5" width="116" height="31" rx="15.5" fill="#FFFFFF" stroke="#ED6C02" stroke-opacity="0.7"/>
+<path transform="translate(762.0 193.0) scale(0.7500)" d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="#ED6C02"/>
+<text x="786.0" y="207.0" class="m-s" font-size="13" font-weight="500" fill="#B34F00">Sample data</text>
+<path d="M883.5 184.5h8M960 184.5h82.5a3.5 3.5 0 0 1 3.5 3.5v29a3.5 3.5 0 0 1-3.5 3.5h-155a3.5 3.5 0 0 1-3.5-3.5v-29a3.5 3.5 0 0 1 3.5-3.5" fill="#FFFFFF" stroke="#C4C4C4"/>
+<text x="894.0" y="188.5" class="m-s" font-size="10" fill="#666666">Forecast start</text>
+<text x="894.0" y="208.0" class="m-s" font-size="13.5" fill="#212121">08/15/2023</text>
+<path transform="translate(1018.0 193.0) scale(0.7500)" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" fill="#757575"/>
+<rect x="1062.5" y="184.5" width="153" height="36" rx="4" fill="#FFFFFF" stroke="#D9D9D9"/>
+<rect x="1165" y="185.0" width="50" height="35" fill="#1976D2" fill-opacity="0.09"/>
+<path d="M1113.5 185.0v35M1164.5 185.0v35" stroke="#D9D9D9"/>
+<text x="1088.0" y="207.0" class="m-s" font-size="13" font-weight="500" fill="#6B6B6B" text-anchor="middle">24H</text>
+<text x="1139.0" y="207.0" class="m-s" font-size="13" font-weight="500" fill="#6B6B6B" text-anchor="middle">48H</text>
+<text x="1190.0" y="207.0" class="m-s" font-size="13" font-weight="500" fill="#1976D2" text-anchor="middle">72H</text>
+<rect x="64" y="250" width="1152" height="477" rx="4" fill="#FFFFFF" filter="url(#m-cardsh)"/>
+<text x="80.0" y="283.0" class="m-s" font-size="14" fill="#666666">8 sites · 3 above τ = 0.50</text>
+<text x="906.0" y="283.0" class="m-s" font-size="14" font-weight="500" fill="#212121">Layers:</text>
+<rect x="970.5" y="259.5" width="229" height="37" rx="4" fill="#FFFFFF" stroke="#D9D9D9"/>
+<rect x="971" y="260" width="77" height="36" fill="#000" fill-opacity="0.08"/>
+<path transform="translate(978.0 268.0) scale(0.8333)" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#212121"/>
+<text x="1002.0" y="282.5" class="m-s" font-size="13" font-weight="500" fill="#212121" letter-spacing="0.4">SITES</text>
+<path d="M1048.5 260v36" stroke="#D9D9D9"/>
+<path transform="translate(1056.0 268.0) scale(0.7500)" d="M2 2v20h20V2H2zm18 18h-2v-2h-2.02c.63-.9 1.02-1.98 1.02-3.16 0-1.61-.66-3.12-1.84-4.19-.67-.61-1.25-1.08-1.44-1.52-.36-.83-.34-1.73-.21-2.61C11.07 7.73 9 10.73 9 14.07c0 1.5.37 2.56.91 3.93H8v2H4V4h16v16z" fill="#757575"/>
+<text x="1080.0" y="282.5" class="m-s" font-size="13" font-weight="500" fill="#757575" letter-spacing="0.4">FRAP</text>
+<rect x="1123" y="260" width="77" height="36" fill="#000" fill-opacity="0.08"/>
+<path d="M1122.5 260v36" stroke="#D9D9D9"/>
+<path transform="translate(1130.0 268.0) scale(0.8333)" d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z" fill="#212121"/>
+<text x="1154.0" y="282.5" class="m-s" font-size="13" font-weight="500" fill="#212121" letter-spacing="0.4">BBOX</text>
+<path d="M64 306.5H1216" stroke="#E0E0E0"/>
+<clipPath id="m-mapclip"><path d="M64 307H1216V723a4 4 0 0 1-4 4H68a4 4 0 0 1-4-4Z"/></clipPath>
+<g clip-path="url(#m-mapclip)">
+<rect x="64" y="307" width="1152" height="420" fill="#AAD3DF"/>
+<path d="M57.5 81.9 L157.6 228.1 L230.4 261.7 L255.9 290.7 L275.9 339.8 L295.9 395.3 L301.4 428.6 L303.2 470.6 L326.9 494.9 L357.8 490.5 L394.2 490.5 L430.7 499.4 L458.0 506.0 L468.9 503.8 L485.3 501.6 L499.8 508.2 L512.6 512.6 L525.3 523.6 L541.7 534.6 L549.0 545.6 L556.3 561.0 L569.0 569.8 L583.6 576.4 L603.6 585.2 L630.9 589.6 L652.7 586.3 L672.8 585.2 L681.9 587.4 L691.0 596.2 L698.3 609.4 L701.9 622.5 L703.7 637.9 L700.1 648.8 L712.8 655.4 L723.7 657.6 L731.0 653.2 L740.1 648.8 L752.9 646.6 L767.4 655.4 L780.2 670.7 L794.7 681.6 L807.5 690.4 L822.0 703.5 L834.8 712.2 L849.3 727.5 L867.5 740.6 L885.8 764.5 L904.0 790.6 L913.1 823.2 L1322.7 834.0 L1322.7 81.9Z" fill="#F2EFE9" stroke="#9CC3D0" stroke-width="0.8"/>
+<path d="M427.0 578.6 C430.7 577.2 442.2 580.1 448.9 580.8 C455.5 581.6 461.0 582.3 467.1 583.0 C473.1 583.8 480.1 584.5 485.3 585.2 C490.4 586.0 496.5 585.2 498.0 587.4 C499.5 589.6 498.0 595.8 494.4 598.4 C490.7 601.0 482.2 602.1 476.2 602.8 C470.1 603.5 464.6 603.5 458.0 602.8 C451.3 602.1 441.3 600.6 436.1 598.4 C431.0 596.2 428.5 592.9 427.0 589.6 C425.5 586.3 423.4 580.1 427.0 578.6Z" fill="#F2EFE9" stroke="#9CC3D0" stroke-width="0.8"/>
+<path d="M368.8 589.6 C373.3 588.5 386.1 590.0 394.2 591.8 C402.4 593.6 414.9 596.6 417.9 600.6 C420.9 604.6 416.4 613.0 412.5 616.0 C408.5 618.9 400.3 619.2 394.2 618.2 C388.2 617.1 380.6 612.7 376.0 609.4 C371.5 606.1 368.2 601.7 366.9 598.4 C365.7 595.1 364.2 590.7 368.8 589.6Z" fill="#F2EFE9" stroke="#9CC3D0" stroke-width="0.8"/>
+<path d="M332.4 583.0 C335.1 581.6 348.7 581.9 352.4 583.0 C356.0 584.1 356.9 588.2 354.2 589.6 C351.5 591.1 339.6 592.9 336.0 591.8 C332.4 590.7 329.6 584.5 332.4 583.0Z" fill="#F2EFE9" stroke="#9CC3D0" stroke-width="0.8"/>
+<path d="M514.4 590.7 C516.8 590.4 526.5 590.8 529.0 591.4 C531.4 591.9 531.4 593.7 529.0 594.0 C526.5 594.3 516.8 593.7 514.4 593.1 C512.0 592.6 512.0 591.0 514.4 590.7Z" fill="#F2EFE9" stroke="#9CC3D0" stroke-width="0.8"/>
+<path d="M667.3 707.8 C670.6 708.6 680.0 714.4 685.5 716.6 C691.0 718.8 694.9 718.4 700.1 720.9 C705.2 723.5 712.8 728.6 716.5 731.8 C720.1 735.1 722.5 738.4 721.9 740.6 C721.3 742.7 717.4 745.6 712.8 744.9 C708.3 744.2 700.7 739.8 694.6 736.2 C688.5 732.6 681.3 727.1 676.4 723.1 C671.6 719.1 667.0 714.8 665.5 712.2 C664.0 709.7 664.0 707.1 667.3 707.8Z" fill="#F2EFE9" stroke="#9CC3D0" stroke-width="0.8"/>
+<path d="M394.2 472.8 C406.4 483.2 415.5 477.3 430.7 479.5 C445.8 481.7 470.1 484.3 485.3 486.1 C500.4 487.9 509.5 490.9 521.7 490.5 C533.8 490.2 544.4 487.2 558.1 483.9 C571.7 480.6 593.0 478.7 603.6 470.6 C614.2 462.5 621.8 450.7 621.8 435.2 C621.8 419.7 623.3 391.6 603.6 377.6 C583.9 363.5 541.4 355.3 503.5 350.9 C465.5 346.4 400.3 339.8 376.0 350.9 C351.8 362.0 354.8 397.2 357.8 417.5 C360.9 437.8 382.1 462.5 394.2 472.8Z" fill="#CDE6C0" fill-opacity="0.85"/>
+<path d="M594.5 572.0 C597.5 574.4 609.7 576.6 621.8 577.5 C633.9 578.5 656.7 577.9 667.3 577.5 C677.9 577.2 683.1 577.0 685.5 575.3 C687.9 573.7 687.9 569.3 681.9 567.6 C675.8 566.0 662.1 566.2 649.1 565.4 C636.1 564.7 612.7 562.1 603.6 563.2 C594.5 564.3 591.5 569.7 594.5 572.0Z" fill="#CDE6C0" fill-opacity="0.85"/>
+<path d="M676.4 483.9 C679.4 493.1 693.1 507.8 703.7 517.0 C714.3 526.2 725.0 533.5 740.1 539.0 C755.3 544.5 778.0 548.9 794.7 550.0 C811.4 551.1 829.6 549.3 840.2 545.6 C850.9 542.0 860.0 533.9 858.4 528.0 C856.9 522.1 844.8 514.8 831.1 510.4 C817.5 506.0 794.7 506.7 776.5 501.6 C758.3 496.4 737.1 486.1 721.9 479.5 C706.7 472.9 693.1 461.1 685.5 461.8 C677.9 462.5 673.4 474.7 676.4 483.9Z" fill="#CDE6C0" fill-opacity="0.85"/>
+<path d="M572.6 497.1 C575.7 494.6 600.6 496.0 612.7 494.9 C624.8 493.8 641.2 488.7 645.5 490.5 C649.7 492.4 646.7 502.7 638.2 506.0 C629.7 509.3 605.4 511.9 594.5 510.4 C583.6 508.9 569.6 499.7 572.6 497.1Z" fill="#CDE6C0" fill-opacity="0.85"/>
+<path d="M904.0 550.0 C917.6 554.8 952.5 561.0 976.8 561.0 C1001.0 561.0 1037.5 559.2 1049.6 550.0 C1061.7 540.9 1064.8 509.6 1049.6 506.0 C1034.4 502.3 984.4 523.6 958.6 528.0 C932.8 532.4 904.0 528.8 894.9 532.4 C885.8 536.1 890.3 545.3 904.0 550.0Z" fill="#CDE6C0" fill-opacity="0.85"/>
+<path d="M312.3 295.2 C319.9 308.2 344.2 324.9 357.8 328.6 C371.5 332.3 385.1 326.8 394.2 317.5 C403.3 308.2 418.5 285.9 412.5 272.8 C406.4 259.8 374.5 243.0 357.8 239.3 C341.2 235.6 319.9 241.2 312.3 250.5 C304.7 259.8 304.7 282.1 312.3 295.2Z" fill="#CDE6C0" fill-opacity="0.85"/>
+<path d="M640.0 362.0 C643.0 373.1 670.3 382.4 685.5 384.2 C700.7 386.1 725.0 382.4 731.0 373.1 C737.1 363.9 732.5 337.9 721.9 328.6 C711.3 319.3 681.0 311.9 667.3 317.5 C653.7 323.0 637.0 350.9 640.0 362.0Z" fill="#CDE6C0" fill-opacity="0.85"/>
+<path d="M681.9 587.4 C681.9 591.1 691.0 588.5 694.6 594.0 C698.3 599.5 701.6 613.0 703.7 620.3 C705.8 627.7 704.3 632.9 707.4 637.9 C710.4 642.8 713.4 648.8 721.9 649.9 C730.4 651.0 747.7 641.7 758.3 644.4 C768.9 647.2 776.5 659.8 785.6 666.3 C794.7 672.9 805.4 682.4 812.9 683.8 C820.5 685.3 826.6 682.7 831.1 675.1 C835.7 667.4 835.7 647.7 840.2 637.9 C844.8 628.0 847.8 621.4 858.4 616.0 C869.1 610.5 893.3 611.6 904.0 605.0 C914.6 598.4 923.7 583.0 922.2 576.4 C920.6 569.8 910.0 566.5 894.9 565.4 C879.7 564.3 850.9 570.9 831.1 569.8 C811.4 568.7 791.7 562.1 776.5 558.8 C761.4 555.5 749.2 548.9 740.1 550.0 C731.0 551.1 729.5 561.8 721.9 565.4 C714.3 569.1 701.3 568.4 694.6 572.0 C687.9 575.7 681.9 583.8 681.9 587.4Z" fill="#E0DFDF"/>
+<path d="M656.4 558.8 C653.3 553.3 659.4 533.2 667.3 528.0 C675.2 522.9 696.1 524.4 703.7 528.0 C711.3 531.7 711.9 544.5 712.8 550.0 C713.7 555.5 713.7 559.2 709.2 561.0 C704.6 562.9 694.3 561.4 685.5 561.0 C676.7 560.7 659.4 564.4 656.4 558.8Z" fill="#E0DFDF"/>
+<path d="M543.5 532.4 C544.1 529.5 549.0 528.0 554.4 528.0 C559.9 528.0 569.6 529.5 576.3 532.4 C583.0 535.4 593.0 540.9 594.5 545.6 C596.0 550.4 591.5 558.3 585.4 561.0 C579.3 563.8 563.8 564.7 558.1 562.1 C552.3 559.6 553.2 550.6 550.8 545.6 C548.4 540.7 542.9 535.4 543.5 532.4Z" fill="#E0DFDF"/>
+<path d="M603.6 550.0 C607.5 553.9 622.7 558.8 630.9 559.9 C639.1 561.0 648.2 561.2 652.7 556.6 C657.3 552.1 661.8 537.2 658.2 532.4 C654.6 527.7 639.4 527.3 630.9 528.0 C622.4 528.8 611.8 533.2 607.2 536.8 C602.7 540.5 599.6 546.2 603.6 550.0Z" fill="#E0DFDF"/>
+<path d="M434.3 497.1 C435.8 498.4 441.9 499.5 448.9 500.5 C455.8 501.4 470.1 502.8 476.2 502.7 C482.2 502.5 486.8 501.0 485.3 499.4 C483.7 497.7 474.6 493.8 467.1 492.7 C459.5 491.6 445.2 492.0 439.8 492.7 C434.3 493.5 432.8 495.9 434.3 497.1Z" fill="#E0DFDF"/>
+<path d="M663.7 510.4 C667.6 514.4 688.5 517.0 694.6 514.8 C700.7 512.6 704.0 501.2 700.1 497.1 C696.1 493.1 677.0 488.3 670.9 490.5 C664.9 492.7 659.7 506.3 663.7 510.4Z" fill="#E0DFDF"/>
+<path d="M731.0 472.8 C738.6 479.1 768.3 479.1 776.5 472.8 C784.7 466.6 787.8 441.5 780.2 435.2 C772.6 429.0 739.2 429.0 731.0 435.2 C722.8 441.5 723.4 466.6 731.0 472.8Z" fill="#E0DFDF"/>
+<path d="M572.6 306.3 C578.7 311.2 602.4 310.8 609.1 306.3 C615.7 301.9 618.8 284.4 612.7 279.5 C606.6 274.7 579.3 272.8 572.6 277.3 C566.0 281.8 566.6 301.5 572.6 306.3Z" fill="#E0DFDF"/>
+<path d="M325.1 395.3 C328.1 399.0 340.2 399.0 343.3 395.3 C346.3 391.6 346.3 376.8 343.3 373.1 C340.2 369.4 328.1 369.4 325.1 373.1 C322.0 376.8 322.0 391.6 325.1 395.3Z" fill="#E0DFDF"/>
+<path d="M882.1 494.9 C887.6 500.5 911.8 500.5 918.5 494.9 C925.2 489.4 927.6 467.3 922.2 461.8 C916.7 456.3 892.4 456.3 885.8 461.8 C879.1 467.3 876.7 489.4 882.1 494.9Z" fill="#E0DFDF"/>
+<path d="M1031.4 642.3 C1039.6 648.8 1083.0 663.1 1095.1 664.1 C1107.2 665.2 1112.4 655.4 1104.2 648.8 C1096.0 642.3 1058.1 625.8 1045.9 624.7 C1033.8 623.6 1023.2 635.7 1031.4 642.3Z" fill="#E0DFDF"/>
+<path d="M508.9 511.5 L514.4 492.7 L514.4 395.3 L514.4 350.9" fill="none" stroke="#B08DB4" stroke-width="1.2" stroke-dasharray="6 3 1.5 3" stroke-opacity="0.75"/>
+<path d="M605.4 584.1 L632.7 556.6 L654.6 541.2 L660.0 506.0 L645.5 461.8 L616.3 413.1" fill="none" stroke="#B08DB4" stroke-width="1.2" stroke-dasharray="6 3 1.5 3" stroke-opacity="0.75"/>
+<path d="M758.3 648.8 L785.6 616.0 L816.6 605.0 L827.5 589.6 L834.8 506.0 L838.4 413.1" fill="none" stroke="#B08DB4" stroke-width="1.2" stroke-dasharray="6 3 1.5 3" stroke-opacity="0.75"/>
+<path d="M541.7 532.4 C542.3 528.0 545.6 514.1 545.3 506.0 C545.0 497.9 542.3 493.1 539.9 483.9 C537.5 474.7 533.8 463.6 530.8 450.7 C527.7 437.8 523.2 413.8 521.7 406.4" fill="none" stroke="#FCD6A4" stroke-width="2" stroke-linecap="round"/>
+<path d="M448.9 494.9 C444.3 491.3 430.7 479.5 421.6 472.8 C412.4 466.2 401.8 457.4 394.2 455.2 C386.7 452.9 379.1 458.8 376.0 459.6" fill="none" stroke="#FCD6A4" stroke-width="2" stroke-linecap="round"/>
+<path d="M603.6 532.4 C611.2 532.4 633.9 532.4 649.1 532.4 C664.3 532.4 687.0 532.4 694.6 532.4" fill="none" stroke="#FCD6A4" stroke-width="2" stroke-linecap="round"/>
+<path d="M740.1 550.0 C744.7 545.6 758.3 529.5 767.4 523.6 C776.5 517.7 790.2 516.3 794.7 514.8" fill="none" stroke="#FCD6A4" stroke-width="2" stroke-linecap="round"/>
+<path d="M554.4 536.8 C559.6 533.5 575.7 522.1 585.4 517.0 C595.1 511.9 602.1 508.2 612.7 506.0 C623.3 503.8 639.1 504.5 649.1 503.8 C659.1 503.0 668.8 501.9 672.8 501.6" fill="none" stroke="#F9B29C" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M694.6 512.6 C699.2 508.9 712.8 497.1 721.9 490.5 C731.0 483.9 744.1 481.3 749.2 472.8 C754.4 464.4 751.3 455.5 752.9 439.7 C754.4 423.8 757.4 387.9 758.3 377.6" fill="none" stroke="#F9B29C" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M583.6 576.4 C591.5 578.5 614.5 586.9 630.9 588.5 C647.3 590.2 673.4 586.7 681.9 586.3" fill="none" stroke="#F9B29C" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M336.0 384.2 C339.6 389.8 351.2 405.0 357.8 417.5 C364.5 430.1 373.6 447.4 376.0 459.6 C378.5 471.8 364.8 484.3 372.4 490.5 C380.0 496.8 409.7 496.0 421.6 497.1 C433.4 498.2 435.8 496.6 443.4 497.1 C451.0 497.7 458.6 499.2 467.1 500.5 C475.6 501.7 486.8 503.0 494.4 504.9 C502.0 506.7 505.0 507.1 512.6 511.5 C520.2 515.9 532.9 526.7 539.9 531.3 C546.9 535.9 550.8 536.7 554.4 539.0 C558.1 541.4 558.1 543.8 561.7 545.6 C565.4 547.5 570.8 549.3 576.3 550.0 C581.7 550.8 588.4 549.3 594.5 550.0 C600.6 550.8 606.6 553.2 612.7 554.4 C618.8 555.7 623.3 557.2 630.9 557.7 C638.5 558.3 649.1 557.6 658.2 557.7 C667.3 557.9 677.9 558.3 685.5 558.8 C693.1 559.4 697.6 558.8 703.7 561.0 C709.8 563.2 717.1 568.7 721.9 572.0 C726.8 575.3 731.0 579.4 732.8 580.8" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M336.0 384.2 C339.6 389.8 351.2 405.0 357.8 417.5 C364.5 430.1 373.6 447.4 376.0 459.6 C378.5 471.8 364.8 484.3 372.4 490.5 C380.0 496.8 409.7 496.0 421.6 497.1 C433.4 498.2 435.8 496.6 443.4 497.1 C451.0 497.7 458.6 499.2 467.1 500.5 C475.6 501.7 486.8 503.0 494.4 504.9 C502.0 506.7 505.0 507.1 512.6 511.5 C520.2 515.9 532.9 526.7 539.9 531.3 C546.9 535.9 550.8 536.7 554.4 539.0 C558.1 541.4 558.1 543.8 561.7 545.6 C565.4 547.5 570.8 549.3 576.3 550.0 C581.7 550.8 588.4 549.3 594.5 550.0 C600.6 550.8 606.6 553.2 612.7 554.4 C618.8 555.7 623.3 557.2 630.9 557.7 C638.5 558.3 649.1 557.6 658.2 557.7 C667.3 557.9 677.9 558.3 685.5 558.8 C693.1 559.4 697.6 558.8 703.7 561.0 C709.8 563.2 717.1 568.7 721.9 572.0 C726.8 575.3 731.0 579.4 732.8 580.8" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M607.2 350.9 C608.7 356.4 612.4 373.1 616.3 384.2 C620.3 395.3 626.0 406.1 630.9 417.5 C635.8 429.0 640.0 441.9 645.5 452.9 C650.9 464.0 658.5 475.1 663.7 483.9 C668.8 492.7 671.3 499.4 676.4 506.0 C681.6 512.6 687.0 515.5 694.6 523.6 C702.2 531.7 715.5 544.9 721.9 554.4 C728.3 564.0 726.8 572.4 732.8 580.8 C738.9 589.3 748.0 595.5 758.3 605.0 C768.6 614.5 784.1 626.9 794.7 637.9 C805.4 648.8 812.9 658.0 822.0 670.7 C831.1 683.5 838.7 699.8 849.3 714.4 C860.0 728.9 879.7 750.7 885.8 758.0" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M607.2 350.9 C608.7 356.4 612.4 373.1 616.3 384.2 C620.3 395.3 626.0 406.1 630.9 417.5 C635.8 429.0 640.0 441.9 645.5 452.9 C650.9 464.0 658.5 475.1 663.7 483.9 C668.8 492.7 671.3 499.4 676.4 506.0 C681.6 512.6 687.0 515.5 694.6 523.6 C702.2 531.7 715.5 544.9 721.9 554.4 C728.3 564.0 726.8 572.4 732.8 580.8 C738.9 589.3 748.0 595.5 758.3 605.0 C768.6 614.5 784.1 626.9 794.7 637.9 C805.4 648.8 812.9 658.0 822.0 670.7 C831.1 683.5 838.7 699.8 849.3 714.4 C860.0 728.9 879.7 750.7 885.8 758.0" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M685.5 589.6 C691.6 589.3 714.0 588.9 721.9 587.4 C729.8 586.0 723.7 582.3 732.8 580.8 C741.9 579.4 760.1 579.0 776.5 578.6 C792.9 578.3 812.9 578.3 831.1 578.6 C849.3 579.0 870.6 580.1 885.8 580.8 C900.9 581.6 907.0 579.0 922.2 583.0 C937.3 587.1 955.5 599.5 976.8 605.0 C998.0 610.5 1037.5 614.1 1049.6 616.0" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M685.5 589.6 C691.6 589.3 714.0 588.9 721.9 587.4 C729.8 586.0 723.7 582.3 732.8 580.8 C741.9 579.4 760.1 579.0 776.5 578.6 C792.9 578.3 812.9 578.3 831.1 578.6 C849.3 579.0 870.6 580.1 885.8 580.8 C900.9 581.6 907.0 579.0 922.2 583.0 C937.3 587.1 955.5 599.5 976.8 605.0 C998.0 610.5 1037.5 614.1 1049.6 616.0" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M691.0 528.0 C691.0 533.5 689.5 550.8 691.0 561.0 C692.5 571.3 697.3 580.5 700.1 589.6 C702.8 598.8 700.7 609.0 707.4 616.0 C714.0 622.9 728.6 624.7 740.1 631.3 C751.7 637.9 765.9 648.8 776.5 655.4 C787.1 662.0 799.3 668.2 803.8 670.7" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M691.0 528.0 C691.0 533.5 689.5 550.8 691.0 561.0 C692.5 571.3 697.3 580.5 700.1 589.6 C702.8 598.8 700.7 609.0 707.4 616.0 C714.0 622.9 728.6 624.7 740.1 631.3 C751.7 637.9 765.9 648.8 776.5 655.4 C787.1 662.0 799.3 668.2 803.8 670.7" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M703.7 530.2 C709.8 534.3 728.0 548.9 740.1 554.4 C752.3 559.9 761.4 561.0 776.5 563.2 C791.7 565.4 812.9 567.6 831.1 567.6 C849.3 567.6 876.7 564.0 885.8 563.2" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M703.7 530.2 C709.8 534.3 728.0 548.9 740.1 554.4 C752.3 559.9 761.4 561.0 776.5 563.2 C791.7 565.4 812.9 567.6 831.1 567.6 C849.3 567.6 876.7 564.0 885.8 563.2" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M885.8 616.0 C884.8 608.6 880.3 586.7 880.3 572.0 C880.3 557.4 881.8 542.7 885.8 528.0 C889.7 513.3 897.9 498.6 904.0 483.9 C910.0 469.2 916.1 458.1 922.2 439.7 C928.2 421.2 937.3 384.2 940.4 373.1" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M885.8 616.0 C884.8 608.6 880.3 586.7 880.3 572.0 C880.3 557.4 881.8 542.7 885.8 528.0 C889.7 513.3 897.9 498.6 904.0 483.9 C910.0 469.2 916.1 458.1 922.2 439.7 C928.2 421.2 937.3 384.2 940.4 373.1" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M336.0 384.2 C330.5 377.9 310.2 359.4 303.2 346.4 C296.2 333.4 297.8 320.5 294.1 306.3 C290.5 292.2 289.0 278.4 281.4 261.7 C273.8 244.9 254.1 215.0 248.6 205.7" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M336.0 384.2 C330.5 377.9 310.2 359.4 303.2 346.4 C296.2 333.4 297.8 320.5 294.1 306.3 C290.5 292.2 289.0 278.4 281.4 261.7 C273.8 244.9 254.1 215.0 248.6 205.7" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M607.2 350.9 C602.1 345.3 586.0 330.5 576.3 317.5 C566.6 304.5 558.1 289.6 549.0 272.8 C539.9 256.1 526.2 226.2 521.7 216.9" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M607.2 350.9 C602.1 345.3 586.0 330.5 576.3 317.5 C566.6 304.5 558.1 289.6 549.0 272.8 C539.9 256.1 526.2 226.2 521.7 216.9" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M603.6 373.1 C601.5 359.4 598.4 313.8 590.8 290.7 C583.3 267.7 563.5 244.1 558.1 234.8" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M603.6 373.1 C601.5 359.4 598.4 313.8 590.8 290.7 C583.3 267.7 563.5 244.1 558.1 234.8" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M1049.6 616.0 C1061.7 622.5 1092.1 647.4 1122.4 655.4 C1152.7 663.4 1213.4 662.7 1231.6 664.1" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M1049.6 616.0 C1061.7 622.5 1092.1 647.4 1122.4 655.4 C1152.7 663.4 1213.4 662.7 1231.6 664.1" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M940.4 373.1 C949.5 363.8 970.7 334.2 995.0 317.5 C1019.3 300.8 1070.8 280.3 1086.0 272.8" fill="none" stroke="#D1607A" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.55"/>
+<path d="M940.4 373.1 C949.5 363.8 970.7 334.2 995.0 317.5 C1019.3 300.8 1070.8 280.3 1086.0 272.8" fill="none" stroke="#E892A2" stroke-width="2.4" stroke-linecap="round"/>
+<text x="485.3" y="677.3" class="m-s" font-size="14" fill="#4D80B3" text-anchor="middle" font-style="italic">Pacific Ocean</text>
+<text x="416.1" y="550.0" class="m-s" font-size="10.5" fill="#4D80B3" text-anchor="middle" font-style="italic">Santa Barbara Channel</text>
+<text x="485.3" y="628.5" class="m-s" font-size="9.5" fill="#6B6B6B" text-anchor="middle">Santa Cruz Island</text>
+<text x="700.1" y="751.1" class="m-s" font-size="9.5" fill="#6B6B6B" text-anchor="middle">Santa Catalina Island</text>
+<text x="740.1" y="408.6" class="m-s" font-size="9.5" font-weight="600" fill="#9A7AA0" text-anchor="middle" letter-spacing="1.2">LOS ANGELES CO.</text>
+<text x="421.6" y="435.2" class="m-s" font-size="9.5" font-weight="600" fill="#9A7AA0" text-anchor="middle" letter-spacing="1.2">SANTA BARBARA CO.</text>
+<text x="585.4" y="457.4" class="m-s" font-size="9.5" font-weight="600" fill="#9A7AA0" text-anchor="middle" letter-spacing="1.2">VENTURA CO.</text>
+<text x="958.6" y="328.6" class="m-s" font-size="9.5" font-weight="600" fill="#9A7AA0" text-anchor="middle" letter-spacing="1.2">SAN BERNARDINO CO.</text>
+<circle cx="467.1" cy="501.6" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="461.1" y="518.6" class="m-s" font-size="11.5" font-weight="500" fill="#FFFFFF" text-anchor="end" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Santa Barbara</text>
+<text x="461.1" y="518.6" class="m-s" font-size="11.5" font-weight="500" fill="#333333" text-anchor="end">Santa Barbara</text>
+<circle cx="552.6" cy="532.4" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="559.6" y="544.4" class="m-s" font-size="11.5" font-weight="500" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Ventura</text>
+<text x="559.6" y="544.4" class="m-s" font-size="11.5" font-weight="500" fill="#333333">Ventura</text>
+<circle cx="623.6" cy="554.4" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="617.6" y="567.4" class="m-s" font-size="10.5" font-weight="500" fill="#FFFFFF" text-anchor="end" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Thousand Oaks</text>
+<text x="617.6" y="567.4" class="m-s" font-size="10.5" font-weight="500" fill="#333333" text-anchor="end">Thousand Oaks</text>
+<circle cx="678.2" cy="506.0" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="686.2" y="502.0" class="m-s" font-size="11" font-weight="500" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Santa Clarita</text>
+<text x="686.2" y="502.0" class="m-s" font-size="11" font-weight="500" fill="#333333">Santa Clarita</text>
+<circle cx="732.8" cy="583.0" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="740.8" y="587.0" class="m-s" font-size="13.5" font-weight="700" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Los Angeles</text>
+<text x="740.8" y="587.0" class="m-s" font-size="13.5" font-weight="700" fill="#333333">Los Angeles</text>
+<circle cx="741.9" cy="644.4" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="734.9" y="648.4" class="m-s" font-size="11" font-weight="500" fill="#FFFFFF" text-anchor="end" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Long Beach</text>
+<text x="734.9" y="648.4" class="m-s" font-size="11" font-weight="500" fill="#333333" text-anchor="end">Long Beach</text>
+<circle cx="792.9" cy="629.1" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="800.9" y="639.1" class="m-s" font-size="11" font-weight="500" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Anaheim</text>
+<text x="800.9" y="639.1" class="m-s" font-size="11" font-weight="500" fill="#333333">Anaheim</text>
+<circle cx="885.8" cy="605.0" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="893.8" y="615.0" class="m-s" font-size="11" font-weight="500" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Riverside</text>
+<text x="893.8" y="615.0" class="m-s" font-size="11" font-weight="500" fill="#333333">Riverside</text>
+<circle cx="905.8" cy="569.8" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="913.8" y="573.8" class="m-s" font-size="11" font-weight="500" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">San Bernardino</text>
+<text x="913.8" y="573.8" class="m-s" font-size="11" font-weight="500" fill="#333333">San Bernardino</text>
+<circle cx="905.8" cy="475.1" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="913.8" y="479.1" class="m-s" font-size="11" font-weight="500" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Victorville</text>
+<text x="913.8" y="479.1" class="m-s" font-size="11" font-weight="500" fill="#333333">Victorville</text>
+<circle cx="751.0" cy="441.9" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="759.0" y="445.9" class="m-s" font-size="11" font-weight="500" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Lancaster</text>
+<text x="759.0" y="445.9" class="m-s" font-size="11" font-weight="500" fill="#333333">Lancaster</text>
+<circle cx="754.7" cy="466.2" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="762.7" y="470.2" class="m-s" font-size="11" font-weight="500" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Palmdale</text>
+<text x="762.7" y="470.2" class="m-s" font-size="11" font-weight="500" fill="#333333">Palmdale</text>
+<circle cx="590.8" cy="290.7" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="598.8" y="294.7" class="m-s" font-size="12" font-weight="600" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Bakersfield</text>
+<text x="598.8" y="294.7" class="m-s" font-size="12" font-weight="600" fill="#333333">Bakersfield</text>
+<circle cx="332.4" cy="384.2" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="340.4" y="388.2" class="m-s" font-size="11" font-weight="500" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Santa Maria</text>
+<text x="340.4" y="388.2" class="m-s" font-size="11" font-weight="500" fill="#333333">Santa Maria</text>
+<circle cx="328.7" cy="452.9" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="321.7" y="456.9" class="m-s" font-size="11" font-weight="500" fill="#FFFFFF" text-anchor="end" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Lompoc</text>
+<text x="321.7" y="456.9" class="m-s" font-size="11" font-weight="500" fill="#333333" text-anchor="end">Lompoc</text>
+<circle cx="1040.5" cy="631.3" r="2.4" fill="#FFFFFF" stroke="#555" stroke-width="1"/>
+<text x="1048.5" y="635.3" class="m-s" font-size="11" font-weight="500" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9">Palm Springs</text>
+<text x="1048.5" y="635.3" class="m-s" font-size="11" font-weight="500" fill="#333333">Palm Springs</text>
+<circle cx="581.7" cy="508.2" r="51.5" fill="#ED6C02" fill-opacity="0.16" stroke="#ED6C02" stroke-opacity="0.55" stroke-width="1.5"/>
+<circle cx="470.7" cy="490.5" r="55.0" fill="#ED6C02" fill-opacity="0.16" stroke="#ED6C02" stroke-opacity="0.55" stroke-width="1.5"/>
+<circle cx="539.9" cy="486.1" r="60.4" fill="#D32F2F" fill-opacity="0.16" stroke="#D32F2F" stroke-opacity="0.55" stroke-width="1.5"/>
+<rect x="443.8" y="388.4" width="464.9" height="332.1" fill="#1976D2" fill-opacity="0.08" stroke="#1976D2" stroke-opacity="0.7" stroke-width="3"/>
+<circle cx="539.9" cy="486.1" r="14" fill="#000" fill-opacity="0.22" filter="url(#m-blur)"/>
+<circle cx="539.9" cy="486.1" r="11.5" fill="#D32F2F" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="470.7" cy="490.5" r="14" fill="#000" fill-opacity="0.22" filter="url(#m-blur)"/>
+<circle cx="470.7" cy="490.5" r="11.5" fill="#ED6C02" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="581.7" cy="508.2" r="14" fill="#000" fill-opacity="0.22" filter="url(#m-blur)"/>
+<circle cx="581.7" cy="508.2" r="11.5" fill="#ED6C02" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="665.5" cy="477.3" r="14" fill="#000" fill-opacity="0.22" filter="url(#m-blur)"/>
+<circle cx="665.5" cy="477.3" r="11.5" fill="#FBC02D" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="667.3" cy="572.0" r="14" fill="#000" fill-opacity="0.22" filter="url(#m-blur)"/>
+<circle cx="667.3" cy="572.0" r="11.5" fill="#FBC02D" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="643.6" cy="539.0" r="14" fill="#000" fill-opacity="0.22" filter="url(#m-blur)"/>
+<circle cx="643.6" cy="539.0" r="11.5" fill="#FBC02D" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="740.1" cy="525.8" r="14" fill="#000" fill-opacity="0.22" filter="url(#m-blur)"/>
+<circle cx="740.1" cy="525.8" r="11.5" fill="#2E7D32" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="696.4" cy="444.1" r="14" fill="#000" fill-opacity="0.22" filter="url(#m-blur)"/>
+<circle cx="696.4" cy="444.1" r="11.5" fill="#2E7D32" stroke="#FFFFFF" stroke-width="3"/>
+<g filter="url(#m-popsh)"><rect x="489.7" y="390.2" width="184" height="94" rx="12" fill="#FFFFFF"/><path d="M571.7 484.2L581.7 494.2L591.7 484.2Z" fill="#FFFFFF"/></g>
+<text x="661.7" y="406.2" class="m-s" font-size="16" fill="#757575" text-anchor="middle">×</text>
+<text x="503.7" y="412.2" class="m-s" font-size="13" font-weight="700" fill="#212121">Santa Paula Ridge</text>
+<rect x="503.7" y="421.2" width="39" height="18" rx="9" fill="#ED6C02"/>
+<text x="523.1" y="434.2" class="m-s" font-size="10.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">High</text>
+<text x="550.5" y="434.2" class="m-s" font-size="11.5" font-weight="600" fill="#212121">Peak risk 0.64</text>
+<text x="503.7" y="456.2" class="m-s" font-size="10.5" fill="#666666">Wed 16 Aug, 18:00</text>
+<text x="503.7" y="472.2" class="m-s" font-size="10.5" fill="#666666">35.1 °C · RH 21.2 %</text>
+<rect x="74" y="317" width="34" height="64" rx="4" fill="#FFFFFF" stroke="#000" stroke-opacity="0.22" stroke-width="2"/><path d="M75 349H107" stroke="#CCCCCC"/><path d="M85 333H97M91 327V339M85 365H97" stroke="#000" stroke-width="2.2"/>
+<rect x="1032" y="317" width="174" height="108" rx="4" fill="#FFFFFF" fill-opacity="0.95" stroke="#000" stroke-opacity="0.15"/>
+<text x="1042.0" y="338.0" class="m-s" font-size="12" font-weight="700" fill="#212121">Fire risk (peak)</text>
+<circle cx="1047" cy="353" r="5" fill="#D32F2F" stroke="#FFFFFF" stroke-width="1.5"/>
+<text x="1058.0" y="357.0" class="m-s" font-size="12" fill="#212121">Extreme</text>
+<text x="1196.0" y="357.0" class="m-s" font-size="12" fill="#666666" text-anchor="end">≥ 0.75</text>
+<circle cx="1047" cy="371" r="5" fill="#ED6C02" stroke="#FFFFFF" stroke-width="1.5"/>
+<text x="1058.0" y="375.0" class="m-s" font-size="12" fill="#212121">High</text>
+<text x="1196.0" y="375.0" class="m-s" font-size="12" fill="#666666" text-anchor="end">0.50 – 0.75</text>
+<circle cx="1047" cy="389" r="5" fill="#FBC02D" stroke="#FFFFFF" stroke-width="1.5"/>
+<text x="1058.0" y="393.0" class="m-s" font-size="12" fill="#212121">Moderate</text>
+<text x="1196.0" y="393.0" class="m-s" font-size="12" fill="#666666" text-anchor="end">0.25 – 0.50</text>
+<circle cx="1047" cy="407" r="5" fill="#2E7D32" stroke="#FFFFFF" stroke-width="1.5"/>
+<text x="1058.0" y="411.0" class="m-s" font-size="12" fill="#212121">Low</text>
+<text x="1196.0" y="411.0" class="m-s" font-size="12" fill="#666666" text-anchor="end">&lt; 0.25</text>
+<path d="M69 704V722H168V704" fill="#FFFFFF" fill-opacity="0.8" stroke="#777" stroke-width="2"/>
+<text x="74.0" y="717.0" class="m-l" font-size="11" fill="#333">50 km</text>
+<rect x="954" y="710" width="262" height="17" fill="#FFFFFF" fill-opacity="0.8"/>
+<path d="M959 714.5h12v4h-12z" fill="#4C7BE1"/><path d="M959 718.5h12v3h-12z" fill="#FFD500"/><path d="M959 721.5h12v1h-12z" fill="#E0BC00"/>
+<text x="975" y="722.5" class="m-l" font-size="12" fill="#333"><tspan fill="#0078A8">Leaflet</tspan> | © <tspan fill="#0078A8">OpenStreetMap</tspan> contributors</text>
+</g>
+</g>
+<rect x="40.5" y="40.5" width="1199" height="719" rx="11.5" fill="none" stroke="#000" stroke-opacity="0.10"/>
+</svg>
