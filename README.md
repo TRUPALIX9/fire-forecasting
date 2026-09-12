@@ -34,7 +34,7 @@ Earlier versions (up to commit [`300d8da`](https://github.com/TRUPALIX9/fire-for
 - **Leaflet forecast map**: OpenStreetMap tiles, the Tri-County bounding box, site markers coloured by risk level with popups, risk circles around sites above the threshold, a legend and a scale bar. A full-width view lives at `/map`.
 - **Risk chart**: an ApexCharts area chart of the selected site's risk, with threshold and peak annotations. Click a marker or a table row to switch sites.
 - **Site forecast table**: every site with its county, peak risk and level chip.
-- **Settings**: display and data preferences saved in the browser (localStorage), with input validation.
+- **Settings**: display and data preferences saved in the browser (localStorage), with input validation. The dashboard does not apply them yet.
 - **ML History**: a model-run table and KPI cards, clearly marked as example data.
 - **Reproducible sample data**: `scripts/build_sample_data.py` rebuilds the bundled JSON from the CSV.
 

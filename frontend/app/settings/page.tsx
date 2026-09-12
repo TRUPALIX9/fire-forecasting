@@ -332,8 +332,10 @@ export default function SettingsPage() {
       <Alert severity="info" sx={{ mt: 3 }}>
         <Typography variant="body2">
           <strong>Note:</strong> Settings are saved in this browser
-          (localStorage). This prototype has no backend; the dashboard shows
-          metric units and the light theme.
+          (localStorage) but are not applied yet. This prototype has no
+          backend, so notifications, auto refresh and data retention have no
+          effect, and the dashboard always shows metric units and the light
+          theme.
         </Typography>
       </Alert>
     </Box>
