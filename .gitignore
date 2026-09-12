@@ -46,7 +46,8 @@ coverage.xml
 
 # Artifacts and data (do not commit)
 artifacts/
-data/
+data/*
+!data/trihourly_weather.csv
 # Keep sample data examples if needed
 !data/*/README.md
 !data/*/sample_*.csv
