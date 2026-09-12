@@ -8,6 +8,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TableRow,
   Typography,
@@ -61,44 +62,52 @@ const SitesTable: React.FC<SitesTableProps> = ({
         {sites.length} sites
       </Typography>
     </Box>
-    <Table
-      size="small"
-      aria-label="Site forecasts"
-      sx={{ "& td, & th": { whiteSpace: "nowrap" } }}
-    >
-      <TableHead>
-        <TableRow>
-          <TableCell>Site</TableCell>
-          <TableCell>County</TableCell>
-          <TableCell align="right">Peak risk</TableCell>
-          <TableCell>Level</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {sites.map((site) => (
-          <TableRow
-            key={site.id}
-            hover
-            selected={site.id === selectedId}
-            tabIndex={0}
-            onClick={() => onSelect?.(site.id)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") onSelect?.(site.id);
-            }}
-            sx={{ cursor: "pointer" }}
-          >
-            <TableCell>{site.name}</TableCell>
-            <TableCell sx={{ color: "text.secondary" }}>{site.county}</TableCell>
-            <TableCell align="right" sx={{ fontVariantNumeric: "tabular-nums" }}>
-              {site.peak.toFixed(2)}
-            </TableCell>
-            <TableCell>
-              <LevelChip level={site.level} />
-            </TableCell>
+    {/* Tighter inner padding so the table fits the card at desktop widths;
+        on narrow screens it scrolls instead of being clipped by the Card. */}
+    <TableContainer sx={{ overflowX: "auto" }}>
+      <Table
+        size="small"
+        aria-label="Site forecasts"
+        sx={{
+          "& td, & th": { whiteSpace: "nowrap", px: 1.25 },
+          "& td:first-of-type, & th:first-of-type": { pl: 2 },
+          "& td:last-of-type, & th:last-of-type": { pr: 2 },
+        }}
+      >
+        <TableHead>
+          <TableRow>
+            <TableCell>Site</TableCell>
+            <TableCell>County</TableCell>
+            <TableCell align="right">Peak risk</TableCell>
+            <TableCell>Level</TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHead>
+        <TableBody>
+          {sites.map((site) => (
+            <TableRow
+              key={site.id}
+              hover
+              selected={site.id === selectedId}
+              tabIndex={0}
+              onClick={() => onSelect?.(site.id)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") onSelect?.(site.id);
+              }}
+              sx={{ cursor: "pointer" }}
+            >
+              <TableCell>{site.name}</TableCell>
+              <TableCell sx={{ color: "text.secondary" }}>{site.county}</TableCell>
+              <TableCell align="right" sx={{ fontVariantNumeric: "tabular-nums" }}>
+                {site.peak.toFixed(2)}
+              </TableCell>
+              <TableCell>
+                <LevelChip level={site.level} />
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   </Card>
 );
 
